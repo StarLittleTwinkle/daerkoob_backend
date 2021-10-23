@@ -1,0 +1,5 @@
+package com.daerkoob.dto;
+
+public class Member {
+
+}
