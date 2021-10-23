@@ -30,13 +30,13 @@ public class MemberController {
     public Member check(@PathVariable Long id){
         Optional<Member> memberOptional = memberRepository.findById(id);
         Member resultMember= memberOptional.get();
-        System.out.println(resultMember.getId());
-        System.out.println(resultMember.getMemberId());
-        System.out.println(resultMember.getAdmin());
-        System.out.println(resultMember.getBirth());
-        System.out.println(resultMember.getName());
-        System.out.println(resultMember.getPassword());
-        System.out.println(resultMember.getFriend());
         return resultMember;
+    }
+
+    @GetMapping("signup")
+    public Member signup(Member member){
+        memberRepository.save(member);
+        Optional<Member> resultMember = memberRepository.findById(member.getId());
+        return resultMember.get();
     }
 }
