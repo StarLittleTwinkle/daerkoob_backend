@@ -1,5 +1,6 @@
 package com.project.daerkoob.controller;
 
+import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,33 +28,62 @@ public class UserController {
 //        return "successfully executed";
 //    }
 
-    @GetMapping("check/{id}")
-    public User check(@PathVariable Long id){
-        Optional<User> userOptional = userRepository.findById(id);
-        User resultUser = userOptional.get();
-        return resultUser;
-    }
+//    @GetMapping("check/{id}")
+//    public User check(@PathVariable Long id){
+//        Optional<User> userOptional = userRepository.findById(id);
+//        User resultUser = userOptional.get();
+//        return resultUser;
+//    }
 
-    @PostMapping("signup")
-    public User signup(User user){
-        userRepository.save(user);
-        Optional<User> resultUser = userRepository.findById(user.getId());
-        return resultUser.get();
+    @GetMapping("signup")
+    public Message signup(User user, String confirmPassword) {
+        Message message;
+        if (user.getUserId() == null) {
+            message = new Message(false, "아이디를 입력하세요.");
+            return message;
+        } else if (user.getName() == null) {
+            message = new Message(false, "이름을 입력하세요.");
+            return message;
+        } else if (user.getNickName() == null) {
+            message = new Message(false, "닉네임을 입력하세요.");
+            return message;
+        } else if (user.getPassword() == null) {
+            message = new Message(false, "비밀번호를 입력하세요.");
+            return message;
+        } else if (confirmPassword == null) {
+            message = new Message(false, "비밀번호를 한번 더 입력하세요.");
+            return message;
+        } else if (user.getBirth() == null) {
+            message = new Message(false, "생일을 입력하세요.");
+            return message;
+        } else if (user.getPassword().equals(confirmPassword)) {
+            Optional<User> tempUser = userRepository.findByUserId(user.getUserId());
+            User resultUser = tempUser.orElse(null);
+            if(resultUser == null) {
+                userRepository.save(user);
+                message = new Message(true, "회원가입 성공");
+                return message;
+            }
+            else {
+                message = new Message(false, "이미 존재하는 회원입니다.");
+                return message;
+            }
+        }
+        else{
+            message = new Message(false, "비밀번호를 다시 입력해주세요");
+            return message;
+        }
     }
 
     @PostMapping("login")
-    public boolean login(String userId ,String password){
-        System.out.println(userId);
-        System.out.println(password);
-        Optional<User> resultUser = userRepository.findByUserId(userId);
-        System.out.println(resultUser.get().getName() );
+    public boolean login(User user){
+        Optional<User> resultUser = userRepository.findByUserId(user.getUserId());
         User result = resultUser.orElse(null);
-        System.out.println(result.getPassword() + "  " + password);
         if(result == null) {
             return false;
         }
         else{
-            if(result.getPassword().equals(password)){
+            if(result.getPassword().equals(user.getUserId())){
                 return true;
             }
             else{
