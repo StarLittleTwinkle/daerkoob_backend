@@ -11,12 +11,12 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @Data
-@Table(name = "member")
-public class Member {
-    @Id @Column(name = "member_index") @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name = "user")
+public class User {
+    @Id @Column(name = "user_index") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "member_id")
-    private String memberId;
+    @Column(name = "user_id")
+    private String userId;
     @Column(name = "name")
     private String name;
     @Column(name = "nick_name")
