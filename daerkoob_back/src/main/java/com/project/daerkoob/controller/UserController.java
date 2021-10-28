@@ -77,13 +77,16 @@ public class UserController {
 
     @PostMapping("login")
     public boolean login(User user){
+        System.out.println(user.getUserId());
+        System.out.println(user.getPassword());
         Optional<User> resultUser = userRepository.findByUserId(user.getUserId());
         User result = resultUser.orElse(null);
+        System.out.println(result);
         if(result == null) {
             return false;
         }
         else{
-            if(result.getPassword().equals(user.getUserId())){
+            if(result.getPassword().equals(user.getPassword())){
                 return true;
             }
             else{
