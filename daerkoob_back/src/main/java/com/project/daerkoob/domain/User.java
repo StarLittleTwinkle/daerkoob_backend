@@ -24,7 +24,7 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "birth")
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
     @Column(name = "admin")
     private String admin;

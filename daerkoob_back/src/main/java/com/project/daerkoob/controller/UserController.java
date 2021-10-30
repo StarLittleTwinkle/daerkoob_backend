@@ -35,43 +35,41 @@ public class UserController {
 //        return resultUser;
 //    }
 
-    @GetMapping("signup")
-    public Message signup(User user, String confirmPassword) {
-        Message message;
+    @PostMapping("signup")
+    public Message signup(User user, String confirmPassword){
+        System.out.println(user.getNickName());
+        System.out.println(user.getPassword());
+        System.out.println(confirmPassword);
         if (user.getUserId() == null) {
-            message = new Message(false, "아이디를 입력하세요.");
-            return message;
+            return new Message(false, "아이디를 입력하세요.");
         } else if (user.getName() == null) {
-            message = new Message(false, "이름을 입력하세요.");
-            return message;
+            return new Message(false, "이름을 입력하세요.");
         } else if (user.getNickName() == null) {
-            message = new Message(false, "닉네임을 입력하세요.");
-            return message;
+            return new Message(false, "닉네임을 입력하세요.");
         } else if (user.getPassword() == null) {
-            message = new Message(false, "비밀번호를 입력하세요.");
-            return message;
+            return new Message(false, "비밀번호를 입력하세요.");
         } else if (confirmPassword == null) {
-            message = new Message(false, "비밀번호를 한번 더 입력하세요.");
-            return message;
+            return new Message(false, "비밀번호를 한번 더 입력하세요.");
         } else if (user.getBirth() == null) {
-            message = new Message(false, "생일을 입력하세요.");
-            return message;
+            return new Message(false, "생일을 입력하세요.");
         } else if (user.getPassword().equals(confirmPassword)) {
-            Optional<User> tempUser = userRepository.findByUserId(user.getUserId());
-            User resultUser = tempUser.orElse(null);
-            if(resultUser == null) {
+            Optional<User> findUserId = userRepository.findByUserId(user.getUserId());
+            Optional<User> findNickName = userRepository.findByNickName(user.getNickName());
+            User findUserIdResult = findUserId.orElse(null);
+            User findNickNameResult = findNickName.orElse(null);
+            if(findUserIdResult == null && findNickNameResult == null) {
                 userRepository.save(user);
-                message = new Message(true, "회원가입 성공");
-                return message;
+                return new Message(true, "회원가입 성공");
             }
-            else {
-                message = new Message(false, "이미 존재하는 회원입니다.");
-                return message;
+            else if(findUserIdResult != null) {
+                return new Message(false, "이미 존재하는 아이디입니다.");
+            }
+            else{
+                return new Message(false , "이미 존재하는 닉네임입니다.");
             }
         }
         else{
-            message = new Message(false, "비밀번호를 다시 입력해주세요");
-            return message;
+            return new Message(false, "비밀번호를 다시 입력해주세요");
         }
     }
 
