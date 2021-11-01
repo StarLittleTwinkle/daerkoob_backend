@@ -4,8 +4,14 @@ import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
@@ -34,21 +40,17 @@ public class UserController {
 //        User resultUser = userOptional.get();
 //        return resultUser;
 //    }
-
     @PostMapping("signup")
-    public Message signup(User user, String confirmPassword){
-        System.out.println(user.getNickName());
-        System.out.println(user.getPassword());
-        System.out.println(confirmPassword);
-        if (user.getUserId() == null) {
+    public Message signUp(User user, String confirmPassword){
+        if (user.getUserId() == null || user.getUserId().length() == 0) {
             return new Message(false, "아이디를 입력하세요.");
-        } else if (user.getName() == null) {
+        } else if (user.getName() == null || user.getName().length() == 0) {
             return new Message(false, "이름을 입력하세요.");
-        } else if (user.getNickName() == null) {
+        } else if (user.getNickName() == null || user.getNickName().length() == 0) {
             return new Message(false, "닉네임을 입력하세요.");
-        } else if (user.getPassword() == null) {
+        } else if (user.getPassword() == null || user.getPassword().length() == 0) {
             return new Message(false, "비밀번호를 입력하세요.");
-        } else if (confirmPassword == null) {
+        } else if (confirmPassword == null || confirmPassword.length() == 0) {
             return new Message(false, "비밀번호를 한번 더 입력하세요.");
         } else if (user.getBirth() == null) {
             return new Message(false, "생일을 입력하세요.");
@@ -75,11 +77,8 @@ public class UserController {
 
     @PostMapping("login")
     public boolean login(User user){
-        System.out.println(user.getUserId());
-        System.out.println(user.getPassword());
         Optional<User> resultUser = userRepository.findByUserId(user.getUserId());
         User result = resultUser.orElse(null);
-        System.out.println(result);
         if(result == null) {
             return false;
         }
@@ -87,7 +86,7 @@ public class UserController {
             if(result.getPassword().equals(user.getPassword())){
                 return true;
             }
-            else{
+            else {
                 return false;
             }
         }
