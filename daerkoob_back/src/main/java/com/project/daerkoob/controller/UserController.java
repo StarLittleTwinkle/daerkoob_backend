@@ -2,16 +2,10 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
-import com.project.daerkoob.repository.UserRepository;
+import com.project.daerkoob.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
@@ -20,7 +14,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
 //    @PostMapping("member")
 //    public User getTest(@RequestBody User user){
@@ -55,12 +49,12 @@ public class UserController {
         } else if (user.getBirth() == null) {
             return new Message(false, "생일을 입력하세요.");
         } else if (user.getPassword().equals(confirmPassword)) {
-            Optional<User> findUserId = userRepository.findByUserId(user.getUserId());
-            Optional<User> findNickName = userRepository.findByNickName(user.getNickName());
+            Optional<User> findUserId = userService.findByUserId(user.getUserId());
+            Optional<User> findNickName = userService.findByNickName(user.getNickName());
             User findUserIdResult = findUserId.orElse(null);
             User findNickNameResult = findNickName.orElse(null);
             if(findUserIdResult == null && findNickNameResult == null) {
-                userRepository.save(user);
+                userService.save(user);
                 return new Message(true, "회원가입 성공");
             }
             else if(findUserIdResult != null) {
@@ -77,7 +71,7 @@ public class UserController {
 
     @PostMapping("login")
     public boolean login(User user){
-        Optional<User> resultUser = userRepository.findByUserId(user.getUserId());
+        Optional<User> resultUser = userService.findByUserId(user.getUserId());
         User result = resultUser.orElse(null);
         if(result == null) {
             return false;
