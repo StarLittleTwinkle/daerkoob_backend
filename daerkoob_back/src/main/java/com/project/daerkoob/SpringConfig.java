@@ -17,7 +17,7 @@ public class SpringConfig {
     }
 
     @Bean
-    public UserService userService(){
+    public UserService userService(){ // @Bean을 통해서 userService와 userRepository와의 dependency를 형셩
         return new UserService(userRepository);
     }
 }
