@@ -6,8 +6,6 @@ import com.project.daerkoob.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("user")
@@ -16,7 +14,7 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

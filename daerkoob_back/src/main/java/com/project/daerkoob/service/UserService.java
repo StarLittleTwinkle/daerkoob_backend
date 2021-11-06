@@ -3,12 +3,16 @@ package com.project.daerkoob.service;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UserService {
 
     private final UserRepository userRepository;
+
 
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository; //UserService가 userRepository 를 사용 가능하도록 dependency injection 을 추가
