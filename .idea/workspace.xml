@@ -2,18 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b57eefc9-3837-4cab-9080-7e249fb26ffe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/service/NaverApiService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/daerkoob_back/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/daerkoob_back/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/controller/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/domain/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/domain/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/repository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/repository/BookRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/service/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/daerkoob_back/src/main/java/com/project/daerkoob/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="20MUapCSKP37IgFq0kMePwzmRD4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="b57eefc9-3837-4cab-9080-7e249fb26ffe" name="Default Changelist" comment="" />

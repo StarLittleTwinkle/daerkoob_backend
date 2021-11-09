@@ -14,6 +14,10 @@ repositories {
 }
 
 dependencies {
+//	implementation group: 'xpp3', name: 'xpp3_min', version: '1.1.4c'
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+	implementation 'org.json:json:20190722'
+//	implementation 'com.loopj.android:android-async-http:1.4.9'
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'

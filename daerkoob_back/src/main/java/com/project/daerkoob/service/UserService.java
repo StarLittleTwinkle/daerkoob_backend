@@ -13,7 +13,6 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository; //UserService가 userRepository 를 사용 가능하도록 dependency injection 을 추가
     }
@@ -71,12 +70,7 @@ public class UserService {
             return false;
         }
         else{
-            if(result.getPassword().equals(user.getPassword())){
-                return true;
-            }
-            else {
-                return false;
-            }
+            return result.getPassword().equals(user.getPassword());
         }
     }
 }

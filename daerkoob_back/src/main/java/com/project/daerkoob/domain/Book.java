@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "Book")
+@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,18 +16,18 @@ public class Book {
     private Long id;
     @Column(name = "title")
     private String title;
-    @Column(name = "book_category")
-    private String category;
-    @Column(name = "writer")
-    private String writer;
+    @Column(name = "author ")
+    private String author;
+    @Column(name = "image")
+    private String image;
     @Column(name = "publisher")
     private String publisher;
-    @Column(name = "year")
-    private Long year;
-    @Column(name = "ibsn")
-    private String ibsn;
-    @Column(name = "like")
-    private Long like;
+    @Column(name = "pubdate")
+    private String pubdate;
+    @Column(name = "isbn")
+    private String isbn;
+    @Column(name = "good")
+    private Long good;
     @Column(name = "star")
     private Double star;
 }
