@@ -19,14 +19,14 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public boolean save(Book book){
+    public void save(Book book){
         if(!bookRepository.existsByIsbn(book.getIsbn())){ // 없으면
             bookRepository.save(book);
-            return true;
         }
-        else {
-            return false;
-        }
+    }
+
+    public boolean existsBook(Book book){
+        return bookRepository.existsByIsbn(book.getIsbn());
     }
 
     public Long getBookId(Book book){
@@ -34,7 +34,7 @@ public class BookService {
         return findByIsbn.get().getId();
     }
 
-    public List<Book> returnBook(String title , String display) throws Exception {
+    public List<Book> getBook(String title , String display) throws Exception {
         NaverApiService naverApiService = new NaverApiService();
         List<Book> bookList = new ArrayList<Book>();
         String id = "FZrwDPKOBRfo1BlN5tFY";

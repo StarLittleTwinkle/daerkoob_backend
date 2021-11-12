@@ -22,7 +22,7 @@ public class BookController {
 
     @PostMapping("find")
     public List<Book> postFindBook(String title ,String display) throws Exception {
-        List<Book> bookList = bookService.returnBook(title , display);
+        List<Book> bookList = bookService.getBook(title , display);
         return bookList;
     }
 }
