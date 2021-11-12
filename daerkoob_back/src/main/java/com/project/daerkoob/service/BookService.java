@@ -19,10 +19,19 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public void save(Book book){
+    public boolean save(Book book){
         if(!bookRepository.existsByIsbn(book.getIsbn())){ // 없으면
             bookRepository.save(book);
+            return true;
         }
+        else {
+            return false;
+        }
+    }
+
+    public Long getBookId(Book book){
+        Optional<Book> findByIsbn= bookRepository.findByIsbn(book.getIsbn());
+        return findByIsbn.get().getId();
     }
 
     public List<Book> returnBook(String title , String display) throws Exception {
