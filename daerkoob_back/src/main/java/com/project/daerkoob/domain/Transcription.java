@@ -22,4 +22,6 @@ public class Transcription {
     private Long thumb;
     @Column(name = "star")
     private Double star;
+    @Column(name = "transcription")
+    private String transcription;
 }
