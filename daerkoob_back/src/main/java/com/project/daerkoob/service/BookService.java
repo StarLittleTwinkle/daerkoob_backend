@@ -44,7 +44,12 @@ public class BookService {
             tempBook.setPublisher(obj.getString("publisher"));
             tempBook.setPubdate(obj.getString("pubdate"));
             tempBook.setIsbn(obj.getString("isbn"));
-            tempBook.setImage(obj.getString("image"));
+            if(naverApiService.checkLink(obj.getString("image"))){
+                tempBook.setImage(obj.getString("image"));
+            }
+            else{
+                tempBook.setImage(null);
+            }
             tempBook.setDescription(obj.getString("description"));
             tempBook.setThumb(0L);
             tempBook.setStar(0D);

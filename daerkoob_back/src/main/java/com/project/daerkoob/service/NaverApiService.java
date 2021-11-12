@@ -37,6 +37,32 @@ public class NaverApiService {
         return result; //얻어온 응답을 string 형태로 반환
     }
 
+    public Boolean checkLink(String _url){
+        HttpURLConnection con = null;
+        String result = "";
+        try {
+            URL url = new URL(_url);
+            System.out.println(url);
+            con = (HttpURLConnection) url.openConnection();
+            System.out.println(con);
+            con.setRequestMethod("GET");
+            int responseCode = con.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK){ result = "possible";}
+            else {result = "impossible";}
+        } catch (Exception e) {
+            System.out.println("연결 오류 : " + e);
+        }
+//         finally {
+//            con.disconnect();
+//        }
+        if (result.equals("possible")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public String readBody(InputStream body) { //이건 그냥 HttpURLConnection 객체를 통해서 request를 마치 웹사이트인 것 처럼 요청을 보내서 그로부터 얻은 응답을 읽어서 반환하는 method임
 //         InputStreamReader streamReader = new InputStreamReader(body);  //받아온 con.getInputStream()을 문자열로 읽어올 수 있도록 InputStreamReader로 객체를 생성, 물론 받아온 inputStream에 연결해서, fileInputStream과 흡사하다.
         try (BufferedReader lineReader = new BufferedReader(new InputStreamReader(body))) { //try with resource방법으로 무조건 close가 되도록 관리해주고 있다 , 원래 bufferedReader로 읽어줘야지 더 빠르기 때문에 한단계를 더 거쳐준다.
