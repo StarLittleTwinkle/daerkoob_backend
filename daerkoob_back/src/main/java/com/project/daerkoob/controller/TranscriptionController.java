@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("transcription")
 public class TranscriptionController {
 
-    private TranscriptionService transcriptionService;
+    private TranscriptionService transcriptionService; 
 
     public TranscriptionController(TranscriptionService transcriptionService){
         this.transcriptionService = transcriptionService;
