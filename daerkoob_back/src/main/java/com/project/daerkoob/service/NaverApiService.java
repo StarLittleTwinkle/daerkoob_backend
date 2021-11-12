@@ -37,24 +37,21 @@ public class NaverApiService {
         return result; //얻어온 응답을 string 형태로 반환
     }
 
-    public Boolean checkLink(String _url){
+    public boolean checkLink(String _url){ //link가 404 not found error 날 때 처리
         HttpURLConnection con = null;
         String result = "";
         try {
             URL url = new URL(_url);
-            System.out.println(url);
             con = (HttpURLConnection) url.openConnection();
-            System.out.println(con);
-            con.setRequestMethod("GET");
             int responseCode = con.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK){ result = "possible";}
             else {result = "impossible";}
         } catch (Exception e) {
-            System.out.println("연결 오류 : " + e);
+            System.out.println("연결 오류 : " + e + _url);
         }
-//         finally {
-//            con.disconnect();
-//        }
+         finally {
+            con.disconnect();
+        }
         if (result.equals("possible")){
             return true;
         }

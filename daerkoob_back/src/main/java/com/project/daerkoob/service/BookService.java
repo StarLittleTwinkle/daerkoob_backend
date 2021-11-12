@@ -44,7 +44,9 @@ public class BookService {
             tempBook.setPublisher(obj.getString("publisher"));
             tempBook.setPubdate(obj.getString("pubdate"));
             tempBook.setIsbn(obj.getString("isbn"));
-            if(naverApiService.checkLink(obj.getString("image"))){
+            if(!obj.getString("image").equals("") && naverApiService.checkLink(obj.getString("image"))){ //이전에 연결 오류 났던 것은 value가 "" 일때도 넘어가서 그럼
+                //그래서 obj.getString 으로 value값을 꺼낸다음 ""과 같은지 확인하고 그것이 같으면 바로 else로 가는 && 연산자의 특성을 이용해서 naverApiService.checkLink를 실행 못하도록 하였음
+                //그리고 img값은 null이 아니고 정확히는 "" 였었다. (null이 아님)
                 tempBook.setImage(obj.getString("image"));
             }
             else{

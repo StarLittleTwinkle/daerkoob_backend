@@ -32,6 +32,7 @@ CREATE TABLE `book` (
   `star` double DEFAULT NULL,
   `isbn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`book_id`),
   UNIQUE KEY `book_id_UNIQUE` (`book_id`),
   UNIQUE KEY `ibsn_UNIQUE` (`isbn`)
@@ -65,7 +66,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (27);
+INSERT INTO `hibernate_sequence` VALUES (79);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,4 +111,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-12 16:05:11
+-- Dump completed on 2021-11-12 17:42:28
