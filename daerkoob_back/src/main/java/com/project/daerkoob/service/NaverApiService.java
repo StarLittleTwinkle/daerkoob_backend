@@ -63,7 +63,6 @@ public class NaverApiService {
     public String readBody(InputStream body) { //이건 그냥 HttpURLConnection 객체를 통해서 request를 마치 웹사이트인 것 처럼 요청을 보내서 그로부터 얻은 응답을 읽어서 반환하는 method임
 //         InputStreamReader streamReader = new InputStreamReader(body);  //받아온 con.getInputStream()을 문자열로 읽어올 수 있도록 InputStreamReader로 객체를 생성, 물론 받아온 inputStream에 연결해서, fileInputStream과 흡사하다.
         try (BufferedReader lineReader = new BufferedReader(new InputStreamReader(body))) { //try with resource방법으로 무조건 close가 되도록 관리해주고 있다 , 원래 bufferedReader로 읽어줘야지 더 빠르기 때문에 한단계를 더 거쳐준다.
-            //솔직히 BufferedReader lineReader = new BufferedReader(new InputStreamReader(body)) 이런식으로 선언해주어도 됨
             StringBuilder responseBody = new StringBuilder(); //builder로 받아온 응답 즉 con.getInputStream에서 얻어온 응답을 builder로 가공하는 것
             String line;
             while ((line = lineReader.readLine()) != null) { //받아온 응답의 끝을 만날 때까지 반복하면서
