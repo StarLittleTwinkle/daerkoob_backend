@@ -20,9 +20,7 @@ public class BookService {
     }
 
     public void save(Book book){
-        Optional<Book> findByIsbn = bookRepository.findByIsbn(book.getIsbn());
-        Book resultBook = findByIsbn.orElse(null);
-        if(resultBook == null){
+        if(!bookRepository.existsByIsbn(book.getIsbn())){ // 없으면
             bookRepository.save(book);
         }
     }
@@ -33,7 +31,7 @@ public class BookService {
         String id = "FZrwDPKOBRfo1BlN5tFY";
         String secret = "pBFNa86Va1";
         String url = URLEncoder.encode(title, "UTF-8") + ("&display=" + display + "&start=1");
-        String response = naverApiService.search(id, secret, url);
+        String response = naverApiService.search(id, secret, url); //naver api에 request를 보내려면 ,clientId와 secret code가 필요하기 떄문에 다 같이 보내준다 , 그리고 내가 원하는 query와 함께
 
         JSONObject jObject = new JSONObject(response);
         JSONArray jArray = jObject.getJSONArray("items");

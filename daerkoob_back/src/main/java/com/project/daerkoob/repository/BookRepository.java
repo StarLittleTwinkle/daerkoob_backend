@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-    Optional<Book> findByTitle(String title);
-    Optional<Book> findByIsbn(String isbn);
+    Boolean existsByIsbn(String isbn); //없는 method일 경우에는 그냥 ByName해주면 됨
 }

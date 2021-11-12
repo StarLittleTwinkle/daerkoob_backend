@@ -43,15 +43,13 @@ public class UserService {
         } else if (user.getBirth() == null) {
             return new Message(false, "생일을 입력하세요.");
         } else if (user.getPassword().equals(confirmPassword)) {
-            Optional<User> findUserId = userRepository.findByUserId(user.getUserId());
-            Optional<User> findNickName = userRepository.findByNickName(user.getNickName());
-            User findUserIdResult = findUserId.orElse(null);
-            User findNickNameResult = findNickName.orElse(null);
-            if(findUserIdResult == null && findNickNameResult == null) {
+            boolean existsByUserId = userRepository.existsByUserId(user.getUserId());
+            boolean existsByNickName = userRepository.existsByNickName(user.getNickName());
+            if(!existsByUserId && !existsByNickName) {
                 userRepository.save(user);
                 return new Message(true, "회원가입 성공");
             }
-            else if(findUserIdResult != null) {
+            else if(existsByUserId) {
                 return new Message(false, "이미 존재하는 아이디입니다.");
             }
             else{
