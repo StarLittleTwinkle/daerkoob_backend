@@ -45,7 +45,7 @@ public class BookService {
             tempBook.setPubdate(obj.getString("pubdate"));
             tempBook.setIsbn(obj.getString("isbn"));
             tempBook.setImage(obj.getString("image"));
-            tempBook.setGood(0L);
+            tempBook.setThumb(0L);
             tempBook.setStar(0D);
             bookList.add(tempBook);
         }

@@ -20,21 +20,9 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("find/{title}/{display}")
-    public List<Book> getFindBook(@PathVariable String title , @PathVariable String display) throws Exception {
-        List<Book> bookList = bookService.returnBook(title , display);
-        for(Book book : bookList){
-            bookService.save(book);
-        } //일단 조회하면 저장하는 기능은 구현
-        return bookList;
-    }
-
     @PostMapping("find")
     public List<Book> postFindBook(String title ,String display) throws Exception {
         List<Book> bookList = bookService.returnBook(title , display);
-        for(Book book : bookList){
-            bookService.save(book);
-        } //일단 조회하면 저장하는 기능은 구현
         return bookList;
     }
 }

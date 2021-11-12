@@ -26,8 +26,8 @@ public class Book {
     private String pubdate;
     @Column(name = "isbn")
     private String isbn;
-    @Column(name = "good")
-    private Long good;
+    @Column(name = "thumb")
+    private Long thumb;
     @Column(name = "star")
     private Double star;
 }
