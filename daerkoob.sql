@@ -28,8 +28,6 @@ CREATE TABLE `book` (
   `author` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `publisher` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `pubdate` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `thumb` int DEFAULT NULL,
-  `star` double DEFAULT NULL,
   `isbn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -147,6 +145,8 @@ CREATE TABLE `thumb` (
   `thumb_id` int NOT NULL,
   `review_id` int DEFAULT NULL,
   `transcription_id` int DEFAULT NULL,
+  `star_id` bigint NOT NULL,
+  `score` bigint DEFAULT NULL,
   PRIMARY KEY (`thumb_id`),
   UNIQUE KEY `thumb_id_UNIQUE` (`thumb_id`),
   KEY `review_id` (`review_id`),
@@ -238,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-13 19:06:07
+-- Dump completed on 2021-11-13 22:16:53
