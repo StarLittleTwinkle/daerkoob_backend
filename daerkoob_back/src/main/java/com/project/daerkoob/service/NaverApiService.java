@@ -37,7 +37,7 @@ public class NaverApiService {
         return result; //얻어온 응답을 string 형태로 반환
     }
 
-    public boolean checkLink(String _url){ //link가 404 not found error 날 때 처리
+    public synchronized boolean checkLink(String _url){ //link가 404 not found error 날 때 처리
         HttpURLConnection con = null;
         String result = "";
         try {
