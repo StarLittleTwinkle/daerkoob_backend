@@ -71,6 +71,133 @@ INSERT INTO `hibernate_sequence` VALUES (79);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `review`
+--
+
+DROP TABLE IF EXISTS `review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `review` (
+  `user_id` int NOT NULL,
+  `book_id` int NOT NULL,
+  `review` varchar(255) NOT NULL,
+  `thumb` int NOT NULL,
+  `star` double NOT NULL,
+  `review_id` int NOT NULL,
+  `star_count` int NOT NULL,
+  PRIMARY KEY (`review_id`),
+  UNIQUE KEY `review_id_UNIQUE` (`review_id`),
+  KEY `book_id` (`book_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `review_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`),
+  CONSTRAINT `review_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `review`
+--
+
+LOCK TABLES `review` WRITE;
+/*!40000 ALTER TABLE `review` DISABLE KEYS */;
+/*!40000 ALTER TABLE `review` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `star`
+--
+
+DROP TABLE IF EXISTS `star`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `star` (
+  `book_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `review_id` int DEFAULT NULL,
+  `transcription_id` int DEFAULT NULL,
+  `star_id` int NOT NULL,
+  `score` int NOT NULL,
+  PRIMARY KEY (`star_id`),
+  KEY `transcription_id` (`transcription_id`),
+  KEY `review_id` (`review_id`),
+  CONSTRAINT `star_ibfk_1` FOREIGN KEY (`transcription_id`) REFERENCES `transcription` (`transcription_id`),
+  CONSTRAINT `star_ibfk_2` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `star`
+--
+
+LOCK TABLES `star` WRITE;
+/*!40000 ALTER TABLE `star` DISABLE KEYS */;
+/*!40000 ALTER TABLE `star` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `thumb`
+--
+
+DROP TABLE IF EXISTS `thumb`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `thumb` (
+  `user_id` int NOT NULL,
+  `book_id` int NOT NULL,
+  `thumb_id` int NOT NULL,
+  `review_id` int DEFAULT NULL,
+  `transcription_id` int DEFAULT NULL,
+  PRIMARY KEY (`thumb_id`),
+  UNIQUE KEY `thumb_id_UNIQUE` (`thumb_id`),
+  KEY `review_id` (`review_id`),
+  KEY `transcription_id` (`transcription_id`),
+  CONSTRAINT `thumb_ibfk_1` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`),
+  CONSTRAINT `thumb_ibfk_2` FOREIGN KEY (`transcription_id`) REFERENCES `transcription` (`transcription_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `thumb`
+--
+
+LOCK TABLES `thumb` WRITE;
+/*!40000 ALTER TABLE `thumb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `thumb` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transcription`
+--
+
+DROP TABLE IF EXISTS `transcription`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transcription` (
+  `book_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `transcription_id` int NOT NULL,
+  `transcription` varchar(255) NOT NULL,
+  `thumb` int NOT NULL,
+  `star` double NOT NULL,
+  `star_count` int NOT NULL,
+  PRIMARY KEY (`transcription_id`),
+  KEY `book_id` (`book_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `transcription_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`),
+  CONSTRAINT `transcription_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transcription`
+--
+
+LOCK TABLES `transcription` WRITE;
+/*!40000 ALTER TABLE `transcription` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transcription` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -111,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-12 17:42:28
+-- Dump completed on 2021-11-13 19:06:07
