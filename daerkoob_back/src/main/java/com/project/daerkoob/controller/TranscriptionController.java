@@ -20,8 +20,9 @@ public class TranscriptionController {
     private TranscriptionService transcriptionService;
     private BookService bookService;
 
-    public TranscriptionController(TranscriptionService transcriptionService){
+    public TranscriptionController(TranscriptionService transcriptionService , BookService bookService){
         this.transcriptionService = transcriptionService;
+        this.bookService = bookService;
     }
     @PostMapping("click") //책을 눌렀을 때 없으면 그냥 아무일도 안 일어남
     public List<Transcription> click(Book book){

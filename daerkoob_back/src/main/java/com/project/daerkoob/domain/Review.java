@@ -22,6 +22,8 @@ public class Review {
     private Long thumb;
     @Column(name = "star")
     private Double star;
+    @Column(name = "star_count")
+    private Long starCount;
     @Column(name = "review")
     private String review;
 }

@@ -62,8 +62,6 @@ public class BookService {
                 tempBook.setImage(null);
             }
             tempBook.setDescription(obj.getString("description"));
-            tempBook.setThumb(0L);
-            tempBook.setStar(0D);
             bookList.add(tempBook);
         }
         return bookList;

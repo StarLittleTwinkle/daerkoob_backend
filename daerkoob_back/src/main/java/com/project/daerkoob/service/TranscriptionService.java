@@ -3,9 +3,8 @@ package com.project.daerkoob.service;
 import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.repository.TranscriptionRepository;
 import org.springframework.stereotype.Service;
-
-import java.awt.print.Book;
 import java.util.List;
+
 @Service
 public class TranscriptionService {
     private TranscriptionRepository transcriptionRepository;
@@ -25,6 +24,7 @@ public class TranscriptionService {
         transcription.setBookId(bookId);
         transcription.setStar(0D);
         transcription.setThumb(0L);
+        transcription.setStarCount(0L);
         transcription.setTranscription(transcriptionContent);
         return transcription;
     }
