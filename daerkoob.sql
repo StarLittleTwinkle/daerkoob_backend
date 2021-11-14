@@ -93,6 +93,7 @@ CREATE TABLE `star` (
   `transcription_id` int DEFAULT NULL,
   `star_id` int NOT NULL,
   `score` int NOT NULL,
+  `given_user_id` int NOT NULL,
   PRIMARY KEY (`star_id`),
   KEY `transcription_id` (`transcription_id`),
   KEY `review_id` (`review_id`),
@@ -123,8 +124,7 @@ CREATE TABLE `thumb` (
   `thumb_id` int NOT NULL,
   `review_id` int DEFAULT NULL,
   `transcription_id` int DEFAULT NULL,
-  `star_id` bigint NOT NULL,
-  `score` bigint DEFAULT NULL,
+  `given_user_id` int NOT NULL,
   PRIMARY KEY (`thumb_id`),
   UNIQUE KEY `thumb_id_UNIQUE` (`thumb_id`),
   KEY `review_id` (`review_id`),
@@ -203,7 +203,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (10,'kpeel5839','김재연','수희사랑','sksk5839!','1998-06-04 15:00:00',NULL,NULL);
+INSERT INTO `user` VALUES (10,'kpeel5839','김재연','suheelove','sksk5839','1998-06-04 15:00:00',NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -216,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-13 23:32:28
+-- Dump completed on 2021-11-14 10:46:30
