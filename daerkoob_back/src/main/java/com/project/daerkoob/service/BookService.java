@@ -19,7 +19,7 @@ public class BookService {
     }
 
     public void save(Book book){
-        if(!bookRepository.existsByIsbn(book.getIsbn())){ // 없으면
+        if(!bookRepository.existsByIsbn(book.getIsbn())){
             bookRepository.save(book);
         }
     }
@@ -47,18 +47,18 @@ public class BookService {
         JSONArray jArray = jObject.getJSONArray("items");
 
         for(int i =0; i <jArray.length(); i++){
-            Thread thread = new Thread(new MyThread(jArray.getJSONObject(i) , bookList));
+            Thread thread = new Thread(new CheckLinkThread(jArray.getJSONObject(i) , bookList));
             thread.start();
         }
         while(bookList.size() != jArray.length()){Thread.sleep(100);}
         return bookList;
     }
 
-    public static class MyThread implements Runnable{
+    public static class CheckLinkThread implements Runnable{ // checkLink 속도를 개선해주기 위한 thread
         private JSONObject obj;
         private List<Book> bookList;
 
-        public MyThread(JSONObject obj , List<Book> bookList){
+        public CheckLinkThread(JSONObject obj , List<Book> bookList){
             this.obj = obj;
             this.bookList = bookList;
         }

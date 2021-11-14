@@ -7,20 +7,24 @@ import com.project.daerkoob.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("user")
 public class UserController {
 
-    private final UserService userService;
+    private UserService userService;
+    private UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService , UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("signup")
     public Message signUp(User user, String confirmPassword){
-        return userService.signUp(user , confirmPassword);
+        return userService.signUp(user, confirmPassword);
     }
 
     @PostMapping("login")

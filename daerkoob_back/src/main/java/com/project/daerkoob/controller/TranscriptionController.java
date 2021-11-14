@@ -30,7 +30,7 @@ public class TranscriptionController {
         if (bookService.existsBook(book)) {
             transcriptions = transcriptionService.getTranscription(bookService.getBookId(book));
         }
-        return transcriptions;
+        return transcriptions; //별점도 담겨 있음
     }
 
 
