@@ -2,7 +2,6 @@ package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.*;
 import com.project.daerkoob.repository.ReviewRepository;
-import com.project.daerkoob.repository.StarRepository;
 import com.project.daerkoob.repository.ThumbRepository;
 import com.project.daerkoob.repository.TranscriptionRepository;
 import org.springframework.stereotype.Service;
