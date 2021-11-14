@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "thumb")
+@Table(name = "star")
 public class Star {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,4 +24,6 @@ public class Star {
     private Long reviewId;
     @Column(name = "transcription_id")
     private Long transcriptionId;
+    @Column(name = "given_user_id")
+    private Long givenUserId;
 }

@@ -22,4 +22,6 @@ public class Thumb {
     private Long reviewId;
     @Column(name = "transcription_id")
     private Long transcriptionId;
+    @Column(name = "given_user_id")
+    private Long givenUserId;
 }
