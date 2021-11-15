@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `book`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `book` (
-  `book_id` int NOT NULL,
+  `book_id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `author` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `publisher` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -47,6 +47,34 @@ LOCK TABLES `book` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `friend`
+--
+
+DROP TABLE IF EXISTS `friend`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `friend` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `friend_index` int NOT NULL,
+  `nick_name` varchar(255) NOT NULL,
+  `user_index` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `friend_id_UNIQUE` (`id`),
+  KEY `user_index` (`user_index`),
+  CONSTRAINT `friend_ibfk_1` FOREIGN KEY (`user_index`) REFERENCES `user` (`user_index`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `friend`
+--
+
+LOCK TABLES `friend` WRITE;
+/*!40000 ALTER TABLE `friend` DISABLE KEYS */;
+/*!40000 ALTER TABLE `friend` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `review`
 --
 
@@ -59,7 +87,7 @@ CREATE TABLE `review` (
   `review` varchar(255) NOT NULL,
   `thumb` int NOT NULL,
   `star` double NOT NULL,
-  `review_id` int NOT NULL,
+  `review_id` int NOT NULL AUTO_INCREMENT,
   `star_count` int NOT NULL,
   PRIMARY KEY (`review_id`),
   UNIQUE KEY `review_id_UNIQUE` (`review_id`),
@@ -91,10 +119,11 @@ CREATE TABLE `star` (
   `user_id` int NOT NULL,
   `review_id` int DEFAULT NULL,
   `transcription_id` int DEFAULT NULL,
-  `star_id` int NOT NULL,
+  `star_id` int NOT NULL AUTO_INCREMENT,
   `score` int NOT NULL,
   `given_user_id` int NOT NULL,
   PRIMARY KEY (`star_id`),
+  UNIQUE KEY `star_id_UNIQUE` (`star_id`),
   KEY `transcription_id` (`transcription_id`),
   KEY `review_id` (`review_id`),
   CONSTRAINT `star_ibfk_1` FOREIGN KEY (`transcription_id`) REFERENCES `transcription` (`transcription_id`),
@@ -121,7 +150,7 @@ DROP TABLE IF EXISTS `thumb`;
 CREATE TABLE `thumb` (
   `user_id` int NOT NULL,
   `book_id` int NOT NULL,
-  `thumb_id` int NOT NULL,
+  `thumb_id` int NOT NULL AUTO_INCREMENT,
   `review_id` int DEFAULT NULL,
   `transcription_id` int DEFAULT NULL,
   `given_user_id` int NOT NULL,
@@ -153,16 +182,17 @@ DROP TABLE IF EXISTS `transcription`;
 CREATE TABLE `transcription` (
   `book_id` int NOT NULL,
   `user_id` int NOT NULL,
-  `transcription_id` int NOT NULL,
+  `transcription_id` int NOT NULL AUTO_INCREMENT,
   `transcription` varchar(255) NOT NULL,
   `thumb` int NOT NULL,
   `star` double NOT NULL,
   `star_count` int NOT NULL,
   PRIMARY KEY (`transcription_id`),
-  KEY `book_id` (`book_id`),
+  UNIQUE KEY `transcription_id_UNIQUE` (`transcription_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `transcription_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`),
-  CONSTRAINT `transcription_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`)
+  KEY `book_id` (`book_id`),
+  CONSTRAINT `transcription_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`),
+  CONSTRAINT `transcription_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -216,4 +246,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-14 10:46:30
+-- Dump completed on 2021-11-16  7:28:53
