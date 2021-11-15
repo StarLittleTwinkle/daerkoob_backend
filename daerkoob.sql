@@ -220,7 +220,7 @@ CREATE TABLE `user` (
   `password` varchar(45) NOT NULL,
   `birth` datetime NOT NULL,
   `admin` varchar(45) DEFAULT NULL,
-  `friend` varchar(45) DEFAULT NULL,
+  `friend` int NOT NULL,
   PRIMARY KEY (`user_index`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `nick_name_UNIQUE` (`nick_name`)
@@ -233,7 +233,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (10,'kpeel5839','김재연','suheelove','sksk5839','1998-06-04 15:00:00',NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -246,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-16  7:28:53
+-- Dump completed on 2021-11-16  7:57:27
