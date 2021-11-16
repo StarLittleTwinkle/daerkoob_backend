@@ -62,7 +62,7 @@ CREATE TABLE `friend` (
   UNIQUE KEY `friend_id_UNIQUE` (`id`),
   KEY `user_index` (`user_index`),
   CONSTRAINT `friend_ibfk_1` FOREIGN KEY (`user_index`) REFERENCES `user` (`user_index`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,30 @@ CREATE TABLE `friend` (
 
 LOCK TABLES `friend` WRITE;
 /*!40000 ALTER TABLE `friend` DISABLE KEYS */;
+INSERT INTO `friend` VALUES (1,12,'재연사랑',11);
 /*!40000 ALTER TABLE `friend` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hibernate_sequence`
+--
+
+DROP TABLE IF EXISTS `hibernate_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hibernate_sequence`
+--
+
+LOCK TABLES `hibernate_sequence` WRITE;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` VALUES (2);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -224,7 +247,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_index`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `nick_name_UNIQUE` (`nick_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,6 +256,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (11,'kpeel5839','김재연','수희사랑','sksk5839!','2021-11-15 15:00:00',NULL,1),(12,'suheelove','황수희','재연사랑','sksk5839!','2021-11-15 15:00:00',NULL,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -245,4 +269,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-16  7:57:27
+-- Dump completed on 2021-11-16 11:07:20
