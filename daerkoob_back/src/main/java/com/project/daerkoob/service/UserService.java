@@ -46,6 +46,7 @@ public class UserService {
             boolean existsByUserId = userRepository.existsByUserId(user.getUserId());
             boolean existsByNickName = userRepository.existsByNickName(user.getNickName());
             if(!existsByUserId && !existsByNickName) {
+                user.setFriend(0L);
                 userRepository.save(user);
                 return new Message(true, "회원가입 성공");
             }
