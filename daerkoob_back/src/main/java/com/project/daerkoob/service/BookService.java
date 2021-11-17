@@ -24,13 +24,29 @@ public class BookService {
         }
     }
 
-    public boolean existsBook(Book book){
-        return bookRepository.existsByIsbn(book.getIsbn());
+    public boolean existsBook(String isbn){
+        return bookRepository.existsByIsbn(isbn);
     }
 
-    public Long getBookId(Book book){
-        Optional<Book> findByIsbn= bookRepository.findByIsbn(book.getIsbn());
+    public Book findBook(String isbn){
+        Optional<Book> book = bookRepository.findByIsbn(isbn);
+        return book.get();
+    }
+    public Long getBookId(String isbn){
+        Optional<Book> findByIsbn= bookRepository.findByIsbn(isbn);
         return findByIsbn.get().getId();
+    }
+
+    public Book createBook(String title ,String author ,String publisher ,String pubdate ,String isbn ,String image ,String description){
+        Book book = new Book();
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setPublisher(publisher);
+        book.setPubdate(pubdate);
+        book.setIsbn(isbn);
+        book.setImage(image);
+        book.setDescription(description);
+        return book;
     }
 
     public List<Book> getBook(String title , String display) throws Exception {

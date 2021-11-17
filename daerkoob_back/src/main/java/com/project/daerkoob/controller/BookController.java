@@ -2,7 +2,6 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Book;
 import com.project.daerkoob.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
@@ -19,8 +18,14 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @GetMapping("find/{title}/{display}")
+    public List<Book> getFindBook(@PathVariable String title , @PathVariable String display) throws Exception {
+        List<Book> bookList = bookService.getBook(title , display);
+        return bookList;
+    }
+
     @PostMapping("find")
-    public List<Book> postFindBook(String title ,String display) throws Exception {
+    public List<Book> findBook(String title ,String display) throws Exception {
         List<Book> bookList = bookService.getBook(title , display);
         return bookList;
     }
