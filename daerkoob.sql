@@ -34,7 +34,7 @@ CREATE TABLE `book` (
   PRIMARY KEY (`book_id`),
   UNIQUE KEY `book_id_UNIQUE` (`book_id`),
   UNIQUE KEY `ibsn_UNIQUE` (`isbn`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +43,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
+INSERT INTO `book` VALUES (1,'1','1','1','1','1','1','1'),(2,'2','2','2','2','2','2','2'),(3,'슬픔의 해석','리사 슐먼','일므디','20210711','1197031758 9791197031755','naver.com','누구누구');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +152,7 @@ CREATE TABLE `star` (
   KEY `review_id` (`review_id`),
   CONSTRAINT `star_ibfk_1` FOREIGN KEY (`transcription_id`) REFERENCES `transcription` (`transcription_id`),
   CONSTRAINT `star_ibfk_2` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,6 +161,7 @@ CREATE TABLE `star` (
 
 LOCK TABLES `star` WRITE;
 /*!40000 ALTER TABLE `star` DISABLE KEYS */;
+INSERT INTO `star` VALUES (3,11,NULL,9,1,5,12),(3,11,NULL,9,2,5,11);
 /*!40000 ALTER TABLE `star` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +185,7 @@ CREATE TABLE `thumb` (
   KEY `transcription_id` (`transcription_id`),
   CONSTRAINT `thumb_ibfk_1` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`),
   CONSTRAINT `thumb_ibfk_2` FOREIGN KEY (`transcription_id`) REFERENCES `transcription` (`transcription_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +218,7 @@ CREATE TABLE `transcription` (
   KEY `book_id` (`book_id`),
   CONSTRAINT `transcription_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`),
   CONSTRAINT `transcription_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,6 +227,7 @@ CREATE TABLE `transcription` (
 
 LOCK TABLES `transcription` WRITE;
 /*!40000 ALTER TABLE `transcription` DISABLE KEYS */;
+INSERT INTO `transcription` VALUES (1,11,1,'나는 바보다',0,0,0),(1,11,3,'1',0,0,0),(2,11,8,'2',0,0,0),(3,11,9,'나는 바보다',0,5,2);
 /*!40000 ALTER TABLE `transcription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,7 +250,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_index`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `nick_name_UNIQUE` (`nick_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,7 +259,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (11,'kpeel5839','김재연','수희사랑','sksk5839!','2021-11-15 15:00:00',NULL,1),(12,'suheelove','황수희','재연사랑','sksk5839!','2021-11-15 15:00:00',NULL,0);
+INSERT INTO `user` VALUES (11,'kpeel5839','김재연','수희사랑','sksk5839!','2021-11-15 15:00:00',NULL,1),(12,'suheelove','황수희','재연사랑','sksk5839!','2021-11-15 15:00:00',NULL,0),(13,'hello','김김김','숲세권주민','1234','2021-11-16 15:00:00',NULL,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -269,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-16 11:07:20
+-- Dump completed on 2021-11-17 11:33:30
