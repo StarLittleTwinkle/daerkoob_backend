@@ -21,9 +21,9 @@ public class ThumbService {
         this.transcriptionRepository = transcriptionRepository;
     }
 
-    public Message judgeReview(Long userIndex , Review review){
-        Optional<Thumb> tempThumb = thumbRepository.findByUserIdAndBookIdAndReviewIdAndGivenUserId(review.getUserId() , review.getBookId() , review.getId() , userIndex);
-        Optional<Review> tempReview = reviewRepository.findById(review.getId());
+    public Message judgeReview(Long userIndex , Long userId , Long bookId , Long reviewId){
+        Optional<Thumb> tempThumb = thumbRepository.findByUserIdAndBookIdAndReviewIdAndGivenUserId(userId , bookId , reviewId , userIndex);
+        Optional<Review> tempReview = reviewRepository.findById(reviewId);
 
         Thumb resultThumb = tempThumb.orElse(null);
         Review resultReview = tempReview.orElse(null);
@@ -37,14 +37,14 @@ public class ThumbService {
         else{
             resultReview.setThumb(resultReview.getThumb() + 1); //review 의 star , star_count 다시 update
             reviewRepository.save(resultReview);
-            thumbRepository.save(createReviewThumb(userIndex , review));
+            thumbRepository.save(createReviewThumb(userIndex , userId, bookId , reviewId));
         }
         return new Message(true , "좋아요 생성");
     }
 
-    public Message judgeTranscription(Long userIndex, Transcription transcription){
-        Optional<Thumb> tempThumb = thumbRepository.findByUserIdAndBookIdAndReviewIdAndGivenUserId(transcription.getUserId() , transcription.getBookId() , transcription.getId() , userIndex);
-        Optional<Transcription> tempTranscription = transcriptionRepository.findById(transcription.getId());
+    public Message judgeTranscription(Long userIndex , Long userId , Long bookId , Long transcriptionId){
+        Optional<Thumb> tempThumb = thumbRepository.findByUserIdAndBookIdAndTranscriptionIdAndGivenUserId(userId , bookId , transcriptionId , userIndex);
+        Optional<Transcription> tempTranscription = transcriptionRepository.findById(transcriptionId);
 
         Thumb resultThumb = tempThumb.orElse(null);
         Transcription resultTranscription = tempTranscription.orElse(null);
@@ -58,25 +58,25 @@ public class ThumbService {
         else{
             resultTranscription.setThumb(resultTranscription.getThumb() + 1); //review 의 star , star_count 다시 update
             transcriptionRepository.save(resultTranscription);
-            thumbRepository.save(createTranscriptionThumb(userIndex , transcription));
+            thumbRepository.save(createTranscriptionThumb(userIndex , userId ,bookId , transcriptionId));
         }
         return new Message(true , "좋아요 생성");
     }
 
-    public Thumb createReviewThumb(Long userIndex , Review review){
+    public Thumb createReviewThumb(Long userIndex , Long userId, Long bookId , Long reviewId){
         Thumb thumb = new Thumb();
-        thumb.setBookId(review.getBookId());
-        thumb.setUserId(review.getUserId());
-        thumb.setReviewId(review.getId());
+        thumb.setBookId(bookId);
+        thumb.setUserId(userId);
+        thumb.setReviewId(reviewId);
         thumb.setGivenUserId(userIndex);
         return thumb;
     }
 
-    public Thumb createTranscriptionThumb(Long userIndex , Transcription transcription){
+    public Thumb createTranscriptionThumb(Long userIndex , Long userId, Long bookId , Long transcriptionId){
         Thumb thumb = new Thumb();
-        thumb.setBookId(transcription.getBookId());
-        thumb.setUserId(transcription.getUserId());
-        thumb.setReviewId(transcription.getId());
+        thumb.setBookId(bookId);
+        thumb.setUserId(userId);
+        thumb.setTranscriptionId(transcriptionId);
         thumb.setGivenUserId(userIndex);
         return thumb;
     }

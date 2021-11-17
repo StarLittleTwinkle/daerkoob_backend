@@ -8,7 +8,6 @@ import com.project.daerkoob.domain.Book;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -41,7 +40,6 @@ public class TranscriptionController {
 
     @GetMapping("{userId}/{title}/{author}/{publisher}/{pubdate}/{isbn}/{image}/{description}/{transcriptionContent}") //guide line , 없는 user_index 넘기면 에러나니까 조심해주세요
     public void getRegister(@PathVariable Long userId ,@PathVariable String title ,@PathVariable String author , @PathVariable String publisher , @PathVariable String pubdate ,@PathVariable String isbn , @PathVariable String image , @PathVariable String description , @PathVariable String transcriptionContent){
-        System.out.println("call teh get Register");
         Book book = bookService.createBook(title , author , publisher , pubdate , isbn , image , description);
         bookService.save(book);
         book = bookService.findBook(isbn);
