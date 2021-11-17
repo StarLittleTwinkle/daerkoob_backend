@@ -65,9 +65,9 @@ public class UserService {
     public User login(User user){
         Optional<User> resultUser = userRepository.findByUserId(user.getUserId());
         User result = resultUser.orElse(null);
-        if(result.getPassword().equals(user.getPassword())) {
+        if(result != null && result.getPassword().equals(user.getPassword())) {
             return result;
         }
-        return result;
+        return null;
     }
 }

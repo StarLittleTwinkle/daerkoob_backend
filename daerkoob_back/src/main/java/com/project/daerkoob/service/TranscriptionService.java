@@ -1,5 +1,6 @@
 package com.project.daerkoob.service;
 
+import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.repository.TranscriptionRepository;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,8 @@ public class TranscriptionService {
         return transcription;
     }
 
-    public void save(Transcription transcription){
+    public Message save(Transcription transcription){
         transcriptionRepository.save(transcription);
+        return new Message(true , "저장에 성공했습니다.");
     }
 }

@@ -1,5 +1,6 @@
 package com.project.daerkoob.controller;
 
+import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.TranscriptionService;
@@ -31,6 +32,7 @@ public class TranscriptionController {
     }
     @PostMapping("click") //책을 눌렀을 때 없으면 그냥 아무일도 안 일어남
     public List<Transcription> click(String isbn){
+        System.out.println("call the click method");
         List<Transcription> transcriptions = new ArrayList<Transcription>();
         if (bookService.existsBook(isbn)) {
             transcriptions = transcriptionService.getTranscription(bookService.getBookId(isbn));
@@ -46,9 +48,9 @@ public class TranscriptionController {
     } //register guide line
 
     @PostMapping("register") //책에 대한 필사 내용을 적고 submit을 눌렀을 때
-    public void register(Long userId, String title , String author , String publisher , String pubdate , String isbn , String image , String description , String transcriptionContent){
+    public Message register(Long userId, String title , String author , String publisher , String pubdate , String isbn , String image , String description , String transcriptionContent){
         bookService.save(bookService.createBook(title, author, publisher , pubdate , isbn, image , description));
         Book book = bookService.findBook(isbn);
-        transcriptionService.save(transcriptionService.createDto(userId, book.getId(), transcriptionContent));
+        return transcriptionService.save(transcriptionService.createDto(userId, book.getId(), transcriptionContent));
     }
 }
