@@ -62,14 +62,12 @@ public class UserService {
         }
     }
 
-    public boolean login(User user){
+    public User login(User user){
         Optional<User> resultUser = userRepository.findByUserId(user.getUserId());
         User result = resultUser.orElse(null);
-        if(result == null) {
-            return false;
+        if(result.getPassword().equals(user.getPassword())) {
+            return result;
         }
-        else{
-            return result.getPassword().equals(user.getPassword());
-        }
+        return result;
     }
 }

@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public boolean login(User user) {
+    public User login(User user) {
         return userService.login(user);
     }
 }

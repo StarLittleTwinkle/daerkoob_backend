@@ -40,15 +40,15 @@ public class TranscriptionController {
 
     @GetMapping("{userId}/{title}/{author}/{publisher}/{pubdate}/{isbn}/{image}/{description}/{transcriptionContent}") //guide line , 없는 user_index 넘기면 에러나니까 조심해주세요
     public void getRegister(@PathVariable Long userId ,@PathVariable String title ,@PathVariable String author , @PathVariable String publisher , @PathVariable String pubdate ,@PathVariable String isbn , @PathVariable String image , @PathVariable String description , @PathVariable String transcriptionContent){
-        Book book = bookService.createBook(title , author , publisher , pubdate , isbn , image , description);
-        bookService.save(book);
-        book = bookService.findBook(isbn);
+        bookService.save(bookService.createBook(title , author , publisher , pubdate , isbn , image , description));
+        Book book = bookService.findBook(isbn);
         transcriptionService.save(transcriptionService.createDto(userId, book.getId(), transcriptionContent));
     } //register guide line
 
     @PostMapping("register") //책에 대한 필사 내용을 적고 submit을 눌렀을 때
-    public void register(Long userId, Book book , String transcriptionContent){
-        bookService.save(book);
+    public void register(Long userId, String title , String author , String publisher , String pubdate , String isbn , String image , String description , String transcriptionContent){
+        bookService.save(bookService.createBook(title, author, publisher , pubdate , isbn, image , description));
+        Book book = bookService.findBook(isbn);
         transcriptionService.save(transcriptionService.createDto(userId, book.getId(), transcriptionContent));
     }
 }
