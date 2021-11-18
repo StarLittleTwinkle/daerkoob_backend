@@ -44,17 +44,17 @@ public class TranscriptionController {
         return transcriptions; //별점도 담겨 있음
     }
 
-    @GetMapping("{userId}/{title}/{author}/{publisher}/{pubdate}/{isbn}/{image}/{description}/{transcriptionContent}") //guide line , 없는 user_index 넘기면 에러나니까 조심해주세요
-    public void getRegister(@PathVariable Long userId ,@PathVariable String title ,@PathVariable String author , @PathVariable String publisher , @PathVariable String pubdate ,@PathVariable String isbn , @PathVariable String image , @PathVariable String description , @PathVariable String transcriptionContent){
-        bookService.save(bookService.createBook(title , author , publisher , pubdate , isbn , image , description));
+    @GetMapping("{userId}/{isbn}/{transcriptionContent}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.
+    public void getRegister(@PathVariable Long userId, @PathVariable String isbn, @PathVariable String transcriptionContent) throws Exception{
+        bookService.save(bookService.createBook(isbn));
         Book book = bookService.findBook(isbn);
         User user = userService.findUser(userId);
         transcriptionService.save(transcriptionService.createDto(userId, book.getId(), book.getTitle() ,user.getNickName() ,  transcriptionContent));
-    } //register guide line
+    }
 
     @PostMapping("register") //책에 대한 필사 내용을 적고 submit을 눌렀을 때
-    public Message register(Long userId, String title , String author , String publisher , String pubdate , String isbn , String image , String description , String transcriptionContent){
-        bookService.save(bookService.createBook(title, author, publisher , pubdate , isbn, image , description));
+    public Message register(Long userId, String isbn , String transcriptionContent) throws Exception{
+        bookService.save(bookService.createBook(isbn));
         Book book = bookService.findBook(isbn);
         User user = userService.findUser(userId);
         return transcriptionService.save(transcriptionService.createDto(userId, book.getId(), book.getTitle() ,user.getNickName() ,  transcriptionContent));

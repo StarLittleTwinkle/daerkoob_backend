@@ -37,15 +37,19 @@ public class BookService {
         return findByIsbn.get().getId();
     }
 
-    public Book createBook(String title ,String author ,String publisher ,String pubdate ,String isbn ,String image ,String description){
+    public Book createBook(String isbn) throws Exception{
+        List<Book> bookList = getBook(isbn , "1");
         Book book = new Book();
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setPublisher(publisher);
-        book.setPubdate(pubdate);
-        book.setIsbn(isbn);
-        book.setImage(image);
-        book.setDescription(description);
+        for(Book tempBook : bookList) {
+            book.setTitle(tempBook.getTitle());
+            book.setAuthor(tempBook.getAuthor());
+            book.setPublisher(tempBook.getPublisher());
+            book.setPubdate(tempBook.getPubdate());
+            book.setIsbn(isbn);
+            book.setImage(tempBook.getImage());
+            book.setDescription(tempBook.getDescription());
+            book = tempBook;
+        }
         return book;
     }
 
