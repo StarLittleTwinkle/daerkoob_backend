@@ -26,7 +26,12 @@ public class UserService {
     }
 
     public void save(User user){
-        userRepository.save(user);
+        userRepository.save(createDto(user));
+    }
+    public User createDto(User user){
+        user.setTranscriptionCount(0L);
+        user.setReviewCount(0L);
+        return user;
     }
 
     public Message signUp(User user , String confirmPassword){
@@ -69,5 +74,9 @@ public class UserService {
             return result;
         }
         return null;
+    }
+
+    public User findUser(Long id){
+        return userRepository.findById(id).get();
     }
 }
