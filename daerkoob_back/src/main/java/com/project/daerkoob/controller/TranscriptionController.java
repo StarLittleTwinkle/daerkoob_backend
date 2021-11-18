@@ -26,6 +26,7 @@ public class TranscriptionController {
         this.bookService = bookService;
         this.userService = userService;
     }
+
     @GetMapping("{isbn}") //guide line , 해당 book의 isbn을 보내면 해당 필사 내용이 Transcription의 형태로 다 넘어옴
     public List<Transcription> getClick(@PathVariable String isbn){
         List<Transcription> transcriptions = new ArrayList<Transcription>();
@@ -34,14 +35,19 @@ public class TranscriptionController {
         }
         return transcriptions; //별점도 담겨 있음
     }
+
     @PostMapping("click") //책을 눌렀을 때 없으면 그냥 아무일도 안 일어남
-    public List<Transcription> click(String isbn){
+    public List<? extends Object> click(String isbn) throws Exception{
         System.out.println("call the click method");
-        List<Transcription> transcriptions = new ArrayList<Transcription>();
+        List<? extends Object> information = new ArrayList<>();
         if (bookService.existsBook(isbn)) {
-            transcriptions = transcriptionService.getTranscription(bookService.getBookId(isbn));
+            information = transcriptionService.getTranscription(bookService.getBookId(isbn));
         }
-        return transcriptions; //별점도 담겨 있음
+        if(information.size() == 0){
+            information = (List<? extends Object>)bookService.createBook(isbn);
+            return information;
+        }
+        return information;
     }
 
     @GetMapping("{userId}/{isbn}/{transcriptionContent}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.
