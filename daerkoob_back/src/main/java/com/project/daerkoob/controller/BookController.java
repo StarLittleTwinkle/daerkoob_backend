@@ -18,10 +18,9 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("find/{title}/{display}")
-    public List<Book> getFindBook(@PathVariable String title , @PathVariable String display) throws Exception {
-        List<Book> bookList = bookService.getBook(title , display);
-        return bookList;
+    @GetMapping("find/{isbn}") //글쓰기 및 책 내용보기를 클릭하면 넘어오는 정보
+    public Book getClick(@PathVariable String isbn) throws Exception{
+        return bookService.createBook(isbn);
     }
 
     @PostMapping("find")
