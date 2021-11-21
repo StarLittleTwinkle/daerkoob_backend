@@ -28,4 +28,6 @@ public class Book {
     private String isbn;
     @Column(name = "description")
     private String description;
+    @Column(name = "transcription_count")
+    private Long transcriptionCount;
 }

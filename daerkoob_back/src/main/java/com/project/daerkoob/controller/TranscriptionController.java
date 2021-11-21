@@ -61,7 +61,6 @@ public class TranscriptionController {
     public Message register(Long userId, String isbn , String transcriptionContent) throws Exception{
         bookService.save(bookService.createBook(isbn));
         Optional<Book> book = bookService.findBook(isbn);
-        System.out.println(book.get());
         User user = userService.findUser(userId);
         return transcriptionService.save(transcriptionService.createDto(userId, book.get().getId(), book.get().getTitle() ,user.getNickName() ,  transcriptionContent));
     }

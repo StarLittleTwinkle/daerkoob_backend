@@ -5,6 +5,7 @@ import com.project.daerkoob.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -27,5 +28,11 @@ public class BookController {
     public List<Book> findBook(String title ,String display) throws Exception {
         List<Book> bookList = bookService.getBook(title , display);
         return bookList;
+    }
+
+    @GetMapping("best") //아직 구현안함
+    public List<Book> bestBook(){
+        List<Book> bestBookList = new ArrayList<Book>();
+        return bestBookList;
     }
 }

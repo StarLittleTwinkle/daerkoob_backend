@@ -18,9 +18,15 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public void save(Book book){
+    public void save(Book book) throws Exception{
         if(!bookRepository.existsByIsbn(book.getIsbn())){
-            System.out.println(bookRepository.save(book));
+            bookRepository.save(createBook(book.getIsbn()));
+        }
+        else{
+            Optional<Book> findByIsbn = bookRepository.findByIsbn(book.getIsbn());
+            Book resultBook = findByIsbn.get();
+            resultBook.setTranscriptionCount(resultBook.getTranscriptionCount() + 1);
+            bookRepository.save(resultBook);
         }
     }
 
@@ -48,7 +54,7 @@ public class BookService {
             book.setIsbn(isbn);
             book.setImage(tempBook.getImage());
             book.setDescription(tempBook.getDescription());
-            book = tempBook;
+            book.setTranscriptionCount(1L); //필사를 달면서 만드니까 1로 초기화
         }
         return book;
     }
