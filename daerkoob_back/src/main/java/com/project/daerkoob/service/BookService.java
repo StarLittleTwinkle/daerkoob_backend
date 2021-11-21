@@ -20,7 +20,7 @@ public class BookService {
 
     public void save(Book book){
         if(!bookRepository.existsByIsbn(book.getIsbn())){
-            bookRepository.save(book);
+            System.out.println(bookRepository.save(book));
         }
     }
 
@@ -87,18 +87,18 @@ public class BookService {
         public void run(){
             NaverApiService naverApiService = new NaverApiService();
             Book tempBook = new Book();
-            tempBook.setTitle(obj.getString("title"));
-            tempBook.setAuthor(obj.getString("author"));
-            tempBook.setPublisher(obj.getString("publisher"));
-            tempBook.setPubdate(obj.getString("pubdate"));
-            tempBook.setIsbn(obj.getString("isbn"));
+            tempBook.setTitle(obj.getString("title").replace("<b>", "").replace("</b>" , ""));
+            tempBook.setAuthor(obj.getString("author").replace("<b>", "").replace("</b>" , ""));
+            tempBook.setPublisher(obj.getString("publisher").replace("<b>", "").replace("</b>" , ""));
+            tempBook.setPubdate(obj.getString("pubdate").replace("<b>", "").replace("</b>" , ""));
+            tempBook.setIsbn(obj.getString("isbn").replace("<b>", "").replace("</b>" , ""));
             if(!obj.getString("image").equals("") && naverApiService.checkLink(obj.getString("image"))){
-                tempBook.setImage(obj.getString("image"));
+                tempBook.setImage(obj.getString("image").replace("<b>", "").replace("</b>" , ""));
             }
             else{
                 tempBook.setImage(null);
             }
-            tempBook.setDescription(obj.getString("description"));
+            tempBook.setDescription(obj.getString("description").replace("<b>", "").replace("</b>" , ""));
             bookList.add(tempBook);
         }
     }

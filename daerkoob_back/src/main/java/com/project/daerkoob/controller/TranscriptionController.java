@@ -30,7 +30,7 @@ public class TranscriptionController {
     }
 
     @GetMapping("judge/{isbn}")
-    public Boolean getJudge(String isbn) throws Exception{ //false 는 필사 존재 x , true 는 필사 존재 o (필사 보기 가능)
+    public Boolean getJudge(@PathVariable String isbn) throws Exception{ //false 는 필사 존재 x , true 는 필사 존재 o (필사 보기 가능)
         Optional<Book> book = bookService.findBook(isbn);
         Book resultBook = book.orElse(null);
         if(resultBook == null){
@@ -59,9 +59,9 @@ public class TranscriptionController {
 
     @PostMapping("register") //책에 대한 필사 내용을 적고 submit을 눌렀을 때
     public Message register(Long userId, String isbn , String transcriptionContent) throws Exception{
-        System.out.println("call the transcription register");
         bookService.save(bookService.createBook(isbn));
         Optional<Book> book = bookService.findBook(isbn);
+        System.out.println(book.get());
         User user = userService.findUser(userId);
         return transcriptionService.save(transcriptionService.createDto(userId, book.get().getId(), book.get().getTitle() ,user.getNickName() ,  transcriptionContent));
     }
