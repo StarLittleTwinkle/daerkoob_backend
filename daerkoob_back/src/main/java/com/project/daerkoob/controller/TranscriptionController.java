@@ -59,6 +59,7 @@ public class TranscriptionController {
 
     @PostMapping("register") //책에 대한 필사 내용을 적고 submit을 눌렀을 때
     public Message register(Long userId, String isbn , String transcriptionContent) throws Exception{
+        System.out.println("call the transcription register");
         bookService.save(bookService.createBook(isbn));
         Optional<Book> book = bookService.findBook(isbn);
         User user = userService.findUser(userId);

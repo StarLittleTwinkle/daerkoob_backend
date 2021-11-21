@@ -31,6 +31,7 @@ public class UserService {
     public User createDto(User user){
         user.setTranscriptionCount(0L);
         user.setReviewCount(0L);
+        user.setFriend(0L);
         return user;
     }
 
@@ -51,8 +52,7 @@ public class UserService {
             boolean existsByUserId = userRepository.existsByUserId(user.getUserId());
             boolean existsByNickName = userRepository.existsByNickName(user.getNickName());
             if(!existsByUserId && !existsByNickName) {
-                user.setFriend(0L);
-                userRepository.save(user);
+                userRepository.save(createDto(user));
                 return new Message(true, "회원가입 성공");
             }
             else if(existsByUserId) {
