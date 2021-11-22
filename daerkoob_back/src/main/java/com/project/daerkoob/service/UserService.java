@@ -45,7 +45,7 @@ public class UserService {
         } else if (user.getPassword() == null || user.getPassword().length() == 0) {
             return new Message(false, "비밀번호를 입력하세요.");
         } else if (confirmPassword == null || confirmPassword.length() == 0) {
-            return new Message(false, "비밀번호를 한번 더 입력하세요.");
+            return new Message(false, "비밀번호가 일치하지 않습니다.");
         } else if (user.getBirth() == null) {
             return new Message(false, "생일을 입력하세요.");
         } else if (user.getPassword().equals(confirmPassword)) {
