@@ -16,7 +16,7 @@ public class Comment {
     private Long id;
     @Column(name = " review_id")
     private Long reviewId;
-    @Column(name = " nested_comment")
+    @Column(name = "nested_comment")
     private Long nestedComment;
     @Column(name = " content")
     private String content;
