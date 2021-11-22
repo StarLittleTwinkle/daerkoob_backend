@@ -17,22 +17,18 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long id;
-    @Column(name = "user_id")
-    private Long userId;
-    @Column(name = "book_id")
-    private Long bookId;
-    @Column(name = "thumb")
-    private Long thumb;
-    @Column(name = "star")
-    private Double star;
-    @Column(name = "star_count")
-    private Long starCount;
-    @Column(name = "review")
-    private String review;
-    @Column(name = "book_title")
-    private String bookTitle;
-    @Column(name = "user_nick_name")
-    private String userNickName;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+    @Column(name = "thumb_count")
+    private Long thumbCount;
+    @Column(name = "content")
+    private String content;
+    @Column(name = "score")
+    private Long score;
     @Column(name = "register_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registerDate;

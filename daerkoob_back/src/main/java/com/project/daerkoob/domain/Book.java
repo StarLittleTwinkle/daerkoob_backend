@@ -30,4 +30,10 @@ public class Book {
     private String description;
     @Column(name = "transcription_count")
     private Long transcriptionCount;
+    @Column(name = " review_count")
+    private Long reviewCount;
+    @Column(name = "star")
+    private Double star;
+    @Column(name = "star_count")
+    private Long starCount;
 }

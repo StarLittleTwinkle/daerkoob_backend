@@ -14,14 +14,12 @@ public class Thumb {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "thumb_id")
     private Long id;
-    @Column(name = "book_id")
-    private Long bookId;
-    @Column(name = "user_id")
-    private Long userId;
     @Column(name = "review_id")
     private Long reviewId;
     @Column(name = "transcription_id")
     private Long transcriptionId;
+    @Column(name = "comment_id")
+    private Long commentId;
     @Column(name = "given_user_id")
     private Long givenUserId;
 }

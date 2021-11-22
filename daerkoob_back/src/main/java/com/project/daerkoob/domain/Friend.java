@@ -14,10 +14,9 @@ public class Friend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "user_index")
-    private Long userIndex;
     @Column(name = "friend_index")
     private Long friendIndex;
-    @Column(name = "nick_name")
-    private String nickName;
+    @ManyToOne
+    @JoinColumn(name = "user_index")
+    private User user;
 }
