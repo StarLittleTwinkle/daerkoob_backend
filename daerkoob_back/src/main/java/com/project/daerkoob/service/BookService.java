@@ -55,6 +55,9 @@ public class BookService {
             book.setImage(tempBook.getImage());
             book.setDescription(tempBook.getDescription());
             book.setTranscriptionCount(1L); //필사를 달면서 만드니까 1로 초기화
+            book.setReviewCount(1L);
+            book.setStar(0D);
+            book.setStarCount(0L);
         }
         return book;
     }
