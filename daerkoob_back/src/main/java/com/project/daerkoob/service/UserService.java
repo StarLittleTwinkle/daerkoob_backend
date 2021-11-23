@@ -31,7 +31,7 @@ public class UserService {
     public User createDto(User user){
         user.setTranscriptionCount(0L);
         user.setReviewCount(0L);
-        user.setFriend(0L);
+        user.setFriendCount(0L);
         return user;
     }
 

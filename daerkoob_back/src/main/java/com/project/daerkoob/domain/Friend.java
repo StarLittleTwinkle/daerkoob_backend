@@ -19,4 +19,6 @@ public class Friend {
     @ManyToOne
     @JoinColumn(name = "user_index")
     private User user;
+    @Column(name = "friend_nick_name")
+    private String friendNickName;
 }

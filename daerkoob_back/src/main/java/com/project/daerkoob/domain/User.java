@@ -1,14 +1,13 @@
 package com.project.daerkoob.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Date;
 
 @Entity
@@ -30,8 +29,12 @@ public class User {
     @Column(name = "birth")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
-    @Column(name = "friend")
-    private Long friend; // String 으로 관리하면서 배열 형태로 관리하다가 파싱해서 친구 목록 출력
+    @Column(name = "friend_count")
+    private Long friendCount;
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user")
+    private List<Friend> friends;
     @Column(name = "review_count")
     private Long reviewCount;
     @Column(name = "transcription_count")
