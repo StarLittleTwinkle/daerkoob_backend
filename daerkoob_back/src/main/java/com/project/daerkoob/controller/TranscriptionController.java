@@ -50,7 +50,6 @@ public class TranscriptionController {
     public void getRegister(@PathVariable Long userId, @PathVariable String isbn, @PathVariable String transcriptionContent) throws Exception{
         bookService.save(bookService.createBook(isbn));
         Optional<Book> book = bookService.findBook(isbn);
-        User user = userService.findUser(userId);
         transcriptionService.save(transcriptionService.createDto(userId, book.get().getId() ,  transcriptionContent));
     }
 
@@ -59,7 +58,6 @@ public class TranscriptionController {
     public void register(Long userId, String isbn , String transcriptionContent) throws Exception{
         bookService.save(bookService.createBook(isbn));
         Optional<Book> book = bookService.findBook(isbn);
-        User user = userService.findUser(userId);
         transcriptionService.save(transcriptionService.createDto(userId, book.get().getId() ,  transcriptionContent));
     }
 }
