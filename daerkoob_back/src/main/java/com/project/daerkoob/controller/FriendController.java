@@ -2,7 +2,6 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Friend;
 import com.project.daerkoob.domain.Message;
-import com.project.daerkoob.domain.User;
 import com.project.daerkoob.service.FriendService;
 import com.project.daerkoob.service.UserService;
 import org.springframework.web.bind.annotation.*;

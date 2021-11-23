@@ -33,7 +33,7 @@ public class User {
     private Long friendCount;
     @JsonIgnore
     @ToString.Exclude
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user" , fetch = FetchType.EAGER)
     private List<Friend> friends;
     @Column(name = "review_count")
     private Long reviewCount;
