@@ -47,7 +47,7 @@ public class ReviewController {
         return reviewService.getBookReview(book.get().getId());
     }
 
-    @GetMapping("register/{userId}/{isbn}/{transcriptionContent}/{score}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.
+    @GetMapping("register/{userId}/{isbn}/{reviewContent}/{score}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.
     public void getRegister(@PathVariable Long userId, @PathVariable String isbn, @PathVariable String reviewContent , @PathVariable Long score) throws Exception{
         bookService.save(bookService.createBook(isbn));
         Optional<Book> book = bookService.findBook(isbn);

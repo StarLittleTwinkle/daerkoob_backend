@@ -56,6 +56,7 @@ public class ReviewService {
         resultUser.setReviewCount(resultUser.getReviewCount() + 1);
         resultBook.setStar(scoreCalculate(resultBook.getStar(), resultBook.getStarCount() , review.getScore() , resultBook.getStarCount() + 1));
         resultBook.setStarCount(resultBook.getStarCount() + 1);
+        resultBook.setReviewCount(resultBook.getReviewCount() + 1);
         userRepository.save(resultUser);
         bookRepository.save(resultBook);
         return new Message(true , "리뷰 저장에 성공했습니다.");

@@ -1,7 +1,6 @@
 package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Transcription;
-import com.project.daerkoob.domain.User;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.TranscriptionService;
 import com.project.daerkoob.service.UserService;
