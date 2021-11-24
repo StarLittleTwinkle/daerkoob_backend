@@ -73,7 +73,7 @@ CREATE TABLE `comment` (
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`) ON DELETE CASCADE,
   CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE,
   CONSTRAINT `comment_ibfk_3` FOREIGN KEY (`nested_comment`) REFERENCES `comment` (`comment_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,6 +82,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,1,NULL,'여기에 처음 다는 댓글',11,2),(2,1,NULL,'두번째 다는 댓글',11,0),(3,1,NULL,'다른 사람이 다는 댓글',12,0),(4,NULL,1,'하하하 대댓글',12,0),(6,NULL,1,'또 댓글',13,0),(7,NULL,1,'또 댓글글',14,0);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +172,7 @@ CREATE TABLE `thumb` (
   CONSTRAINT `thumb_ibfk_2` FOREIGN KEY (`transcription_id`) REFERENCES `transcription` (`transcription_id`) ON DELETE CASCADE,
   CONSTRAINT `thumb_ibfk_3` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`) ON DELETE CASCADE,
   CONSTRAINT `thumb_ibfk_4` FOREIGN KEY (`given_user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +181,7 @@ CREATE TABLE `thumb` (
 
 LOCK TABLES `thumb` WRITE;
 /*!40000 ALTER TABLE `thumb` DISABLE KEYS */;
-INSERT INTO `thumb` VALUES (2,NULL,24,11,NULL),(3,1,NULL,11,NULL),(4,2,NULL,12,NULL),(5,1,NULL,12,NULL),(6,1,NULL,13,NULL),(7,1,NULL,14,NULL);
+INSERT INTO `thumb` VALUES (3,1,NULL,11,NULL),(4,2,NULL,12,NULL),(5,1,NULL,12,NULL),(6,1,NULL,13,NULL),(7,1,NULL,14,NULL),(11,NULL,NULL,11,1),(12,NULL,NULL,12,1);
 /*!40000 ALTER TABLE `thumb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +214,7 @@ CREATE TABLE `transcription` (
 
 LOCK TABLES `transcription` WRITE;
 /*!40000 ALTER TABLE `transcription` DISABLE KEYS */;
-INSERT INTO `transcription` VALUES (11,13,24,'나는 이거를 몇번 작업하냐\n',1,'2021-11-21 00:00:00'),(11,13,25,'나는 이거를 2번 작업한다.',0,'2021-11-21 00:00:00'),(11,13,26,'이번엔 3번째\n',0,'2021-11-21 00:00:00'),(12,14,27,'수희 바보',0,'2021-11-21 00:00:00'),(12,14,28,'수희 엉엉엉',0,'2021-11-21 00:00:00'),(12,14,29,'어엉ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',0,'2021-11-21 00:00:00'),(11,13,30,'지윤님에게 보여주는 test\n',0,'2021-11-22 00:00:00'),(13,13,31,'jazz jazz',0,'2021-11-22 00:00:00'),(11,11,32,'나는나는나는',0,'2021-11-23 00:00:00'),(11,13,33,'앙앙앙 난 니가 정말 싫어 도라에몽이',0,'2021-11-24 00:00:00'),(11,13,34,'앙앙앙 난 니가 정말 싫어 도라에몽이',0,'2021-11-24 00:00:00');
+INSERT INTO `transcription` VALUES (11,13,24,'나는 이거를 몇번 작업하냐\n',0,'2021-11-21 00:00:00'),(11,13,25,'나는 이거를 2번 작업한다.',0,'2021-11-21 00:00:00'),(11,13,26,'이번엔 3번째\n',0,'2021-11-21 00:00:00'),(12,14,27,'수희 바보',0,'2021-11-21 00:00:00'),(12,14,28,'수희 엉엉엉',0,'2021-11-21 00:00:00'),(12,14,29,'어엉ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',0,'2021-11-21 00:00:00'),(11,13,30,'지윤님에게 보여주는 test\n',0,'2021-11-22 00:00:00'),(13,13,31,'jazz jazz',0,'2021-11-22 00:00:00'),(11,11,32,'나는나는나는',0,'2021-11-23 00:00:00'),(11,13,33,'앙앙앙 난 니가 정말 싫어 도라에몽이',0,'2021-11-24 00:00:00'),(11,13,34,'앙앙앙 난 니가 정말 싫어 도라에몽이',0,'2021-11-24 00:00:00');
 /*!40000 ALTER TABLE `transcription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,4 +260,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-24 11:34:13
+-- Dump completed on 2021-11-24 23:27:09
