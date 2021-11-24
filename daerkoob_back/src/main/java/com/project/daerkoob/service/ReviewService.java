@@ -45,7 +45,7 @@ public class ReviewService {
         return resultList;
     }
 
-    public TransferComment createTransferComment(Comment comment){
+    public TransferComment createTransferComment(Comment comment){ //대댓글에 쓰이는 transferComment
         TransferComment transferComment = new TransferComment();
         transferComment.setId(comment.getId());
         transferComment.setComments(comment.getComments());

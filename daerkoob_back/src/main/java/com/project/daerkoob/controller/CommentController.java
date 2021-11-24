@@ -20,9 +20,7 @@ public class CommentController {
         this.reviewService =reviewService;
     }
 
-    //일단 댓글 달기 , 삭제는 나중에 생각하자
-    //두개를 생각 리뷰에 댓글을 다는 경우 , 댓글에 댓글을 다는 경우 일단은 그 2경우만 생각해보면
-    @GetMapping("register/review/{userId}/{reviewId}/{content}") //review에다가 댓글을 달면 이 댓글은 , 저 리뷰를 가르키게 됨 , 근데 리뷰가 자신에게 달린 댓글을 셀 수 있으면 더 좋을 것 같은데.. 그거는 review 가 list의 사이즈를 체크 하면될 듯
+    @GetMapping("register/review/{userId}/{reviewId}/{content}")
     public void getCommentOfReview(@PathVariable Long userId , @PathVariable Long reviewId, @PathVariable String content) { //guide line
         commentService.save(commentService.createCommentOfReviewDto(userId , reviewId , content));
     }
@@ -32,16 +30,11 @@ public class CommentController {
         commentService.save(commentService.createCommentOfReviewDto(userId , reviewId , content));
     }
 
-    @GetMapping("inquiry/review/{reviewId}") //
+    @GetMapping("inquiry/review/{reviewId}") //이거 하면 그냥 review에 달린 댓글들이 다 나옴 , 대댓글에 대댓글은 안나옴, youtube나 이런 곳 보니까 다 막아놓은 걸 보아하니 , 우리도 막아야할 듯
     public List<TransferComment> inquiryCommentOfReview(@PathVariable Long reviewId){
         System.out.println("call the inquiryReview Method");
         return reviewService.getCommentOfReview(reviewId);
     }
-
-//    @GetMapping("inquiry/nested/{commentId}") //지영님이 여기서 계속 comment마다 inquiry로 요청해주시면 될 것 같기도한데
-//    public List<Comment> inquiryCommentOfComment(@PathVariable Long commentId){
-//        return commentService.getCommentOfComment(commentId);
-//    }
 
     @GetMapping("register/nested/{userId}/{commentId}/{content}") //자신의 댓글에다가 댓글을 다는 경우에는 자신의 테이블에 있는 레코드를 가르키게 됨 , 일단은 join 연산으로 구현할 생각은 못한 상태이다.
     public void getCommentOfComment(@PathVariable Long userId , @PathVariable Long commentId, @PathVariable String content) { //guide line

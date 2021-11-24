@@ -1,11 +1,15 @@
 package com.project.daerkoob.service;
 
+import com.project.daerkoob.domain.Friend;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
+import com.project.daerkoob.model.TransferUser;
 import com.project.daerkoob.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +32,7 @@ public class UserService {
     public void save(User user){
         userRepository.save(createDto(user));
     }
+
     public User createDto(User user){
         user.setTranscriptionCount(0L);
         user.setReviewCount(0L);
@@ -35,6 +40,18 @@ public class UserService {
         return user;
     }
 
+    public TransferUser createTransferUser(User user){
+        TransferUser transferUser = new TransferUser();
+        transferUser.setId(user.getId());
+        transferUser.setName(user.getName());
+        transferUser.setNickName(user.getNickName());
+        transferUser.setBirth(user.getBirth());
+        transferUser.setFriendCount(user.getFriendCount());
+        transferUser.setFriends(user.getFriends());
+        transferUser.setReviewCount(user.getReviewCount());
+        transferUser.setTranscriptionCount(user.getTranscriptionCount());
+        return transferUser;
+    }
     public Message signUp(User user , String confirmPassword){
         if (user.getUserId() == null || user.getUserId().length() == 0) {
             return new Message(false, "아이디를 입력하세요.");
@@ -67,11 +84,11 @@ public class UserService {
         }
     }
 
-    public User login(User user){
+    public TransferUser login(User user){
         Optional<User> resultUser = userRepository.findByUserId(user.getUserId());
         User result = resultUser.orElse(null);
         if(result != null && result.getPassword().equals(user.getPassword())) {
-            return result;
+            return createTransferUser(result);
         }
         return null;
     }

@@ -2,6 +2,7 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
+import com.project.daerkoob.model.TransferUser;
 import com.project.daerkoob.repository.UserRepository;
 import com.project.daerkoob.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public User login(User user) {
+    public TransferUser login(User user) { //친구 목록까지 넘어가게 수정
         return userService.login(user);
     }
 }
