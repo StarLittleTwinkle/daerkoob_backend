@@ -1,9 +1,6 @@
 package com.project.daerkoob.service;
 
-import com.project.daerkoob.domain.Book;
-import com.project.daerkoob.domain.Message;
-import com.project.daerkoob.domain.Review;
-import com.project.daerkoob.domain.User;
+import com.project.daerkoob.domain.*;
 import com.project.daerkoob.repository.BookRepository;
 import com.project.daerkoob.repository.ReviewRepository;
 import com.project.daerkoob.repository.UserRepository;
@@ -34,7 +31,9 @@ public class ReviewService {
         List<Review> reviews = reviewRepository.findByUser(userRepository.findById(userId).get());
         return reviews;
     }
-
+    public List<Comment> getCommentOfReview(Long reviewId){
+        return reviewRepository.findById(reviewId).get().getComments();
+    }
     public Review createDto(Long userId , Long bookId , Long score , String reviewContent){
         Review review = new Review();
         LocalDate now = LocalDate.now();

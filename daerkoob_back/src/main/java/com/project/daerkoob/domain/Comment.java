@@ -14,14 +14,16 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private Long id;
-    @Column(name = " review_id")
-    private Long reviewId;
     @Column(name = "nested_comment")
     private Long nestedComment;
     @Column(name = " content")
     private String content;
-    @Column(name = "user_id")
-    private Long userid;
     @Column(name = "thumb_count")
     private Long thumbCount;
+    @ManyToOne
+    @JoinColumn(name = "review_id")
+    private Review review;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User writer;
 }

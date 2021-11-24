@@ -1,12 +1,14 @@
 package com.project.daerkoob.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -32,5 +34,9 @@ public class Review {
     @Column(name = "register_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registerDate;
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "review")
+    List<Comment> comments;
 
 }
