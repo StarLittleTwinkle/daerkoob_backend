@@ -1,9 +1,12 @@
 package com.project.daerkoob.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,8 +17,15 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private Long id;
-    @Column(name = "nested_comment")
-    private Long nestedComment;
+//    @Column(name = "nested_comment")
+//    private Long nestedComment;
+    @ManyToOne
+    @JoinColumn(name = "nested_comment")
+    private Comment comment; //comment가 자신을 참조한다
+    @OneToMany(mappedBy = "comment")
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Comment> comments;
     @Column(name = " content")
     private String content;
     @Column(name = "thumb_count")

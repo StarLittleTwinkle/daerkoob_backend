@@ -5,6 +5,7 @@ import com.project.daerkoob.repository.CommentRepository;
 import com.project.daerkoob.repository.ReviewRepository;
 import com.project.daerkoob.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class CommentService {
@@ -22,6 +23,10 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
+    public List<Comment> getCommentOfComment(Long commentId){
+        return commentRepository.findById(commentId).get().getComments();
+    }
+
     public Comment createCommentOfReviewDto(Long userId , Long reviewId, String content){
         Comment comment = new Comment();
         comment.setReview(reviewRepository.findById(reviewId).get());
@@ -33,7 +38,7 @@ public class CommentService {
 
     public Comment createCommentOfCommentDto(Long userId ,Long commentId , String content){
         Comment comment = new Comment();
-        comment.setNestedComment(commentId);
+        comment.setComment(commentRepository.findById(commentId).get());
         comment.setThumbCount(0L);
         comment.setWriter(userRepository.findById(userId).get());
         comment.setContent(content);

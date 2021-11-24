@@ -31,9 +31,14 @@ public class CommentController {
         commentService.save(commentService.createCommentOfReviewDto(userId , reviewId , content));
     }
 
-    @GetMapping("review/inquiry/{reviewId}")
+    @GetMapping("inquiry/review/{reviewId}")
     public List<Comment> inquiryCommentOfReview(@PathVariable Long reviewId){
         return reviewService.getCommentOfReview(reviewId);
+    }
+
+    @GetMapping("inquiry/nested/{commentId}") //지영님이 여기서 계속 comment마다 inquiry로 요청해주시면 될 것 같기도한데
+    public List<Comment> inquiryCommentOfComment(@PathVariable Long commentId){
+        return commentService.getCommentOfComment(commentId);
     }
 
     @GetMapping("register/nested/{userId}/{commentId}/{content}") //자신의 댓글에다가 댓글을 다는 경우에는 자신의 테이블에 있는 레코드를 가르키게 됨 , 일단은 join 연산으로 구현할 생각은 못한 상태이다.
