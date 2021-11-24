@@ -1,12 +1,15 @@
 package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.*;
+import com.project.daerkoob.model.TransferComment;
 import com.project.daerkoob.repository.BookRepository;
+import com.project.daerkoob.repository.CommentRepository;
 import com.project.daerkoob.repository.ReviewRepository;
 import com.project.daerkoob.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,11 +18,13 @@ public class ReviewService {
     private ReviewRepository reviewRepository;
     private UserRepository userRepository;
     private BookRepository bookRepository;
+    private CommentRepository commentRepository;
 
-    public ReviewService(ReviewRepository reviewRepository , UserRepository userRepository , BookRepository bookRepository){
+    public ReviewService(ReviewRepository reviewRepository , UserRepository userRepository , BookRepository bookRepository, CommentRepository commentRepository){
         this.reviewRepository = reviewRepository;
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
+        this.commentRepository = commentRepository;
     }
 
     public List<Review> getBookReview(Long bookId){
@@ -31,8 +36,24 @@ public class ReviewService {
         List<Review> reviews = reviewRepository.findByUser(userRepository.findById(userId).get());
         return reviews;
     }
-    public List<Comment> getCommentOfReview(Long reviewId){
-        return reviewRepository.findById(reviewId).get().getComments();
+    public List<TransferComment> getCommentOfReview(Long reviewId){ //review에 대한 댓글을 다 불러오는 메소드
+        List<TransferComment> resultList = new ArrayList<>();
+        List<Comment> commentList = commentRepository.findByReview(reviewRepository.findById(reviewId).get());
+        for(Comment comment : commentList){
+            resultList.add(createTransferComment(comment));
+        }
+        return resultList;
+    }
+
+    public TransferComment createTransferComment(Comment comment){
+        TransferComment transferComment = new TransferComment();
+        transferComment.setId(comment.getId());
+        transferComment.setComments(comment.getComments());
+        transferComment.setWriter(comment.getWriter());
+        transferComment.setReview(comment.getReview());
+        transferComment.setThumbCount(comment.getThumbCount());
+        transferComment.setContent(comment.getContent());
+        return transferComment;
     }
     public Review createDto(Long userId , Long bookId , Long score , String reviewContent){
         Review review = new Review();
