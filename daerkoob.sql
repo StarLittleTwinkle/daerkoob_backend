@@ -47,7 +47,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (11,'김이나의 작사법 (우리의 감정을 사로잡는 일상의 언어들)','김이나','문학동네','20150318','8954635601 9788954635608','https://bookthumb-phinf.pstatic.net/cover/088/824/08882431.jpg?type=m1&udate=20210119','아이유 윤상 허지웅의 감정을 두드린 이 책!이선희 〈그중에 그대를 만나〉, 조용필 〈걷고 싶다〉, 아이유 〈좋은 날〉, 브라운아이드걸스 〈아브라카다브라〉, 성시경 〈10월에 눈이 내리면〉, 엑소 〈LUCKY〉,가인 〈APPLE〉 〈PARADISE LOST〉 등 300여 곡\n\n대한민국 작사가 저작권료 수입 1위!\n대중을... ',9,4,3.5,'4'),(12,'해리 포터와 마법사의 돌 (해리포터 20주년)','J.K. 롤링','문학수첩','20191119','8983927747 9788983927743','https://bookthumb-phinf.pstatic.net/cover/157/688/15768828.jpg?type=m1&udate=20200109','해리 포터 세대의, 해리 포터 세대를 위한, 해리 포터 세대에 의한 새 번역!&#x0D;‘21세기 대표 아이콘’에 걸맞은 완성도 높은 작품으로 재탄생하다!&#x0D;&#x0D;1997년 영국에서 출간된 이래 『해리 포터』 시리즈는 지금까지 200개국 이상 80개의 언어로 번역되고 출간되어 5억 부 이상을 판매했다. 국내에서도... ',3,0,0,''),(13,'재즈피플 Jazz People 2021.11','재즈피플 편집부','재즈피플(월간지)','20211028','1975354303 9771975354306','https://bookthumb-phinf.pstatic.net/cover/211/936/21193673.jpg?type=m1&udate=20211101','재즈 관련 전문지 『재즈피플』.',1,0,0,'');
+INSERT INTO `book` VALUES (11,'김이나의 작사법 (우리의 감정을 사로잡는 일상의 언어들)','김이나','문학동네','20150318','8954635601 9788954635608','https://bookthumb-phinf.pstatic.net/cover/088/824/08882431.jpg?type=m1&udate=20210119','아이유 윤상 허지웅의 감정을 두드린 이 책!이선희 〈그중에 그대를 만나〉, 조용필 〈걷고 싶다〉, 아이유 〈좋은 날〉, 브라운아이드걸스 〈아브라카다브라〉, 성시경 〈10월에 눈이 내리면〉, 엑소 〈LUCKY〉,가인 〈APPLE〉 〈PARADISE LOST〉 등 300여 곡\n\n대한민국 작사가 저작권료 수입 1위!\n대중을... ',11,4,3.5,'4'),(12,'해리 포터와 마법사의 돌 (해리포터 20주년)','J.K. 롤링','문학수첩','20191119','8983927747 9788983927743','https://bookthumb-phinf.pstatic.net/cover/157/688/15768828.jpg?type=m1&udate=20200109','해리 포터 세대의, 해리 포터 세대를 위한, 해리 포터 세대에 의한 새 번역!&#x0D;‘21세기 대표 아이콘’에 걸맞은 완성도 높은 작품으로 재탄생하다!&#x0D;&#x0D;1997년 영국에서 출간된 이래 『해리 포터』 시리즈는 지금까지 200개국 이상 80개의 언어로 번역되고 출간되어 5억 부 이상을 판매했다. 국내에서도... ',3,0,0,''),(13,'재즈피플 Jazz People 2021.11','재즈피플 편집부','재즈피플(월간지)','20211028','1975354303 9771975354306','https://bookthumb-phinf.pstatic.net/cover/211/936/21193673.jpg?type=m1&udate=20211101','재즈 관련 전문지 『재즈피플』.',1,0,0,'');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `comment` (
   `comment_id` int NOT NULL AUTO_INCREMENT,
   `review_id` int DEFAULT NULL,
   `nested_comment` int DEFAULT NULL,
-  `content` varchar(255) NOT NULL,
+  `content` longtext NOT NULL,
   `user_id` int DEFAULT NULL,
   `thumb_count` int NOT NULL,
   PRIMARY KEY (`comment_id`),
@@ -124,7 +124,7 @@ DROP TABLE IF EXISTS `review`;
 CREATE TABLE `review` (
   `user_id` int NOT NULL,
   `book_id` int NOT NULL,
-  `content` varchar(255) NOT NULL,
+  `content` longtext NOT NULL,
   `thumb_count` int NOT NULL,
   `review_id` int NOT NULL AUTO_INCREMENT,
   `score` int NOT NULL,
@@ -195,7 +195,7 @@ CREATE TABLE `transcription` (
   `book_id` int NOT NULL,
   `user_id` int NOT NULL,
   `transcription_id` int NOT NULL AUTO_INCREMENT,
-  `content` varchar(255) NOT NULL,
+  `content` longtext NOT NULL,
   `thumb_count` int NOT NULL,
   `register_date` datetime NOT NULL,
   PRIMARY KEY (`transcription_id`),
@@ -204,7 +204,7 @@ CREATE TABLE `transcription` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `transcription_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE,
   CONSTRAINT `transcription_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +213,7 @@ CREATE TABLE `transcription` (
 
 LOCK TABLES `transcription` WRITE;
 /*!40000 ALTER TABLE `transcription` DISABLE KEYS */;
-INSERT INTO `transcription` VALUES (11,13,24,'나는 이거를 몇번 작업하냐\n',1,'2021-11-21 00:00:00'),(11,13,25,'나는 이거를 2번 작업한다.',0,'2021-11-21 00:00:00'),(11,13,26,'이번엔 3번째\n',0,'2021-11-21 00:00:00'),(12,14,27,'수희 바보',0,'2021-11-21 00:00:00'),(12,14,28,'수희 엉엉엉',0,'2021-11-21 00:00:00'),(12,14,29,'어엉ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',0,'2021-11-21 00:00:00'),(11,13,30,'지윤님에게 보여주는 test\n',0,'2021-11-22 00:00:00'),(13,13,31,'jazz jazz',0,'2021-11-22 00:00:00'),(11,11,32,'나는나는나는',0,'2021-11-23 00:00:00');
+INSERT INTO `transcription` VALUES (11,13,24,'나는 이거를 몇번 작업하냐\n',1,'2021-11-21 00:00:00'),(11,13,25,'나는 이거를 2번 작업한다.',0,'2021-11-21 00:00:00'),(11,13,26,'이번엔 3번째\n',0,'2021-11-21 00:00:00'),(12,14,27,'수희 바보',0,'2021-11-21 00:00:00'),(12,14,28,'수희 엉엉엉',0,'2021-11-21 00:00:00'),(12,14,29,'어엉ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',0,'2021-11-21 00:00:00'),(11,13,30,'지윤님에게 보여주는 test\n',0,'2021-11-22 00:00:00'),(13,13,31,'jazz jazz',0,'2021-11-22 00:00:00'),(11,11,32,'나는나는나는',0,'2021-11-23 00:00:00'),(11,13,33,'앙앙앙 난 니가 정말 싫어 도라에몽이',0,'2021-11-24 00:00:00'),(11,13,34,'앙앙앙 난 니가 정말 싫어 도라에몽이',0,'2021-11-24 00:00:00');
 /*!40000 ALTER TABLE `transcription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +246,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (11,'kpeel5839','김재연','수희사랑','sksk5839!','2021-11-15 15:00:00',4,1,1),(12,'suheelove','황수희','재연사랑','sksk5839!','2021-11-15 15:00:00',0,1,0),(13,'hello','김김김','숲세권주민','1234','2021-11-16 15:00:00',0,1,5),(14,'suhee831','황수희','봉봉알러뷰','wodustkfkd486','1998-08-28 15:00:00',0,1,3),(15,'12345','김재연','ㅇㅇㅇ','sksk5839','2021-11-20 15:00:00',0,0,0);
+INSERT INTO `user` VALUES (11,'kpeel5839','김재연','수희사랑','sksk5839!','2021-11-15 15:00:00',4,1,1),(12,'suheelove','황수희','재연사랑','sksk5839!','2021-11-15 15:00:00',0,1,0),(13,'hello','김김김','숲세권주민','1234','2021-11-16 15:00:00',0,1,7),(14,'suhee831','황수희','봉봉알러뷰','wodustkfkd486','1998-08-28 15:00:00',0,1,3),(15,'12345','김재연','ㅇㅇㅇ','sksk5839','2021-11-20 15:00:00',0,0,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -259,4 +259,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-24  8:02:19
+-- Dump completed on 2021-11-24 11:34:13
