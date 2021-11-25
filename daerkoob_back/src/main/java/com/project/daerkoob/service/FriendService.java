@@ -25,9 +25,11 @@ public class FriendService {
 //    }
 
     public Message add(Long userId, Long friendId){ // 친구 추가
-        System.out.println("call the add");
         if (friendRepository.existsByUserAndFriendIndex(userRepository.findById(userId).get(),friendId)){
             return new Message(false , "이미 친구입니다.");
+        }
+        else if(userId == friendId){
+            return new Message(false , "자신은 친구 추가를 할 수 없습니다.");
         }
         Optional<User> findById = userRepository.findById(userId);
         User resultUser = findById.get();

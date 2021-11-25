@@ -1,6 +1,7 @@
 package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Transcription;
+import com.project.daerkoob.model.TransferTranscription;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.TranscriptionService;
 import com.project.daerkoob.service.UserService;
@@ -39,10 +40,10 @@ public class TranscriptionController {
         return true;
     }
 
-    @GetMapping("inquiry/{isbn}") //해당 책에 대한 필사내용 조회
-    public List<Transcription> inquiry(@PathVariable String isbn) throws Exception{
+    @GetMapping("inquiry/{userId}/{isbn}") //해당 책에 대한 필사내용 조회
+    public List<TransferTranscription> inquiry(@PathVariable Long userId , @PathVariable String isbn) throws Exception{
         Optional<Book> book = bookService.findBook(isbn);
-        return transcriptionService.getTranscription(book.get().getId());
+        return transcriptionService.getBookTranscription(userId , book.get().getId());
     }
 
     @GetMapping("register/{userId}/{isbn}/{transcriptionContent}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.

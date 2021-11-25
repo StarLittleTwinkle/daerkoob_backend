@@ -2,10 +2,8 @@ package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.*;
 import com.project.daerkoob.model.TransferComment;
-import com.project.daerkoob.repository.BookRepository;
-import com.project.daerkoob.repository.CommentRepository;
-import com.project.daerkoob.repository.ReviewRepository;
-import com.project.daerkoob.repository.UserRepository;
+import com.project.daerkoob.model.TransferReview;
+import com.project.daerkoob.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,17 +17,39 @@ public class ReviewService {
     private UserRepository userRepository;
     private BookRepository bookRepository;
     private CommentRepository commentRepository;
+    private ThumbRepository thumbRepository;
 
-    public ReviewService(ReviewRepository reviewRepository , UserRepository userRepository , BookRepository bookRepository, CommentRepository commentRepository){
+    public ReviewService(ReviewRepository reviewRepository , UserRepository userRepository , BookRepository bookRepository, CommentRepository commentRepository,ThumbRepository thumbRepository){
         this.reviewRepository = reviewRepository;
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
         this.commentRepository = commentRepository;
+        this.thumbRepository = thumbRepository;
     }
 
-    public List<Review> getBookReview(Long bookId){
+    public List<Review> getReview(Long bookId){
+        return new ArrayList<Review>();
+    }
+
+    public List<TransferReview> getBookReview(Long userId, Long bookId){
         List<Review> reviews = reviewRepository.findByBook(bookRepository.findById(bookId).get());
-        return reviews;
+        List<TransferReview> resultList = new ArrayList<>();
+        for(Review review : reviews){
+            resultList.add(createTransferReview(userId , review));
+        }
+        return resultList;
+    }
+    public TransferReview createTransferReview(Long userId, Review review){
+        TransferReview transferReview = new TransferReview();
+        transferReview.setBook(review.getBook());
+        transferReview.setContent(review.getContent());
+        transferReview.setId(review.getId());
+        transferReview.setRegisterDate(review.getRegisterDate());
+        transferReview.setScore(review.getScore());
+        transferReview.setThumbJudge(thumbRepository.existsByReviewIdAndGivenUserId(review.getId() , userId));
+        transferReview.setUser(review.getUser());
+        transferReview.setThumbCount(review.getThumbCount());
+        return transferReview;
     }
 
     public List<Review> getUserReview(Long userId){

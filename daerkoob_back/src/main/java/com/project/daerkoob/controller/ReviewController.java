@@ -4,6 +4,7 @@ import com.project.daerkoob.domain.Book;
 import com.project.daerkoob.domain.Review;
 import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.domain.User;
+import com.project.daerkoob.model.TransferReview;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.ReviewService;
 import com.project.daerkoob.service.UserService;
@@ -34,17 +35,17 @@ public class ReviewController {
         if(resultBook == null){
             return false;
         }
-        List<Review> reviewList = reviewService.getBookReview(resultBook.getId());
+        List<Review> reviewList = reviewService.getReview(resultBook.getId());
         if(reviewList.size() == 0){
             return false;
         }
         return true;
     }
 
-    @GetMapping("inquiry/{isbn}") //해당 책에 대한 필사내용 조회
-    public List<Review> inquiry(@PathVariable String isbn) throws Exception{
+    @GetMapping("inquiry/{userId}/{isbn}") //해당 책에 대한 리뷰내역 조회
+    public List<TransferReview> inquiry(@PathVariable Long userId , @PathVariable String isbn) throws Exception{
         Optional<Book> book = bookService.findBook(isbn);
-        return reviewService.getBookReview(book.get().getId());
+        return reviewService.getBookReview(userId, book.get().getId());
     }
 
     @GetMapping("register/{userId}/{isbn}/{reviewContent}/{score}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.

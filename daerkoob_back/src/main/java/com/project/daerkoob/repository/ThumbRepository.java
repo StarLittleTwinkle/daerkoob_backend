@@ -11,4 +11,6 @@ public interface ThumbRepository extends JpaRepository<Thumb , Long> {
     Optional<Thumb> findByReviewIdAndGivenUserId(Long reviewId , Long givenUserId);
     Optional<Thumb> findByTranscriptionIdAndGivenUserId(Long transcriptionId , Long givenUserId);
     Optional<Thumb> findByCommentIdAndGivenUserId(Long commentId , Long givenUserId);
+    boolean existsByTranscriptionIdAndGivenUserId(Long transcriptionId , Long givenUserId);
+    boolean existsByReviewIdAndGivenUserId(Long reviewId , Long givenUserId);
 }
