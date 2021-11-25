@@ -27,6 +27,10 @@ public class ReviewService {
         this.thumbRepository = thumbRepository;
     }
 
+    public Long countAll(){
+        return reviewRepository.count();
+    }
+
     public List<Review> getReview(Long bookId){
         return new ArrayList<Review>();
     }

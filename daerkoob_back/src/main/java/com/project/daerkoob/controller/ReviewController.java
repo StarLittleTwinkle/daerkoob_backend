@@ -28,6 +28,11 @@ public class ReviewController {
         this.userService = userService;
     }
 
+    @GetMapping("count")
+    public Long countReview(){
+        return reviewService.countAll();
+    }
+
     @GetMapping("judge/{isbn}")
     public Boolean getJudge(@PathVariable String isbn) throws Exception{ //false 는 필사 존재 x , true 는 필사 존재 o (필사 보기 가능)
         Optional<Book> book = bookService.findBook(isbn);
