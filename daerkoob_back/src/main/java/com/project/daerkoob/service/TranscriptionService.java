@@ -30,6 +30,10 @@ public class TranscriptionService {
         this.bookRepository = bookRepository;
         this.thumbRepository = thumbRepository;
     }
+
+    public Long countAll(){
+        return transcriptionRepository.count();
+    }
     public List<Transcription> getTranscription(Long bookId){
         List<Transcription> transcriptions = transcriptionRepository.findByBookId(bookId);
         return transcriptions;

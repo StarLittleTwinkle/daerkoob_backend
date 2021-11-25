@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TranscriptionRepository extends JpaRepository<Transcription , Long> {
-
+    long count();
     List<Transcription> findByBookId(Long bookId);
 }
