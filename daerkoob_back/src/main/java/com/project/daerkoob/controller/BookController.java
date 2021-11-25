@@ -30,9 +30,9 @@ public class BookController {
         return bookList;
     }
 
-    @GetMapping("best") //아직 구현안함
+    @GetMapping("best")
     public List<Book> bestBook(){
-        List<Book> bestBookList = new ArrayList<Book>();
+        List<Book> bestBookList = bookService.getBest();
         return bestBookList;
     }
 }

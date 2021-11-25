@@ -34,6 +34,10 @@ public class BookService {
         return bookRepository.existsByIsbn(isbn);
     }
 
+    public List<Book> getBest(){
+        return bookRepository.findTop5ByOrderByTranscriptionCountDesc();
+    }
+
     public Optional<Book> findBook(String isbn){
         Optional<Book> book = bookRepository.findByIsbn(isbn);
         return book;
