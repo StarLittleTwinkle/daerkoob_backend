@@ -30,6 +30,11 @@ public class BookController {
         return bookList;
     }
 
+    @GetMapping("count")
+    public Long countBook(){
+        return bookService.countAll();
+    }
+
     @GetMapping("best")
     public List<Book> bestBook(){
         List<Book> bestBookList = bookService.getBest();

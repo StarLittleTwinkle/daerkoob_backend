@@ -42,9 +42,14 @@ public class BookService {
         Optional<Book> book = bookRepository.findByIsbn(isbn);
         return book;
     }
+
     public Long getBookId(String isbn){
         Optional<Book> findByIsbn= bookRepository.findByIsbn(isbn);
         return findByIsbn.get().getId();
+    }
+
+    public Long countAll(){
+        return bookRepository.count();
     }
 
     public Book createBook(String isbn) throws Exception{
