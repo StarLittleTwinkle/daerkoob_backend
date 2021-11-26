@@ -52,6 +52,7 @@ public class TranscriptionService {
         transferTranscription.setBook(transcription.getBook());
         transferTranscription.setUser(transcription.getUser());
         transferTranscription.setId(transcription.getId());
+        transferTranscription.setContent(transcription.getContent());
         transferTranscription.setThumbCount(transcription.getThumbCount());
         transferTranscription.setRegisterDate(transcription.getRegisterDate());
         transferTranscription.setThumbJudge(thumbRepository.existsByTranscriptionIdAndGivenUserId(transcription.getId() , userId));

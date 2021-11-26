@@ -13,7 +13,7 @@ public class TransferReview {
     Long id;
     String content;
     Long thumbCount;
-    Long score;
+    Double score;
     LocalDate registerDate;
     boolean thumbJudge;
 }

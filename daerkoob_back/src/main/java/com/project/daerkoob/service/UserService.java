@@ -93,7 +93,8 @@ public class UserService {
         return null;
     }
 
-    public User findUser(Long id){
-        return userRepository.findById(id).get();
+    public TransferUser findUser(Long id){
+        return createTransferUser(userRepository.findById(id).get());
     }
+
 }

@@ -54,17 +54,19 @@ public class ReviewController {
     }
 
     @GetMapping("register/{userId}/{isbn}/{reviewContent}/{score}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.
-    public void getRegister(@PathVariable Long userId, @PathVariable String isbn, @PathVariable String reviewContent , @PathVariable Long score) throws Exception{
+    public boolean getRegister(@PathVariable Long userId, @PathVariable String isbn, @PathVariable String reviewContent , @PathVariable Long score) throws Exception{
         bookService.save(bookService.createBook(isbn));
         Optional<Book> book = bookService.findBook(isbn);
         reviewService.save(reviewService.createDto(userId, book.get().getId() ,  score , reviewContent));
+        return true;
     }
 
 
     @PostMapping("register")
-    public void register(Long userId, String isbn , String reviewContent , Long score) throws Exception{
+    public boolean register(Long userId, String isbn , String reviewContent , Long score) throws Exception{
         bookService.save(bookService.createBook(isbn));
         Optional<Book> book = bookService.findBook(isbn);
         reviewService.save(reviewService.createDto(userId, book.get().getId() ,  score , reviewContent));
+        return true;
     }
 }

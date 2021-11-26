@@ -30,7 +30,7 @@ public class Review {
     @Column(name = "content")
     private String content;
     @Column(name = "score")
-    private Long score;
+    private Double score;
     @Column(name = "register_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registerDate;

@@ -79,7 +79,7 @@ public class ReviewService {
         transferComment.setContent(comment.getContent());
         return transferComment;
     }
-    public Review createDto(Long userId , Long bookId , Long score , String reviewContent){
+    public Review createDto(Long userId , Long bookId , Double score , String reviewContent){
         Review review = new Review();
         LocalDate now = LocalDate.now();
         review.setUser(userRepository.findById(userId).get());
@@ -106,7 +106,7 @@ public class ReviewService {
         return new Message(true , "리뷰 저장에 성공했습니다.");
     }
 
-    public Double scoreCalculate(Double previousScore , Long previousCount , Long score , Long presentCount){ //별점 주기
+    public Double scoreCalculate(Double previousScore , Long previousCount , Double score , Long presentCount){ //별점 주기
         Double resultScore = (double)Math.round(((previousScore * previousCount) + score) / presentCount * 100) / 100;
         return resultScore;
     }
