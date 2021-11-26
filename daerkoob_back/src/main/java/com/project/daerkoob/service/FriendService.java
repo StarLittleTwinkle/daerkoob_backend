@@ -22,7 +22,7 @@ public class FriendService {
     }
 
     public List<Friend> ask(Long userId){
-        return friendRepository.findByUserIndex(userId);
+        return friendRepository.findByUser(userRepository.findById(userId).get());
     }
 
     public MessageWithFriendList add(Long userId, Long friendId){ // 친구 추가
