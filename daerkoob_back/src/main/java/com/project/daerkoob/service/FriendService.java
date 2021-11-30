@@ -1,7 +1,6 @@
 package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.Friend;
-import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.model.MessageWithFriendList;
 import com.project.daerkoob.repository.FriendRepository;

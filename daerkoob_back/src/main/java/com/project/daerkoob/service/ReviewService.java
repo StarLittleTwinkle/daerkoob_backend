@@ -1,6 +1,7 @@
 package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.*;
+import com.project.daerkoob.model.MessageWithReviewList;
 import com.project.daerkoob.model.TransferComment;
 import com.project.daerkoob.model.TransferReview;
 import com.project.daerkoob.repository.*;
@@ -29,6 +30,18 @@ public class ReviewService {
 
     public Long countAll(){
         return reviewRepository.count();
+    }
+
+    public MessageWithReviewList reviewDelete(Long reviewId , Long userId , Long bookId){ //이제 해야할게 userId로 해당 user가 쓴게 맞는지 확인해야함
+        //추후에는 여기서 판단하는 것이 아닌 이전에 review 조회할 때에도 자신이 쓴 review인지 조회할 수 있도록 , thumb처럼 수정해야할 듯
+        Review review = reviewRepository.findById(reviewId).get();
+        if(review.getUser().getId() != userId){ //같지 않은 경우 삭제 불가
+            return new MessageWithReviewList(false , "삭제에 실패했습니다." , getReview(bookId));
+        }
+        else { //user가 쓴게 맞으면 삭제
+            reviewRepository.deleteById(reviewId);
+            return new MessageWithReviewList(true, "삭제에 성공했습니다.", getReview(bookId));
+        }
     }
 
     public List<Review> getReview(Long bookId){
