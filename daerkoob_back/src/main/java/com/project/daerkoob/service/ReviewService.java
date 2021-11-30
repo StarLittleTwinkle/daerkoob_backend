@@ -38,8 +38,13 @@ public class ReviewService {
         if(review.getUser().getId() != userId){ //같지 않은 경우 삭제 불가
             return new MessageWithReviewList(false , "삭제에 실패했습니다." , getReview(bookId));
         }
-        else { //user가 쓴게 맞으면 삭제
+        else { //user가 쓴게 맞으면 삭제 그리고 삭제하는 경우에 book에대한 정보도 수정해야함 , starCount - 1 해주고 star 다시 계산해주어야함
             reviewRepository.deleteById(reviewId);
+            Book book = bookRepository.findById(bookId).get();
+            //book에 대한 정보 수정 후 업데이트
+            book.setStar(scoreCalculate(book.getStar(), book.getStarCount() , -1 * review.getScore() , book.getStarCount() - 1));
+            book.setStarCount(book.getStarCount() - 1);
+            bookRepository.save(book); //별점 업데이트 후 저장 까지 완료
             return new MessageWithReviewList(true, "삭제에 성공했습니다.", getReview(bookId));
         }
     }
