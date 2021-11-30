@@ -40,11 +40,14 @@ public class ReviewService {
         }
         else {
             reviewRepository.deleteById(reviewId);
+            User user = userRepository.findById(userId).get();
+            user.setReviewCount(user.getReviewCount() - 1);
             Book book = bookRepository.findById(review.getBook().getId()).get();
             book.setStar(scoreCalculate(book.getStar(), book.getStarCount() , -1 * review.getScore() , book.getStarCount() - 1));
             book.setStarCount(book.getStarCount() - 1);
             book.setReviewCount(book.getReviewCount() - 1); //reveiw count까지 차감
             bookRepository.save(book); //별점 업데이트 후 저장 까지 완료
+            userRepository.save(user);
             return new MessageWithReviewList(true, "삭제에 성공했습니다.", getBookReview(userId, review.getBook().getId()));
         }
     }
