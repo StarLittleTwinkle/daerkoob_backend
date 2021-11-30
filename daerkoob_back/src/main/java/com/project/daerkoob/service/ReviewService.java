@@ -32,20 +32,20 @@ public class ReviewService {
         return reviewRepository.count();
     }
 
-    public MessageWithReviewList reviewDelete(Long reviewId , Long userId , Long bookId){ //이제 해야할게 userId로 해당 user가 쓴게 맞는지 확인해야함
+    public MessageWithReviewList reviewDelete(Long reviewId , Long userId){ //이제 해야할게 userId로 해당 user가 쓴게 맞는지 확인해야함
         //추후에는 여기서 판단하는 것이 아닌 이전에 review 조회할 때에도 자신이 쓴 review인지 조회할 수 있도록 , thumb처럼 수정해야할 듯
         Review review = reviewRepository.findById(reviewId).get();
         if(review.getUser().getId() != userId){ //같지 않은 경우 삭제 불가
-            return new MessageWithReviewList(false , "삭제에 실패했습니다." , getReview(bookId));
+            return new MessageWithReviewList(false , "삭제에 실패했습니다." , getBookReview(userId , review.getBook().getId()));
         }
-        else { //user가 쓴게 맞으면 삭제 그리고 삭제하는 경우에 book에대한 정보도 수정해야함 , starCount - 1 해주고 star 다시 계산해주어야함
+        else {
             reviewRepository.deleteById(reviewId);
-            Book book = bookRepository.findById(bookId).get();
-            //book에 대한 정보 수정 후 업데이트
+            Book book = bookRepository.findById(review.getBook().getId()).get();
             book.setStar(scoreCalculate(book.getStar(), book.getStarCount() , -1 * review.getScore() , book.getStarCount() - 1));
             book.setStarCount(book.getStarCount() - 1);
+            book.setReviewCount(book.getReviewCount() - 1); //reveiw count까지 차감
             bookRepository.save(book); //별점 업데이트 후 저장 까지 완료
-            return new MessageWithReviewList(true, "삭제에 성공했습니다.", getReview(bookId));
+            return new MessageWithReviewList(true, "삭제에 성공했습니다.", getBookReview(userId, review.getBook().getId()));
         }
     }
 

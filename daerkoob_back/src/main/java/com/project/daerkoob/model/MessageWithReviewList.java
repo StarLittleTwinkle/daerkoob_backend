@@ -12,5 +12,5 @@ import java.util.List;
 public class MessageWithReviewList {
     boolean flag;
     String message;
-    List<Review> reviewList;
+    List<TransferReview> reviewList;
 }

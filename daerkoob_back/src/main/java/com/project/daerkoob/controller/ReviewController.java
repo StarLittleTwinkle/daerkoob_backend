@@ -71,9 +71,15 @@ public class ReviewController {
         return true;
     }
 
-    @DeleteMapping("delete")
-    public MessageWithReviewList delete(Long reviewId , Long userId, Long bookId){ //review id만 주면은 삭제가 가능하도록 , 근데 이게 이 유저의 댓글인지를 알아야하니까 userId를 받는다
+    @GetMapping("delete/{reviewId}/{userId}")
+    public MessageWithReviewList getDelete(@PathVariable Long reviewId ,@PathVariable Long userId){ //review id만 주면은 삭제가 가능하도록 , 근데 이게 이 유저의 댓글인지를 알아야하니까 userId를 받는다
         //그러면서 delete하면서 다시 해당 book에 대한 정보 받아올 수 있도록 bookId까지 받아서옴
-        return reviewService.reviewDelete(reviewId , userId , bookId);
+        return reviewService.reviewDelete(reviewId , userId);
+    }
+
+    @DeleteMapping("delete")
+    public MessageWithReviewList delete(Long reviewId , Long userId){ //review id만 주면은 삭제가 가능하도록 , 근데 이게 이 유저의 댓글인지를 알아야하니까 userId를 받는다
+        //그러면서 delete하면서 다시 해당 book에 대한 정보 받아올 수 있도록 bookId까지 받아서옴
+        return reviewService.reviewDelete(reviewId , userId);
     }
 }
