@@ -1,6 +1,6 @@
 package com.project.daerkoob.controller;
 
-import com.project.daerkoob.model.MessageWithFriendList;
+import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.service.FriendService;
 import com.project.daerkoob.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +19,12 @@ public class FriendController {
     }
 
     @GetMapping("register/{userId}/{friendId}") //guide line
-    public MessageWithFriendList getAdd(@PathVariable Long userId , @PathVariable Long friendId){
+    public MessageWithList getAdd(@PathVariable Long userId , @PathVariable Long friendId){
         return friendService.add(userId, friendId);
     } //자신은 친구로 안되게 그리고 친구조회도 훨씬 쉽게
 
     @PostMapping("register") //친구리스트랑 boolean 같이넘어오게 ,
-    public MessageWithFriendList add(Long userId , Long friendId){ //없는 친구면 그냥 추가하면 됨 , 근데 만약 이미 있으면?
+    public MessageWithList add(Long userId , Long friendId){ //없는 친구면 그냥 추가하면 됨 , 근데 만약 이미 있으면?
         return friendService.add(userId , friendId);
     }
 

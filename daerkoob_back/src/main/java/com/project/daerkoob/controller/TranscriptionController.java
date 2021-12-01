@@ -1,6 +1,7 @@
 package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Transcription;
+import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.TransferTranscription;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.TranscriptionService;
@@ -59,12 +60,20 @@ public class TranscriptionController {
         return true;
     }
 
-
     @PostMapping("register")
     public boolean register(Long userId, String isbn , String transcriptionContent) throws Exception{
         bookService.save(bookService.createBook(isbn));
         Optional<Book> book = bookService.findBook(isbn);
         transcriptionService.save(transcriptionService.createDto(userId, book.get().getId() ,  transcriptionContent));
         return true;
+    }
+
+    @GetMapping("delete/{userId}/{transcriptionId}")
+    public MessageWithList getDelete(@PathVariable Long userId , @PathVariable Long transcriptionId){
+        return transcriptionService.transcriptionDelete(userId, transcriptionId);
+    }
+    @DeleteMapping("delete")
+    public MessageWithList delete(Long userId, Long transcriptionId){
+        return transcriptionService.transcriptionDelete(userId, transcriptionId);
     }
 }
