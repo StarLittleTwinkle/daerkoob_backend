@@ -53,6 +53,15 @@ public class TranscriptionService {
         return transcriptionRepository.count();
     }
 
+    public List<TransferTranscription> getUserTranscription(Long userId){
+        List<Transcription> transcriptions = transcriptionRepository.findByUser(userRepository.findById(userId).get()); //일단 해당 유저의 transcription 얻고
+        List<TransferTranscription> transferTranscriptions = new ArrayList<>();
+        for(Transcription transcription : transcriptions){
+            transferTranscriptions.add(createTransferTranscription(userId, transcription));
+        }
+        return transferTranscriptions;
+    }
+
     public List<Transcription> getTranscription(Long bookId){ //얘는 그냥 book에 review 달렸는지 안달렸는지 확인하는용
         List<Transcription> transcriptions = transcriptionRepository.findByBookId(bookId);
         return transcriptions;

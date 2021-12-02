@@ -32,6 +32,15 @@ public class ReviewService {
         return reviewRepository.count();
     }
 
+    public List<TransferReview> getUserReview(Long userId){
+        List<Review> reviews = reviewRepository.findByUser(userRepository.findById(userId).get());
+        List<TransferReview> transferReviews = new ArrayList<>();
+        for(Review review : reviews){
+            transferReviews.add(createTransferReview(userId , review));
+        }
+        return transferReviews;
+    }
+
     public MessageWithList reviewDelete(Long reviewId, Long userId) { //이제 해야할게 userId로 해당 user가 쓴게 맞는지 확인해야함
         //추후에는 여기서 판단하는 것이 아닌 이전에 review 조회할 때에도 자신이 쓴 review인지 조회할 수 있도록 , thumb처럼 수정해야할 듯
         Review review = reviewRepository.findById(reviewId).get();
@@ -77,10 +86,10 @@ public class ReviewService {
         return transferReview;
     }
 
-    public List<Review> getUserReview(Long userId) {
-        List<Review> reviews = reviewRepository.findByUser(userRepository.findById(userId).get());
-        return reviews;
-    }
+//    public List<Review> getUserReview(Long userId) {
+//        List<Review> reviews = reviewRepository.findByUser(userRepository.findById(userId).get());
+//        return reviews;
+//    }
 
     public List<TransferComment> getCommentOfReview(Long reviewId) { //review에 대한 댓글을 다 불러오는 메소드
         List<TransferComment> resultList = new ArrayList<>();

@@ -72,8 +72,14 @@ public class TranscriptionController {
     public MessageWithList getDelete(@PathVariable Long userId , @PathVariable Long transcriptionId){
         return transcriptionService.transcriptionDelete(userId, transcriptionId);
     }
+
     @DeleteMapping("delete")
     public MessageWithList delete(Long userId, Long transcriptionId){
         return transcriptionService.transcriptionDelete(userId, transcriptionId);
+    }
+
+    @GetMapping("mine/{userId}") //내것 필사만 조회 할 수 있도록
+    public List<TransferTranscription> getUserTranscription(@PathVariable Long userId){
+        return transcriptionService.getUserTranscription(userId);
     }
 }

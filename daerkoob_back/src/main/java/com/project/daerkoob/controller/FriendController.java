@@ -30,7 +30,6 @@ public class FriendController {
 
     @GetMapping("delete/{userId}/{friendId}")
     public MessageWithList getDelete(@PathVariable Long userId , @PathVariable Long friendId){
-        System.out.println("userId : " + userId + " friendId : " + friendId);
         return friendService.friendDelete(userId, friendId);
     }
 
