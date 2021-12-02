@@ -25,6 +25,13 @@ public class FriendService {
         return friendRepository.findByUser(userRepository.findById(userId).get());
     }
 
+    public MessageWithList friendDelete(Long userId, Long friendId){
+        User user = userRepository.findById(userId).get();
+        user.setFriendCount(user.getFriendCount() - 1);
+        userRepository.save(user); //user friendCount 차감 시켜주고 해당 친구 삭제
+        friendRepository.deleteByFriendIndex(friendId);
+        return new MessageWithList(true , "친구 삭제에 성공했습니다." , new ArrayList<>(ask(userId)));
+   }
     public MessageWithList add(Long userId, Long friendId){ // 친구 추가
         if (friendRepository.existsByUserAndFriendIndex(userRepository.findById(userId).get(),friendId)){
             return new MessageWithList(false , "이미 친구입니다." , new ArrayList<>(ask(userId)));
