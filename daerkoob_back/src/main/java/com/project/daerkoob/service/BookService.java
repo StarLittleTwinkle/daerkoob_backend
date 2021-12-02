@@ -18,14 +18,28 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public void save(Book book) throws Exception{
+    public void save(Book book , Long judgeNumber) throws Exception{
         if(!bookRepository.existsByIsbn(book.getIsbn())){
-            bookRepository.save(createBook(book.getIsbn()));
+            Book dtoBook = createBook(book.getIsbn());
+            if(judgeNumber == 1){//이건 리뷰
+                dtoBook.setReviewCount(dtoBook.getReviewCount() + 1);
+            }
+            if(judgeNumber == 2) {//이건 필사
+                dtoBook.setTranscriptionCount(dtoBook.getTranscriptionCount() + 1);
+            }
+            bookRepository.save(dtoBook);
         }
         else{
             Optional<Book> findByIsbn = bookRepository.findByIsbn(book.getIsbn());
             Book resultBook = findByIsbn.get();
-            resultBook.setTranscriptionCount(resultBook.getTranscriptionCount() + 1);
+            if(judgeNumber == 1){ //이건 리뷰
+                System.out.println("이건 리뷰");
+                resultBook.setReviewCount(resultBook.getReviewCount() + 1);
+            }
+            if(judgeNumber == 2){ //이건 필사
+                System.out.println("이건 필사");
+                resultBook.setTranscriptionCount(resultBook.getTranscriptionCount() + 1);
+            }
             bookRepository.save(resultBook);
         }
     }
@@ -63,8 +77,8 @@ public class BookService {
             book.setIsbn(isbn);
             book.setImage(tempBook.getImage());
             book.setDescription(tempBook.getDescription());
-            book.setTranscriptionCount(1L); //필사를 달면서 만드니까 1로 초기화
-            book.setReviewCount(1L);
+            book.setTranscriptionCount(0L); //그냥 0으로 초기화해주고 , 그 다음에 필사 , 리뷰 달때마다 추가해주는 방향으로 가야함
+            book.setReviewCount(0L);
             book.setStar(0D);
             book.setStarCount(0L);
         }

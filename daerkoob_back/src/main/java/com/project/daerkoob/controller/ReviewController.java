@@ -4,7 +4,6 @@ import com.project.daerkoob.domain.Book;
 import com.project.daerkoob.domain.Review;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.TransferReview;
-import com.project.daerkoob.model.TransferTranscription;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.ReviewService;
 import com.project.daerkoob.service.UserService;
@@ -55,7 +54,7 @@ public class ReviewController {
 
     @GetMapping("register/{userId}/{isbn}/{reviewContent}/{score}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.
     public boolean getRegister(@PathVariable Long userId, @PathVariable String isbn, @PathVariable String reviewContent , @PathVariable Double score) throws Exception{
-        bookService.save(bookService.createBook(isbn));
+        bookService.save(bookService.createBook(isbn) , 1L);
         Optional<Book> book = bookService.findBook(isbn);
         reviewService.save(reviewService.createDto(userId, book.get().getId() ,  score , reviewContent));
         return true;
@@ -64,7 +63,7 @@ public class ReviewController {
 
     @PostMapping("register")
     public boolean register(Long userId, String isbn , String reviewContent , Double score) throws Exception{
-        bookService.save(bookService.createBook(isbn));
+        bookService.save(bookService.createBook(isbn) , 1L);
         Optional<Book> book = bookService.findBook(isbn);
         reviewService.save(reviewService.createDto(userId, book.get().getId() ,  score , reviewContent));
         return true;
