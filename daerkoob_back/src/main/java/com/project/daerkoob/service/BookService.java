@@ -33,11 +33,9 @@ public class BookService {
             Optional<Book> findByIsbn = bookRepository.findByIsbn(book.getIsbn());
             Book resultBook = findByIsbn.get();
             if(judgeNumber == 1){ //이건 리뷰
-                System.out.println("이건 리뷰");
                 resultBook.setReviewCount(resultBook.getReviewCount() + 1);
             }
             if(judgeNumber == 2){ //이건 필사
-                System.out.println("이건 필사");
                 resultBook.setTranscriptionCount(resultBook.getTranscriptionCount() + 1);
             }
             bookRepository.save(resultBook);

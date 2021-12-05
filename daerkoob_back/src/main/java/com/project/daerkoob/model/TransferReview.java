@@ -1,10 +1,12 @@
 package com.project.daerkoob.model;
 
+import com.project.daerkoob.domain.Comment;
 import com.project.daerkoob.domain.User;
 import lombok.Data;
 
 import com.project.daerkoob.domain.Book;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class TransferReview {

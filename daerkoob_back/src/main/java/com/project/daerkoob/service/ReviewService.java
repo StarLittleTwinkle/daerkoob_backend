@@ -91,22 +91,22 @@ public class ReviewService {
 //        return reviews;
 //    }
 
-    public List<TransferComment> getCommentOfReview(Long reviewId) { //review에 대한 댓글을 다 불러오는 메소드
+    public List<TransferComment> getCommentOfReview(Long reviewId , Long userId) { //review에 대한 댓글을 다 불러오는 메소드
         List<TransferComment> resultList = new ArrayList<>();
         List<Comment> commentList = commentRepository.findByReview(reviewRepository.findById(reviewId).get());
         for (Comment comment : commentList) {
-            resultList.add(createTransferComment(comment));
+            resultList.add(createTransferComment(comment , userId));
         }
         return resultList;
     }
 
-    public TransferComment createTransferComment(Comment comment) { //대댓글에 쓰이는 transferComment
+    public TransferComment createTransferComment(Comment comment , Long userId) { //대댓글에 쓰이는 transferComment
         TransferComment transferComment = new TransferComment();
         transferComment.setId(comment.getId());
         transferComment.setComments(comment.getComments());
         transferComment.setWriter(comment.getWriter());
-        transferComment.setReview(comment.getReview());
         transferComment.setThumbCount(comment.getThumbCount());
+        transferComment.setThumbJudge(thumbRepository.existsByCommentIdAndGivenUserId(comment.getId() , userId));
         transferComment.setContent(comment.getContent());
         return transferComment;
     }
