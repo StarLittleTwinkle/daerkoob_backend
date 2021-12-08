@@ -80,9 +80,4 @@ public class ReviewController {
         //그러면서 delete하면서 다시 해당 book에 대한 정보 받아올 수 있도록 bookId까지 받아서옴
         return reviewService.reviewDelete(reviewId , userId);
     }
-
-    @GetMapping("mine/{userId}") //내것 필사만 조회 할 수 있도록
-    public List<TransferReview> getUserReview(@PathVariable Long userId){
-        return reviewService.getUserReview(userId);
-    }
 }
