@@ -32,9 +32,9 @@ public class BookController {
         return bookService.countAll();
     }
 
-    @GetMapping("best")
-    public List<Book> bestBook(){
-        List<Book> bestBookList = bookService.getBest();
+    @GetMapping("best/{display}")
+    public List<Book> bestBook(@PathVariable Long display){
+        List<Book> bestBookList = bookService.getBest(display);
         return bestBookList;
     }
 }
