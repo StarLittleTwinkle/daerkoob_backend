@@ -30,7 +30,7 @@ CREATE TABLE `book` (
   `pubdate` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `isbn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `description` longtext,
   `transcription_count` int NOT NULL,
   `review_count` int NOT NULL,
   `star` double NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE `book` (
   PRIMARY KEY (`book_id`),
   UNIQUE KEY `book_id_UNIQUE` (`book_id`),
   UNIQUE KEY `ibsn_UNIQUE` (`isbn`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (11,'김이나의 작사법 (우리의 감정을 사로잡는 일상의 언어들)','김이나','문학동네','20150318','8954635601 9788954635608','https://bookthumb-phinf.pstatic.net/cover/088/824/08882431.jpg?type=m1&udate=20210119','아이유 윤상 허지웅의 감정을 두드린 이 책!이선희 〈그중에 그대를 만나〉, 조용필 〈걷고 싶다〉, 아이유 〈좋은 날〉, 브라운아이드걸스 〈아브라카다브라〉, 성시경 〈10월에 눈이 내리면〉, 엑소 〈LUCKY〉,가인 〈APPLE〉 〈PARADISE LOST〉 등 300여 곡\n\n대한민국 작사가 저작권료 수입 1위!\n대중을... ',17,4,3.5,'4'),(12,'해리 포터와 마법사의 돌 (해리포터 20주년)','J.K. 롤링','문학수첩','20191119','8983927747 9788983927743','https://bookthumb-phinf.pstatic.net/cover/157/688/15768828.jpg?type=m1&udate=20200109','해리 포터 세대의, 해리 포터 세대를 위한, 해리 포터 세대에 의한 새 번역!&#x0D;‘21세기 대표 아이콘’에 걸맞은 완성도 높은 작품으로 재탄생하다!&#x0D;&#x0D;1997년 영국에서 출간된 이래 『해리 포터』 시리즈는 지금까지 200개국 이상 80개의 언어로 번역되고 출간되어 5억 부 이상을 판매했다. 국내에서도... ',3,0,0,''),(13,'재즈피플 Jazz People 2021.11','재즈피플 편집부','재즈피플(월간지)','20211028','1975354303 9771975354306','https://bookthumb-phinf.pstatic.net/cover/211/936/21193673.jpg?type=m1&udate=20211101','재즈 관련 전문지 『재즈피플』.',1,0,0,''),(14,'2022 하이옴 다이어리 (일반/베이지)','편집부','생명의말씀사','20211029','9463881166 8809463881162','https://bookthumb-phinf.pstatic.net/cover/212/235/21223531.jpg?type=m1&udate=20211106','특징 : · 주간 계획표-공동체원들과 함께 나눌 수 있는 한 주간의 [감사 제목], [기도 제목] 기록 공간 수록       · 3대 절기 주간 페이지-배경 컬러로 포인트를!(부활절, 추수감사절, 성탄절)       · 내용 구성이나 가격에서 교회 단체 구매용 상품으로 최적화       · 강화된 성경 읽기 체크표(자율 읽기 체크표... ',1,1,0,'0');
+INSERT INTO `book` VALUES (1,'김이나의 작사법 (우리의 감정을 사로잡는 일상의 언어들)','김이나','문학동네','20150318','8954635601 9788954635608','https://bookthumb-phinf.pstatic.net/cover/088/824/08882431.jpg?type=m1&udate=20210119','아이유 윤상 허지웅의 감정을 두드린 이 책!이선희 〈그중에 그대를 만나〉, 조용필 〈걷고 싶다〉, 아이유 〈좋은 날〉, 브라운아이드걸스 〈아브라카다브라〉, 성시경 〈10월에 눈이 내리면〉, 엑소 〈LUCKY〉,가인 〈APPLE〉 〈PARADISE LOST〉 등 300여 곡\n\n대한민국 작사가 저작권료 수입 1위!\n대중을... ',2,4,4.5,'2'),(2,'동물농장','조지 오웰','열린책들','20091130','8932909709 9788932909707','https://bookthumb-phinf.pstatic.net/cover/061/870/06187070.jpg?type=m1&udate=20200418','인간은 평등하다, 그러나 어떤 인간은 특별히 더 평등하다!&#x0D;&#x0D;당시 영국의 동맹이던 스탈린을 가차 없이 공격하는 내용 때문에 출판사로부터 출간을 거부당하여 1943년에 써놓고도 출간하지 못할 뻔 하였던 조지 오웰의 소설이다. 동물들이 존스 씨를 몰아내고 스스로 농장을 경영해 나간다는... ',2,9,4.33,'3'),(3,'호꼼 골아봅서 (제주 애월읍 수산리 제주 어르신 그림책)','제주 애월읍 수산리 어르신들 (양순자|강신자|박송자|김영순|송옥자|양인옥)','책여우','20211109','1187860530 9791187860532','https://bookthumb-phinf.pstatic.net/cover/212/981/21298162.jpg?type=m1&udate=20211121','우리들의 젊은 날처럼 어르신들도 젊은 날이 있었다는 사실을 잊고 산다. 긴 시간이지만 찰나처럼 느껴지는 어르신들의 지난날. 그저 허허허, 웃으시는 목소리와 모습에서 저절로 고개가 숙여진다. &lt;호꼼 골아봅서(조금 이야기해 보세요)&gt;는 제주시 애월 수산리 6명 어르신들의 이야기를 모아 한 권에... ',1,2,4,'1'),(4,'가면산장 살인사건','히가시노 게이고','재인','20140926','899098257X 9788990982575','https://bookthumb-phinf.pstatic.net/cover/082/730/08273055.jpg?type=m1&udate=20210611','강도와 인질 간의 숨 막히는 줄다리기!히가시노 게이고의 소설 『가면산장 살인사건』. 저자와 독자가 아슬아슬한 두뇌 싸움을 벌이게 되는 이 작품은 외딴 산장에 모인 여덟 명의 남녀와 한밤중에 침입한 은행 강도범의 인질극을 그리고 있다. 잘 짜인 무대에서 벌어지는 연극과도 같은 이 소설은 그 누구도... ',0,0,0,'0'),(5,'베스트! 원조 괴짜가족 4 (코테츠의 여름방학편)','KENJI HAMAOKA','서울미디어코믹스(서울문화사)','20190925','1165015757 9791165015756','https://bookthumb-phinf.pstatic.net/cover/156/584/15658438.jpg?type=m1&udate=20191101','일본 제일의 활기찬 초등학생 오오사와기 코테츠가 더욱 빛을 발하는\n여름방학 에피소드 15편!!\n괴짜가족 시리즈에서 특별히 선별한 폭소 특선 제4탄~!\n\n첫 번째 방학★수영 타임·\n두 번째 방학★끝나가는 여름방학\n세 번째 방학★코테츠의 여름방학 전야제\n네 번째 방학★혼자 노는 아이\n다섯 번째 방학... ',0,1,5,'1'),(6,'Chrome','Blade|Cg','Lulu.com','20180525','1387590332 9781387590339','https://bookthumb-phinf.pstatic.net/cover/137/072/13707243.jpg?type=m1&udate=20210119','In this sixth chilling novel in the Pseudoverse, Detective Lori Lynn Gutierrez, and former journalist Amanda Sese, both poisoned in Onyx and &quot;recruited&quot; by the NIB, have their work cut out for them as they are pulled into the biggest gun battle the nation has ever witnessed.... ',1,0,0,'0');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +73,7 @@ CREATE TABLE `comment` (
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`) ON DELETE CASCADE,
   CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE,
   CONSTRAINT `comment_ibfk_3` FOREIGN KEY (`nested_comment`) REFERENCES `comment` (`comment_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,1,NULL,'여기에 처음 다는 댓글',11,2),(2,1,NULL,'두번째 다는 댓글',11,0),(3,1,NULL,'다른 사람이 다는 댓글',12,0),(4,NULL,1,'하하하 대댓글',12,0),(6,NULL,1,'또 댓글',13,0),(7,NULL,1,'또 댓글글',14,0);
+INSERT INTO `comment` VALUES (9,2,NULL,'두번째 다는 댓글',11,0),(10,NULL,9,'대댓글 달기',11,0);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,8 +101,9 @@ CREATE TABLE `friend` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `friend_id_UNIQUE` (`id`),
   KEY `user_index` (`user_index`),
-  CONSTRAINT `friend_ibfk_1` FOREIGN KEY (`user_index`) REFERENCES `user` (`user_index`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `friend_ibfk_1` FOREIGN KEY (`user_index`) REFERENCES `user` (`user_index`) ON DELETE CASCADE,
+  CONSTRAINT `friend_ibfk_2` FOREIGN KEY (`user_index`) REFERENCES `user` (`user_index`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +112,7 @@ CREATE TABLE `friend` (
 
 LOCK TABLES `friend` WRITE;
 /*!40000 ALTER TABLE `friend` DISABLE KEYS */;
-INSERT INTO `friend` VALUES (1,12,11,'재연사랑'),(2,13,11,'숲세권주민'),(3,14,11,'봉봉알러뷰'),(4,15,11,'ㅇㅇㅇ'),(5,11,11,'수희사랑');
+INSERT INTO `friend` VALUES (1,13,11,'숲세권주민');
 /*!40000 ALTER TABLE `friend` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +137,7 @@ CREATE TABLE `review` (
   KEY `book_id` (`book_id`),
   CONSTRAINT `review_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE,
   CONSTRAINT `review_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +146,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (11,11,'이 책 너무 싫어요',4,1,5,'2021-11-24 00:00:00'),(12,11,'이 책은 별로에요',1,2,3,'2021-11-24 00:00:00'),(13,11,'이 책을 누가 읽어요',0,3,4,'2021-11-24 00:00:00'),(14,11,'지영님 이거 읽고 또 재밌으시겠죠',0,4,2,'2021-11-24 00:00:00');
+INSERT INTO `review` VALUES (13,1,'이것은!',1,1,5,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베',0,2,5,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베 연타',0,3,4,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베 연타',0,4,4,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베 연타',0,5,4,'2021-12-02 00:00:00'),(13,5,'저기 좀 비켜',0,6,5,'2021-12-02 00:00:00'),(13,1,'헬로헬로',0,7,4,'2021-12-03 00:00:00'),(11,3,'리ㅂ리뷰',0,8,4,'2021-12-10 00:00:00');
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +173,7 @@ CREATE TABLE `thumb` (
   CONSTRAINT `thumb_ibfk_2` FOREIGN KEY (`transcription_id`) REFERENCES `transcription` (`transcription_id`) ON DELETE CASCADE,
   CONSTRAINT `thumb_ibfk_3` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`) ON DELETE CASCADE,
   CONSTRAINT `thumb_ibfk_4` FOREIGN KEY (`given_user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +182,7 @@ CREATE TABLE `thumb` (
 
 LOCK TABLES `thumb` WRITE;
 /*!40000 ALTER TABLE `thumb` DISABLE KEYS */;
-INSERT INTO `thumb` VALUES (3,1,NULL,11,NULL),(4,2,NULL,12,NULL),(5,1,NULL,12,NULL),(6,1,NULL,13,NULL),(7,1,NULL,14,NULL),(11,NULL,NULL,11,1),(12,NULL,NULL,12,1),(20,NULL,24,13,NULL),(21,NULL,25,13,NULL),(22,NULL,26,13,NULL),(23,NULL,30,13,NULL),(24,NULL,32,13,NULL),(25,NULL,33,13,NULL),(26,NULL,34,13,NULL),(27,NULL,24,11,NULL),(28,NULL,25,11,NULL),(29,NULL,26,11,NULL),(31,NULL,32,11,NULL),(32,NULL,33,11,NULL),(33,NULL,34,11,NULL),(34,NULL,30,11,NULL);
+INSERT INTO `thumb` VALUES (4,1,NULL,13,NULL);
 /*!40000 ALTER TABLE `thumb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,7 +206,7 @@ CREATE TABLE `transcription` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `transcription_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE,
   CONSTRAINT `transcription_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +215,7 @@ CREATE TABLE `transcription` (
 
 LOCK TABLES `transcription` WRITE;
 /*!40000 ALTER TABLE `transcription` DISABLE KEYS */;
-INSERT INTO `transcription` VALUES (11,13,24,'나는 이거를 몇번 작업하냐\n',2,'2021-11-21 00:00:00'),(11,13,25,'나는 이거를 2번 작업한다.',2,'2021-11-21 00:00:00'),(11,13,26,'이번엔 3번째\n',2,'2021-11-21 00:00:00'),(12,14,27,'수희 바보',0,'2021-11-21 00:00:00'),(12,14,28,'수희 엉엉엉',0,'2021-11-21 00:00:00'),(12,14,29,'어엉ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',0,'2021-11-21 00:00:00'),(11,13,30,'지윤님에게 보여주는 test\n',2,'2021-11-22 00:00:00'),(13,13,31,'jazz jazz',0,'2021-11-22 00:00:00'),(11,11,32,'나는나는나는',2,'2021-11-23 00:00:00'),(11,13,33,'앙앙앙 난 니가 정말 싫어 도라에몽이',2,'2021-11-24 00:00:00'),(11,13,34,'앙앙앙 난 니가 정말 싫어 도라에몽이',2,'2021-11-24 00:00:00'),(11,11,35,'김이나의 작사법이라 .. 이 사람이 누구지',0,'2021-11-25 00:00:00'),(11,11,36,'김이나의 작사법이라 .. 이 사람이 누구지',0,'2021-11-25 00:00:00'),(11,11,37,'김이나의 작사법이라 .. 이 사람이 누구지',0,'2021-11-25 00:00:00'),(11,11,38,'ㅎㅇㅎㅇ',0,'2021-11-25 00:00:00'),(11,11,39,'ㅎㅇㅎㅇ',0,'2021-11-25 00:00:00'),(11,11,40,'ㅎㅇㅎㅇ',0,'2021-11-25 00:00:00'),(14,11,41,'이것은 무엇이지?',0,'2021-11-25 00:00:00');
+INSERT INTO `transcription` VALUES (1,13,1,'김이나의 작사법을 들어왔는데 살짝 오류가 있네요',0,'2021-12-02 00:00:00'),(1,13,2,'hello',0,'2021-12-02 00:00:00'),(2,13,3,'동물 동물 베베',0,'2021-12-02 00:00:00'),(3,13,4,'그냥 정상적으로 한번만 눌렀을 때',0,'2021-12-02 00:00:00'),(3,13,5,'이거는 한번 더 작성',0,'2021-12-02 00:00:00'),(4,13,6,'가면산장의 살인사건',6,'2021-12-02 00:00:00'),(1,11,7,'김이나',0,'2021-12-10 00:00:00'),(2,11,8,'ang ang ang ...',0,'2021-12-10 00:00:00'),(6,11,9,'앙앙앙 기모찌\n',0,'2021-12-10 00:00:00');
 /*!40000 ALTER TABLE `transcription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +239,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_index`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `nick_name_UNIQUE` (`nick_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +248,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (11,'kpeel5839','김재연','수희사랑','sksk5839!','2021-11-15 15:00:00',5,1,8),(12,'suheelove','황수희','재연사랑','sksk5839!','2021-11-15 15:00:00',0,1,0),(13,'hello','김김김','숲세권주민','1234','2021-11-16 15:00:00',0,1,7),(14,'suhee831','황수희','봉봉알러뷰','wodustkfkd486','1998-08-28 15:00:00',0,1,3),(15,'12345','김재연','ㅇㅇㅇ','sksk5839','2021-11-20 15:00:00',0,0,0);
+INSERT INTO `user` VALUES (11,'kpeel5839','김재연','수희사랑','sksk5839!','2021-11-15 15:00:00',1,1,3),(12,'suheelove','황수희','재연사랑','sksk5839!','2021-11-15 15:00:00',0,0,0),(13,'hello','김김김','숲세권주민','1234','2021-11-16 15:00:00',0,6,6),(14,'suhee831','황수희','봉봉알러뷰','wodustkfkd486','1998-08-28 15:00:00',0,0,0),(15,'12345','김재연','ㅇㅇㅇ','sksk5839','2021-11-20 15:00:00',0,0,0),(16,'jiyeong','박지영','졍','wldud','2021-12-09 15:00:00',0,0,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -260,4 +261,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-26 16:25:56
+-- Dump completed on 2021-12-10 16:16:20
