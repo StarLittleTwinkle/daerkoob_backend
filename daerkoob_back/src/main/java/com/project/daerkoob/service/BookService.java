@@ -51,7 +51,7 @@ public class BookService {
             return bookRepository.findTop10ByOrderByTranscriptionCountDesc();
         }
         else{
-            return bookRepository.findTop10ByOrderByTranscriptionCountDesc();
+            return bookRepository.findTop18ByOrderByTranscriptionCountDesc();
         }
     }
 
