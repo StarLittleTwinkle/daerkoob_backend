@@ -46,13 +46,8 @@ public class BookService {
         return bookRepository.existsByIsbn(isbn);
     }
 
-    public List<Book> getBest(Long display){
-        if(display == 10){
-            return bookRepository.findTop10ByOrderByTranscriptionCountDesc();
-        }
-        else{
-            return bookRepository.findTop18ByOrderByTranscriptionCountDesc();
-        }
+    public List<Book> getBest(){
+        return bookRepository.findTop10ByOrderByTranscriptionCountDesc();
     }
 
     public Optional<Book> findBook(String isbn){
