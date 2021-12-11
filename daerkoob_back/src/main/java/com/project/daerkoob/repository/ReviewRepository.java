@@ -12,5 +12,6 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findByBook(Book book);
     List<Review> findByUser(User user);
+    List<Review> findTop8ByOrderByRegisterDateDesc();
     long count();
 }

@@ -77,4 +77,9 @@ public class TranscriptionController {
     public MessageWithList delete(Long userId, Long transcriptionId){
         return transcriptionService.transcriptionDelete(userId, transcriptionId);
     }
+
+    @GetMapping("recent")
+    public List<Transcription> getRecentTranscription(){
+        return transcriptionService.getRecentTranscription();
+    }
 }

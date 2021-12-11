@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -32,8 +33,8 @@ public class Review {
     @Column(name = "score")
     private Double score;
     @Column(name = "register_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate registerDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd-hh-mm-ss")
+    private LocalDateTime registerDate;
     @JsonIgnore
     @ToString.Exclude
     @OneToMany(mappedBy = "review")

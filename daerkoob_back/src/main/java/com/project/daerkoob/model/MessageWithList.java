@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class MessageWithList {
-    boolean flag;
-    String message;
-    List<Object> List;
+    private boolean flag;
+    private String message;
+    private List<Object> List;
 }

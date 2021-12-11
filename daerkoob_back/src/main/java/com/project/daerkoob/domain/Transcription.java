@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -28,6 +29,6 @@ public class Transcription {
     @Column(name = "content")
     private String content;
     @Column(name = "register_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate registerDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd-hh-mm-ss")
+    private LocalDateTime registerDate;
 }

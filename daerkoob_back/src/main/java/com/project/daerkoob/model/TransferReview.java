@@ -6,16 +6,17 @@ import lombok.Data;
 
 import com.project.daerkoob.domain.Book;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 public class TransferReview {
-    Book book;
-    User user;
-    Long id;
-    String content;
-    Long thumbCount;
-    Double score;
-    LocalDate registerDate;
-    boolean thumbJudge;
+    private Book book;
+    private User user;
+    private Long id;
+    private String content;
+    private Long thumbCount;
+    private Double score;
+    private LocalDateTime registerDate;
+    private boolean thumbJudge;
 }

@@ -12,6 +12,7 @@ import com.project.daerkoob.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import com.project.daerkoob.domain.Book;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -66,6 +67,11 @@ public class TranscriptionService {
         List<Transcription> transcriptions = transcriptionRepository.findByBookId(bookId);
         return transcriptions;
     }
+
+    public List<Transcription> getRecentTranscription(){
+        return transcriptionRepository.findTop8ByOrderByRegisterDateDesc();
+
+    }
     public List<TransferTranscription> getBookTranscription(Long userId , Long bookId) {
         List<Transcription> transcriptions = transcriptionRepository.findByBookId(bookId);
         List<TransferTranscription> resultList = new ArrayList<>();
@@ -89,7 +95,7 @@ public class TranscriptionService {
 
     public Transcription createDto(Long userId , Long bookId ,  String transcriptionContent){
         Transcription transcription = new Transcription();
-        LocalDate now = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
         transcription.setUser(userRepository.findById(userId).get());
         transcription.setBook(bookRepository.findById(bookId).get());
         transcription.setThumbCount(0L);

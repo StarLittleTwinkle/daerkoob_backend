@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -33,6 +36,9 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "review_id")
     private Review review;
+    @Column(name = "register_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd-hh-mm-ss")
+    private LocalDateTime registerDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User writer;

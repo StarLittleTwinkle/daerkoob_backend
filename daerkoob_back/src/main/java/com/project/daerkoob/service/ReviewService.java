@@ -8,6 +8,7 @@ import com.project.daerkoob.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -100,6 +101,10 @@ public class ReviewService {
         return resultList;
     }
 
+    public List<Review> getRecentReview(){
+        return reviewRepository.findTop8ByOrderByRegisterDateDesc();
+    }
+
     public TransferComment createTransferComment(Comment comment , Long userId) { //대댓글에 쓰이는 transferComment
         TransferComment transferComment = new TransferComment();
         transferComment.setId(comment.getId());
@@ -113,7 +118,7 @@ public class ReviewService {
 
     public Review createDto(Long userId, Long bookId, Double score, String reviewContent) {
         Review review = new Review();
-        LocalDate now = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
         review.setUser(userRepository.findById(userId).get());
         review.setBook(bookRepository.findById(bookId).get());
         review.setScore(score);

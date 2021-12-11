@@ -2,6 +2,7 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Book;
 import com.project.daerkoob.domain.Review;
+import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.TransferReview;
 import com.project.daerkoob.service.BookService;
@@ -79,5 +80,10 @@ public class ReviewController {
     public MessageWithList delete(Long reviewId , Long userId){ //review id만 주면은 삭제가 가능하도록 , 근데 이게 이 유저의 댓글인지를 알아야하니까 userId를 받는다
         //그러면서 delete하면서 다시 해당 book에 대한 정보 받아올 수 있도록 bookId까지 받아서옴
         return reviewService.reviewDelete(reviewId , userId);
+    }
+
+    @GetMapping("recent")
+    public List<Review> getRecentTranscription(){
+        return reviewService.getRecentReview();
     }
 }

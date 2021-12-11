@@ -4,15 +4,15 @@ import com.project.daerkoob.domain.User;
 import lombok.Data;
 
 import com.project.daerkoob.domain.Book;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class TransferTranscription {
-    Book book;
-    User user;
-    Long id;
-    String content;
-    Long thumbCount;
-    LocalDate registerDate;
-    boolean thumbJudge;
+    private Book book;
+    private User user;
+    private Long id;
+    private String content;
+    private Long thumbCount;
+    private LocalDateTime registerDate;
+    private boolean thumbJudge;
 }
