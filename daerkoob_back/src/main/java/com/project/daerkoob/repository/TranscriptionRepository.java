@@ -6,6 +6,7 @@ import com.project.daerkoob.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -14,4 +15,5 @@ public interface TranscriptionRepository extends JpaRepository<Transcription , L
     List<Transcription> findByBookId(Long bookId);
     List<Transcription> findByUser(User user);
     List<Transcription> findTop8ByOrderByRegisterDateDesc();
+    List<Transcription> findByUserAndRegisterDateBetweenOrderByRegisterDateAsc(User user , LocalDateTime registerDate1 , LocalDateTime registerDate2);
 }

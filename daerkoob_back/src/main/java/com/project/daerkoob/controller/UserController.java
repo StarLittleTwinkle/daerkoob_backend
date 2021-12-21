@@ -1,15 +1,20 @@
 package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Message;
+import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.model.TransferReview;
 import com.project.daerkoob.model.TransferTranscription;
 import com.project.daerkoob.model.TransferUser;
+import com.project.daerkoob.repository.TranscriptionRepository;
+import com.project.daerkoob.repository.UserRepository;
 import com.project.daerkoob.service.ReviewService;
 import com.project.daerkoob.service.TranscriptionService;
 import com.project.daerkoob.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
@@ -49,4 +54,9 @@ public class UserController {
 //    public TransferUser friend(@PathVariable Long userId){
 //        return userService.findUser(userId);
 //    }
+
+    @GetMapping("record/{userId}/{year}")
+    public int[] getUserRecord(@PathVariable Long userId , @PathVariable Long year){
+        return userService.getUserRecordCount(userId , year);
+    }
 }

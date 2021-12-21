@@ -11,7 +11,6 @@ import com.project.daerkoob.repository.TranscriptionRepository;
 import com.project.daerkoob.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import com.project.daerkoob.domain.Book;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

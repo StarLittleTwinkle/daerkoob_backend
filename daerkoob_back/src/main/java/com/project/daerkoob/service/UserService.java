@@ -2,12 +2,16 @@ package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.Friend;
 import com.project.daerkoob.domain.Message;
+import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.model.TransferUser;
+import com.project.daerkoob.repository.TranscriptionRepository;
 import com.project.daerkoob.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +19,12 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
+    private TranscriptionRepository transcriptionRepository;
 
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository , TranscriptionRepository transcriptionRepository){
         this.userRepository = userRepository; //UserService가 userRepository 를 사용 가능하도록 dependency injection 을 추가
+        this.transcriptionRepository = transcriptionRepository;
     }
 
     public Optional<User> findByUserId(String userId){
@@ -97,4 +103,26 @@ public class UserService {
         return createTransferUser(userRepository.findById(id).get());
     }
 
+    public int[] getUserRecordCount(Long userId , Long year){
+        LocalDateTime startDate = LocalDateTime.of(year.intValue() , 1 , 1 , 0 , 0 , 0);
+        LocalDateTime endDate = LocalDateTime.of(year.intValue() , 12 , 31 , 23 , 59 , 59);
+        int[] record;
+        int[] monthDay = new int[12];
+        if(year%4 == 0 && year%100 !=0 || year%400 == 0){
+            record = new int[366];
+        }
+        else {
+            record = new int[365];
+        }
+        LocalDate newDate;
+        for(int i = 1; i < 12; i++){ //1월 1일 = 0 1 월 31일 = 30 , 2월 1일? = 31 3월 1일 = 60
+            newDate = LocalDate.of(year.intValue() , i , 1);
+            monthDay[i] = monthDay[i - 1] + newDate.lengthOfMonth();
+        }
+        List<Transcription> dateList = transcriptionRepository.findByUserAndRegisterDateBetweenOrderByRegisterDateAsc(userRepository.findById(userId).get() , startDate , endDate); //일단 이렇게 날짜를 얻어오고
+        for(Transcription transcription : dateList){
+            record[monthDay[transcription.getRegisterDate().getMonthValue() - 1] + transcription.getRegisterDate().getDayOfMonth() - 1] += 1;
+        }
+        return record;
+    }
 }
