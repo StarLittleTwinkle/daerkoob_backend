@@ -1,18 +1,15 @@
 package com.project.daerkoob.service;
 
-import com.project.daerkoob.domain.Friend;
-import com.project.daerkoob.domain.Message;
-import com.project.daerkoob.domain.Transcription;
-import com.project.daerkoob.domain.User;
+import com.project.daerkoob.domain.*;
+import com.project.daerkoob.model.Grass;
 import com.project.daerkoob.model.TransferUser;
 import com.project.daerkoob.repository.TranscriptionRepository;
 import com.project.daerkoob.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,7 +100,7 @@ public class UserService {
         return createTransferUser(userRepository.findById(id).get());
     }
 
-    public int[] getUserRecordCount(Long userId , Long year){
+    public List<Grass> getUserRecordCount(Long userId , Long year){
         LocalDateTime startDate = LocalDateTime.of(year.intValue() , 1 , 1 , 0 , 0 , 0);
         LocalDateTime endDate = LocalDateTime.of(year.intValue() , 12 , 31 , 23 , 59 , 59);
         int[] record;
@@ -123,6 +120,19 @@ public class UserService {
         for(Transcription transcription : dateList){
             record[monthDay[transcription.getRegisterDate().getMonthValue() - 1] + transcription.getRegisterDate().getDayOfMonth() - 1] += 1;
         }
-        return record;
+        int monthIndex = 0;
+        List<Grass> result = new ArrayList<>();
+        /*
+        1. 일단 31까지는 계속 0으로 진행되다가
+        2. 31이 딱 되었을 때에는 1로 진행되야함 그리고 항상 year , monthIndex + 1 , i + 1;
+         */
+        for(int i = 0; i < record.length; i++){
+            if(monthIndex != 11 && i >= monthDay[monthIndex + 1]){
+                monthIndex++;
+            }
+            LocalDateTime innerDate = LocalDateTime.of(year.intValue() , monthIndex + 1 , i - monthDay[monthIndex] + 1 , 0 , 0 , 0);
+            result.add(new Grass(innerDate , new Long(record[i])));
+        }
+        return result;
     }
 }
