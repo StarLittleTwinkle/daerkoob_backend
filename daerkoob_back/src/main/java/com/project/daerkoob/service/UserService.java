@@ -101,6 +101,11 @@ public class UserService {
     }
 
     public List<Grass> getUserRecordCount(Long userId , Long year){
+        /*
+        1. 내가 grass 보낼때 아얘 string 으로 이 배열은 bottom 이런식으로 보내자
+        2. 그러면 될 듯
+        3. 수정하자
+         */
         LocalDateTime startDate = LocalDateTime.of(year.intValue() , 1 , 1 , 0 , 0 , 0);
         LocalDateTime endDate = LocalDateTime.of(year.intValue() , 12 , 31 , 23 , 59 , 59);
         int[] record;

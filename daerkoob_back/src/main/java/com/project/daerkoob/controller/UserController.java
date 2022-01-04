@@ -46,6 +46,7 @@ public class UserController {
     public List<TransferReview> getUserReview(@PathVariable Long userId){
         return reviewService.getUserReview(userId);
     }
+
 //    @GetMapping("friend/{userId}")
 //    public TransferUser friend(@PathVariable Long userId){
 //        return userService.findUser(userId);
