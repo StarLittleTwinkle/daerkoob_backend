@@ -8,6 +8,14 @@ import java.time.LocalDateTime;
 public class Grass {
     LocalDateTime date;
     Long commit;
+    String direction;
+
+    public Grass(LocalDateTime date , Long commit , String direction){
+        this.date = date;
+        this.commit = commit;
+        this.direction = direction;
+    }
+
     public Grass(LocalDateTime date , Long commit){
         this.date = date;
         this.commit = commit;

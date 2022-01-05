@@ -21,6 +21,10 @@ public class CommentController {
         this.reviewService =reviewService;
     }
 
+    /*
+    -- 수정할 사항
+    1. review에 몇개의 댓글이 달렸는지 나올 수 있도록
+     */
     @GetMapping("register/review/{userId}/{reviewId}/{content}")
     public void getCommentOfReview(@PathVariable Long userId , @PathVariable Long reviewId, @PathVariable String content) { //guide line
         commentService.save(commentService.createCommentOfReviewDto(userId , reviewId , content));

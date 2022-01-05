@@ -2,10 +2,7 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
-import com.project.daerkoob.model.Grass;
-import com.project.daerkoob.model.TransferReview;
-import com.project.daerkoob.model.TransferTranscription;
-import com.project.daerkoob.model.TransferUser;
+import com.project.daerkoob.model.*;
 import com.project.daerkoob.service.ReviewService;
 import com.project.daerkoob.service.TranscriptionService;
 import com.project.daerkoob.service.UserService;
@@ -53,7 +50,7 @@ public class UserController {
 //    }
 
     @GetMapping("record/{userId}/{year}")
-    public List<Grass> getUserRecord(@PathVariable Long userId , @PathVariable Long year){
+    public MessageWithGrass getUserRecord(@PathVariable Long userId , @PathVariable Long year){
         return userService.getUserRecordCount(userId , year);
     }
 }
