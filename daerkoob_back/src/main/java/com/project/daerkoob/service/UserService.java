@@ -141,7 +141,7 @@ public class UserService {
         List<Grass> result = new ArrayList<>();
         for(int i = 0; i < frontNullCount; i++){
 //            System.out.println("front add");
-            result.add(null);
+            result.add(new Grass(null , null , null));
         }
         for(int i = 0; i < record.length; i++){
             if(monthIndex != 11 && i >= monthDay[monthIndex + 1]){
@@ -199,7 +199,7 @@ public class UserService {
 //        System.out.println("endNullCount : " + endNullCount);
         for(int i = 0; i < endNullCount; i++){
 //            System.out.println("end add");
-            result.add(null);
+            result.add(new Grass(null , null , null));
         }
 //        for(Grass grass : result){
 //            System.out.println(grass == null ? "null" : grass.getDate());
