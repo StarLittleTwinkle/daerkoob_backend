@@ -80,7 +80,6 @@ public class ThumbService {
             return new Message(true , "좋아요 제거");
         }
         else{
-            System.out.println("comment에 thumb를 주려고 합니다.");
             resultComment.setThumbCount(resultComment.getThumbCount() + 1); //review 의 star , star_count 다시 update
             commentRepository.save(resultComment);
             thumbRepository.save(createCommentThumb(userIndex , commentId));

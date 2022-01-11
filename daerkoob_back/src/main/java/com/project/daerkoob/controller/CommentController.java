@@ -23,7 +23,7 @@ public class CommentController {
 
     /*
     -- 수정할 사항
-    1. review에 몇개의 댓글이 달렸는지 나올 수 있도록
+    1. review에 몇개의 댓글이 달렸는지 나올 수 있도록 (상의)
      */
     @GetMapping("register/review/{userId}/{reviewId}/{content}")
     public void getCommentOfReview(@PathVariable Long userId , @PathVariable Long reviewId, @PathVariable String content) { //guide line
@@ -37,7 +37,7 @@ public class CommentController {
 
     @GetMapping("inquiry/{reviewId}/{userId}") //이거 하면 그냥 review에 달린 댓글들이 다 나옴
     public List<TransferComment> inquiryCommentOfReview(@PathVariable Long reviewId , @PathVariable Long userId){
-        System.out.println("call the inquiryReview Method");
+//        System.out.println("call the inquiryReview Method");
         return reviewService.getCommentOfReview(reviewId , userId);
     }
 

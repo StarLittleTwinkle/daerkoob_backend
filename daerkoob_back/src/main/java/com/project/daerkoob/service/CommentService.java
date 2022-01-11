@@ -2,6 +2,7 @@ package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.Comment;
 import com.project.daerkoob.model.MessageWithList;
+import com.project.daerkoob.model.TransferComment;
 import com.project.daerkoob.repository.CommentRepository;
 import com.project.daerkoob.repository.ReviewRepository;
 import com.project.daerkoob.repository.UserRepository;
@@ -43,9 +44,9 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    public List<Comment> getCommentOfComment(Long commentId){
-        return commentRepository.findById(commentId).get().getComments();
-    }
+//    public List<Comment> getCommentOfComment(Long commentId){ // 이건 현재는 사용을 안함 , 이것도 곧 수정해서 사용하면 될 듯
+//        return commentRepository.findById(commentId).get().getComments();
+//    }
 
     public Comment createCommentOfReviewDto(Long userId , Long reviewId, String content){
         Comment comment = new Comment();

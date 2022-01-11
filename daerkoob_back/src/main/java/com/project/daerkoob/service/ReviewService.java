@@ -93,6 +93,10 @@ public class ReviewService {
 //    }
 
     public List<TransferComment> getCommentOfReview(Long reviewId , Long userId) { //review에 대한 댓글을 다 불러오는 메소드
+        /*
+        -- 추가구현
+        1. 여기서 review에 달려있는 댓글의 개수 , 대댓글까지 포함해서 같이 반환하기
+         */
         List<TransferComment> resultList = new ArrayList<>();
         List<Comment> commentList = commentRepository.findByReview(reviewRepository.findById(reviewId).get());
         for (Comment comment : commentList) {
@@ -106,13 +110,32 @@ public class ReviewService {
     }
 
     public TransferComment createTransferComment(Comment comment , Long userId) { //대댓글에 쓰이는 transferComment
+        // 대댓글도 좋아요를 분간 할 수 있도록 다시 구현해놓았음
         TransferComment transferComment = new TransferComment();
         transferComment.setId(comment.getId());
-        transferComment.setComments(comment.getComments());
+        List<Comment> commentList = comment.getComments();
+        List<TransferComment> nestedCommentList = new ArrayList<>();
+        for(Comment nestedComment : commentList){
+            nestedCommentList.add(createTransferCommentOfNested(nestedComment , userId));
+        }
+        transferComment.setComments(nestedCommentList);
         transferComment.setWriter(comment.getWriter());
         transferComment.setThumbCount(comment.getThumbCount());
-        transferComment.setThumbJudge(thumbRepository.existsByCommentIdAndGivenUserId(comment.getId() , userId));
+        transferComment.setThumbJudge(thumbRepository.existsByCommentIdAndGivenUserId(comment.getId() , userId)); // 이 user 가 좋아요를 눌렀는지 아닌지 판단
         transferComment.setContent(comment.getContent());
+        transferComment.setRegisterDate(comment.getRegisterDate());
+        return transferComment;
+    }
+
+    public TransferComment createTransferCommentOfNested(Comment comment , Long userId){
+        TransferComment transferComment = new TransferComment();
+        transferComment.setId(comment.getId());
+        transferComment.setComments(null);
+        transferComment.setWriter(comment.getWriter());
+        transferComment.setThumbCount(comment.getThumbCount());
+        transferComment.setThumbJudge(thumbRepository.existsByCommentIdAndGivenUserId(comment.getId() , userId)); // 이 user 가 좋아요를 눌렀는지 아닌지 판단
+        transferComment.setContent(comment.getContent());
+        transferComment.setRegisterDate(comment.getRegisterDate());
         return transferComment;
     }
 

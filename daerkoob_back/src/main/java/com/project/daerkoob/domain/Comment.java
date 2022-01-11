@@ -1,6 +1,7 @@
 package com.project.daerkoob.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.daerkoob.model.TransferComment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

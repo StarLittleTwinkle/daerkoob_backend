@@ -20,6 +20,7 @@ public class ThumbController {
     public Message getSetReview(@PathVariable Long userIndex, @PathVariable Long reviewId){
         return thumbService.judgeReview(userIndex, reviewId);
     }
+
     @PostMapping("review")
     public Message setReview(Long userIndex, Long reviewId){
         return thumbService.judgeReview(userIndex, reviewId);
@@ -39,7 +40,6 @@ public class ThumbController {
     public Message getSetComment(@PathVariable Long userIndex,@PathVariable Long commentId){
         return thumbService.judgeComment(userIndex, commentId);
     }
-
 
     @PostMapping("comment") //좋아요 필사에다가 , guide line
     public Message SetComment(Long userIndex, Long commentId){

@@ -1,6 +1,5 @@
 package com.project.daerkoob.model;
 
-import com.project.daerkoob.domain.Comment;
 import com.project.daerkoob.domain.User;
 import lombok.Data;
 
@@ -15,5 +14,5 @@ public class TransferComment {
     private Long thumbCount;
     private Boolean thumbJudge;
     private LocalDateTime registerDate;
-    private List<Comment> comments;
+    private List<TransferComment> comments;
 }

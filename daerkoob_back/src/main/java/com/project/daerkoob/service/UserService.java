@@ -137,10 +137,8 @@ public class UserService {
         5. 만일 이게 일욜이다 , 그러면 앞에 null이 추가 안되는 0 , 그리고 이게 토요일이다 -> 6개가 추가되어야 한다. getValue() % 7로 구하면 될 듯
          */
         int frontNullCount = LocalDate.of(year.intValue() , 1 ,1).getDayOfWeek().getValue() % 7;
-//        System.out.println("frontNullCount : " + frontNullCount);
         List<Grass> result = new ArrayList<>();
         for(int i = 0; i < frontNullCount; i++){
-//            System.out.println("front add");
             result.add(new Grass(null , null , null));
         }
         for(int i = 0; i < record.length; i++){
@@ -166,11 +164,9 @@ public class UserService {
             if(i == 12){
                 firstDayIndex = monthDay[i - 1] + frontNullCount;
                 lastDayIndex = record.length + frontNullCount - 1;
-//                System.out.println("i : " + i + " firstDayIndex : " + firstDayIndex + " lastDayIndex : " + lastDayIndex);
             } else{
                 firstDayIndex = monthDay[i - 1] + frontNullCount;
                 lastDayIndex = monthDay[i] + frontNullCount - 1;
-//                System.out.println("i : " + i + " firstDayIndex : " + firstDayIndex + " lastDayIndex : " + lastDayIndex);
             }
             Grass firstDay = result.get(firstDayIndex);
             firstDay.setDirection("left top");
@@ -196,14 +192,9 @@ public class UserService {
         2. 뒤에다가도 null을 추가해서 보내면 된다.
          */
         int endNullCount = 7 - (LocalDate.of(year.intValue() , 12 , 31).getDayOfWeek().getValue() % 7 + 1);
-//        System.out.println("endNullCount : " + endNullCount);
         for(int i = 0; i < endNullCount; i++){
-//            System.out.println("end add");
             result.add(new Grass(null , null , null));
         }
-//        for(Grass grass : result){
-//            System.out.println(grass == null ? "null" : grass.getDate());
-//        }
         transferGrass.setGrass(result);
         return transferGrass;
     }
