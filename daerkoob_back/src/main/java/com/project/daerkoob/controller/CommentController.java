@@ -32,8 +32,12 @@ public class CommentController {
     }
 
     @GetMapping("inquiry/{reviewId}/{userId}") //이거 하면 그냥 review에 달린 댓글들이 다 나옴
-    public CountWithList inquiryCommentOfReview(@PathVariable Long reviewId , @PathVariable Long userId){
+    public MessageWithList inquiryCommentOfReview(@PathVariable Long reviewId , @PathVariable Long userId){
         //MessageWithList는 그대로 유지하면서 그냥 commentService로 getCommentOfReview를 부르고 getCommentOfReview가 ReviewService의 getCommentOfReview의 List<TransferComment> 를 받아오는 형식으로 작성하였음
+        /*
+        근데 근본적인 해결 방안을 찾아야한다...
+        delete api 에서는 개수를 반환하지 않는다 근데 이것은 문제가 있다는 것... 여기서도 분명히 해야함 , 근데 Message가 포함이 되어있는 것일 뿐, 여기서 CountWithList를 그냥 MessageWithList로 바꾸는 것은 어떨까?
+         */
         return commentService.getCommentOfReview(reviewId , userId);
     }
 

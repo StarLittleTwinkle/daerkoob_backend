@@ -4,10 +4,8 @@ import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.model.CountWithList;
 import com.project.daerkoob.model.MessageWithList;
-import com.project.daerkoob.model.TransferTranscription;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.TranscriptionService;
-import com.project.daerkoob.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
