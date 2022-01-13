@@ -66,6 +66,11 @@ public class ReviewService {
         return new ArrayList<Review>();
     }
 
+    public MessageWithList getMessageWithListOfBookReview(Long userId , Long bookId){ // getBookReview가 List<TransferReview> 로 넘겨주면 MessageWithList로 변환해서 넘겨준다.
+        List<TransferReview> transferReviews = getBookReview(userId , bookId);
+        return new MessageWithList(new Long(transferReviews.size()) , new Message(true , "리뷰를 성공적으로 가져왔습니다.") , new ArrayList<>(transferReviews));
+    }
+
     public List<TransferReview> getBookReview(Long userId, Long bookId) {
         List<Review> reviews = reviewRepository.findByBook(bookRepository.findById(bookId).get());
         List<TransferReview> resultList = new ArrayList<>();

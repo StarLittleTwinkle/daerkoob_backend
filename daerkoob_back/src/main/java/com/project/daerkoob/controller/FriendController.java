@@ -24,7 +24,7 @@ public class FriendController {
     }
 
 
-    @PostMapping("delete")
+    @DeleteMapping("delete")
     public MessageWithList delete(Long userId , Long friendId){
         return friendService.friendDelete(userId, friendId);
     }
