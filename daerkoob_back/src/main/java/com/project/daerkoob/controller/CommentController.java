@@ -1,13 +1,10 @@
 package com.project.daerkoob.controller;
 
-import java.util.List;
-
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.service.CommentService;
 import com.project.daerkoob.service.ReviewService;
 import org.springframework.web.bind.annotation.*;
-import com.project.daerkoob.model.CountWithList;
 
 @CrossOrigin(origins = "*")
 @RestController

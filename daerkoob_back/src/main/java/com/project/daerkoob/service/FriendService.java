@@ -1,6 +1,7 @@
 package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.Friend;
+import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.repository.FriendRepository;
@@ -30,21 +31,28 @@ public class FriendService {
         user.setFriendCount(user.getFriendCount() - 1);
         userRepository.save(user); //user friendCount 차감 시켜주고 해당 친구 삭제
         friendRepository.deleteByFriendIndex(friendId);
-        return new MessageWithList(true , "친구 삭제에 성공했습니다." , new ArrayList<>(ask(userId)));
+        List<Friend> friends = ask(userId);
+        return new MessageWithList(new Long(friends.size()) , new Message(true , "친구 삭제에 성공했습니다.") , new ArrayList<>(friends));
    }
     public MessageWithList add(Long userId, Long friendId){ // 친구 추가
+        Message message = null;
         if (friendRepository.existsByUserAndFriendIndex(userRepository.findById(userId).get(),friendId)){
-            return new MessageWithList(false , "이미 친구입니다." , new ArrayList<>(ask(userId)));
+            message = new Message(false ,  "이미 친구입니다.");
         }
         else if(userId == friendId){
-            return new MessageWithList(false , "자신은 친구로 추가할 수 없습니다." , new ArrayList<>(ask(userId)));
+            message = new Message(false , "자신은 친구로 추가할 수 없습니다.");
+        }
+        if(message != null){ //이미 친구로 추가할 수 없다는 것이 정해졌을 때
+            List<Friend> friends = ask(userId);
+            return new MessageWithList(new Long(friends.size()) , message , new ArrayList<>(friends));
         }
         Optional<User> findById = userRepository.findById(userId);
         User resultUser = findById.get();
         resultUser.setFriendCount(resultUser.getFriendCount() + 1);
         userRepository.save(resultUser); //친구 수 바꾸고 저장 (업데이트)
         friendRepository.save(createFriend(userId, friendId)); // 친구로 저장
-        return new MessageWithList(true , "친구 등록에 성공했습니다.", new ArrayList<>(ask(userId)));
+        List<Friend> friends = ask(userId);
+        return new MessageWithList(new Long(friends.size()), new Message(true , "친구 등록에 성공했습니다."), new ArrayList<>(ask(userId)));
     }
 
     public Friend createFriend(Long userId , Long friendId){ //friend 객체를 만드는 함수

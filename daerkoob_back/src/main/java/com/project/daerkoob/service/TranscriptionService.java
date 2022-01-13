@@ -3,7 +3,6 @@ package com.project.daerkoob.service;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.domain.User;
-import com.project.daerkoob.model.CountWithList;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.TransferTranscription;
 import com.project.daerkoob.repository.BookRepository;
@@ -36,7 +35,8 @@ public class TranscriptionService {
         //그리고 user의 transcriptionCount를 떨어트려야함
         Transcription transcription = transcriptionRepository.findById(transcriptionId).get();
         if(transcription.getUser().getId() != userId){
-            return new MessageWithList(false, "필사 삭제에 실패했습니다." , new ArrayList<>(getBookTranscription(userId, transcription.getBook().getId())));
+            List<TransferTranscription> transferTranscriptions = getBookTranscription(userId , transcription.getBook().getId());
+            return new MessageWithList(new Long(transferTranscriptions.size()) ,new Message(false, "필사 삭제에 실패했습니다.") , new ArrayList<>(transferTranscriptions));
         }
         else{
             //여기서 일단 user transcriptionCount , bookTranscriptionCount
@@ -47,7 +47,8 @@ public class TranscriptionService {
             book.setTranscriptionCount(book.getTranscriptionCount() - 1);
             userRepository.save(user);
             bookRepository.save(book);
-            return new MessageWithList(true, "필사 삭제에 성공했습니다." , new ArrayList<>(getBookTranscription(userId, transcription.getBook().getId())));
+            List<TransferTranscription> transferTranscriptions = getBookTranscription(userId , transcription.getBook().getId());
+            return new MessageWithList(new Long(transferTranscriptions.size()) , new Message(true, "필사 삭제에 성공했습니다.") , new ArrayList<>(transferTranscriptions));
         }
     }
     public Long countAll(){
@@ -73,10 +74,10 @@ public class TranscriptionService {
 
     }
 
-    public CountWithList getBookTranscriptionOfCountWithList(Long userId , String isbn){
+    public MessageWithList getBookTranscriptionOfCountWithList(Long userId , String isbn){
         Book book = bookRepository.findByIsbn(isbn).get();
         List<TransferTranscription> result = getBookTranscription(userId, book.getId());
-        return new CountWithList(new Long(result.size()) , new ArrayList<>(result));
+        return new MessageWithList(new Long(result.size()) , new Message(true , "필사를 성공적으로 가져왔습니다."), new ArrayList<>(result));
     }
 
     public List<TransferTranscription> getBookTranscription(Long userId , Long bookId) {

@@ -1,14 +1,12 @@
 package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.*;
-import com.project.daerkoob.model.CountWithList;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.TransferComment;
 import com.project.daerkoob.model.TransferReview;
 import com.project.daerkoob.repository.*;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +45,8 @@ public class ReviewService {
         //추후에는 여기서 판단하는 것이 아닌 이전에 review 조회할 때에도 자신이 쓴 review인지 조회할 수 있도록 , thumb처럼 수정해야할 듯
         Review review = reviewRepository.findById(reviewId).get();
         if (review.getUser().getId() != userId) { //같지 않은 경우 삭제 불가
-            return new MessageWithList(false, "삭제에 실패했습니다.", new ArrayList<>(getBookReview(userId, review.getBook().getId())));
+            List<TransferReview> transferReviews = getBookReview(userId , review.getBook().getId());
+            return new MessageWithList(new Long(transferReviews.size()), new Message(false , "삭제에 실패했습니다."), new ArrayList<>(transferReviews));
         } else {
             reviewRepository.deleteById(reviewId);
             User user = userRepository.findById(userId).get();
@@ -58,7 +57,8 @@ public class ReviewService {
             book.setReviewCount(book.getReviewCount() - 1); //reveiw count까지 차감
             bookRepository.save(book); //별점 업데이트 후 저장 까지 완료
             userRepository.save(user);
-            return new MessageWithList(true, "삭제에 성공했습니다.", new ArrayList<>(getBookReview(userId, review.getBook().getId())));
+            List<TransferReview> transferReviews = getBookReview(userId , review.getBook().getId());
+            return new MessageWithList(new Long(transferReviews.size()), new Message(true, "삭제에 성공했습니다."), new ArrayList<>(transferReviews));
         }
     }
 

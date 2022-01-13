@@ -2,7 +2,6 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.Transcription;
-import com.project.daerkoob.model.CountWithList;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.TranscriptionService;
@@ -45,7 +44,7 @@ public class TranscriptionController {
     }
 
     @GetMapping("inquiry/{userId}/{isbn}") //해당 책에 대한 필사내용 조회
-    public CountWithList inquiry(@PathVariable Long userId , @PathVariable String isbn){
+    public MessageWithList inquiry(@PathVariable Long userId , @PathVariable String isbn){
         return transcriptionService.getBookTranscriptionOfCountWithList(userId , isbn);
     }
 
