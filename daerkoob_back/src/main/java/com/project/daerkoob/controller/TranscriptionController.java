@@ -1,6 +1,8 @@
 package com.project.daerkoob.controller;
 
+import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.Transcription;
+import com.project.daerkoob.model.CountWithList;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.TransferTranscription;
 import com.project.daerkoob.service.BookService;
@@ -45,25 +47,28 @@ public class TranscriptionController {
     }
 
     @GetMapping("inquiry/{userId}/{isbn}") //해당 책에 대한 필사내용 조회
-    public List<TransferTranscription> inquiry(@PathVariable Long userId , @PathVariable String isbn) throws Exception{
-        Optional<Book> book = bookService.findBook(isbn);
-        return transcriptionService.getBookTranscription(userId , book.get().getId());
+    public CountWithList inquiry(@PathVariable Long userId , @PathVariable String isbn){
+        return transcriptionService.getBookTranscriptionOfCountWithList(userId , isbn);
     }
 
-    @GetMapping("register/{userId}/{isbn}/{transcriptionContent}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.
-    public boolean getRegister(@PathVariable Long userId, @PathVariable String isbn, @PathVariable String transcriptionContent) throws Exception{
-        bookService.save(bookService.createBook(isbn) , 2L);
-        Optional<Book> book = bookService.findBook(isbn);
-        transcriptionService.save(transcriptionService.createDto(userId, book.get().getId() ,  transcriptionContent));
-        return true;
-    }
+//    @GetMapping("register/{userId}/{isbn}/{transcriptionContent}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.
+//    public boolean getRegister(@PathVariable Long userId, @PathVariable String isbn, @PathVariable String transcriptionContent) throws Exception{
+//        bookService.save(bookService.createBook(isbn) , 2L);
+//        Optional<Book> book = bookService.findBook(isbn);
+//        transcriptionService.save(transcriptionService.createDto(userId, book.get().getId() ,  transcriptionContent));
+//        return true;
+//    }
 
     @PostMapping("register")
-    public boolean register(Long userId, String isbn , String transcriptionContent) throws Exception{
-        bookService.save(bookService.createBook(isbn) , 2L);
-        Optional<Book> book = bookService.findBook(isbn);
-        transcriptionService.save(transcriptionService.createDto(userId, book.get().getId() ,  transcriptionContent));
-        return true;
+    public Message register(Long userId, String isbn , String transcriptionContent) throws Exception{
+        if(!transcriptionContent.isBlank()) {
+            bookService.save(bookService.createBook(isbn), 2L);
+            Optional<Book> book = bookService.findBook(isbn);
+            transcriptionService.save(transcriptionService.createDto(userId, book.get().getId(), transcriptionContent));
+            return new Message(true , "입력에 성공하셨습니다.");
+        }else{
+            return new Message(false ,"다시 입력해주세요.");
+        }
     }
 
     @GetMapping("delete/{userId}/{transcriptionId}")

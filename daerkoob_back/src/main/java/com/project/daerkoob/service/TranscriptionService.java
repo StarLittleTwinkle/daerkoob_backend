@@ -3,6 +3,7 @@ package com.project.daerkoob.service;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.domain.User;
+import com.project.daerkoob.model.CountWithList;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.TransferTranscription;
 import com.project.daerkoob.repository.BookRepository;
@@ -71,6 +72,13 @@ public class TranscriptionService {
         return transcriptionRepository.findTop8ByOrderByRegisterDateDesc();
 
     }
+
+    public CountWithList getBookTranscriptionOfCountWithList(Long userId , String isbn){
+        Book book = bookRepository.findByIsbn(isbn).get();
+        List<TransferTranscription> result = getBookTranscription(userId, book.getId());
+        return new CountWithList(new Long(result.size()) , new ArrayList<>(result));
+    }
+
     public List<TransferTranscription> getBookTranscription(Long userId , Long bookId) {
         List<Transcription> transcriptions = transcriptionRepository.findByBookId(bookId);
         List<TransferTranscription> resultList = new ArrayList<>();
