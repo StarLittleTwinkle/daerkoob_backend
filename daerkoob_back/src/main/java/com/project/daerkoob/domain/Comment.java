@@ -1,14 +1,12 @@
 package com.project.daerkoob.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.daerkoob.model.TransferComment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -19,12 +19,10 @@ public class TranscriptionController {
 
     private TranscriptionService transcriptionService;
     private BookService bookService;
-    private UserService userService;
 
-    public TranscriptionController(TranscriptionService transcriptionService , BookService bookService , UserService userService){
+    public TranscriptionController(TranscriptionService transcriptionService , BookService bookService){
         this.transcriptionService = transcriptionService;
         this.bookService = bookService;
-        this.userService = userService;
     }
 
     @GetMapping("count")
@@ -33,7 +31,7 @@ public class TranscriptionController {
     }
 
     @GetMapping("judge/{isbn}")
-    public Boolean getJudge(@PathVariable String isbn) throws Exception{ //false 는 필사 존재 x , true 는 필사 존재 o (필사 보기 가능)
+    public Boolean getJudge(@PathVariable String isbn){ //false 는 필사 존재 x , true 는 필사 존재 o (필사 보기 가능)
         Optional<Book> book = bookService.findBook(isbn);
         Book resultBook = book.orElse(null);
         if(resultBook == null){

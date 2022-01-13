@@ -8,6 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MessageWithList {
     private boolean flag;
+//    private Long totalCount;
     private String message;
     private List<Object> List;
 }

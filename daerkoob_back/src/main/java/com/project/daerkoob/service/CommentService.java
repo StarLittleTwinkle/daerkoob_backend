@@ -1,6 +1,7 @@
 package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.Comment;
+import com.project.daerkoob.model.CountWithList;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.TransferComment;
 import com.project.daerkoob.repository.CommentRepository;
@@ -42,6 +43,17 @@ public class CommentService {
 
     public void save(Comment comment){
         commentRepository.save(comment);
+    }
+
+    public CountWithList getCommentOfReview(Long reviewId , Long userId){
+        List<TransferComment> resultList = reviewService.getCommentOfReview(reviewId , userId);
+        Long totalSize = 0L;
+        for(TransferComment transferComment : resultList){
+            totalSize++;
+            totalSize += transferComment.getNestedCount();
+        }
+        CountWithList result = new CountWithList(totalSize , new ArrayList<>(resultList));
+        return result;
     }
 
 //    public List<Comment> getCommentOfComment(Long commentId){ // 이건 현재는 사용을 안함 , 이것도 곧 수정해서 사용하면 될 듯

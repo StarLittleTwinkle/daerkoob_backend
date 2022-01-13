@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 public class TransferComment {
     private Long id;
+    private Long nestedCount;
     private String content;
     private User writer;
     private Long thumbCount;

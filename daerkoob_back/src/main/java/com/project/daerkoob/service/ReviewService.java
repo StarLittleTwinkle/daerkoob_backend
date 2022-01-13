@@ -1,6 +1,7 @@
 package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.*;
+import com.project.daerkoob.model.CountWithList;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.TransferComment;
 import com.project.daerkoob.model.TransferReview;
@@ -96,12 +97,21 @@ public class ReviewService {
         /*
         -- 추가구현
         1. 여기서 review에 달려있는 댓글의 개수 , 대댓글까지 포함해서 같이 반환하기
+        2. 안에 포함되어 있는 댓글들도 대댓글을 가지고 있으니까 카테고리를 리뷰에 달린 댓글 총 개수(대댓글까지) , 댓글들은 자신들의 대댓글 개수를 가지고 있는 것
+        3. 문제 발생함 , 이전에 deleteComment로 했었던 것이 문제가 일어남 나머지도 아마 다 똑같이 할텐데 , 그럴려면 나머지도 다 수정해야함..
+        4. 이러면 그냥 여기서는 이전처럼 List<TransferComment> 를 보내고 그거를 받아서 따로 공정해서 반환하는 과정을 거쳐야 할 것 같음
          */
         List<TransferComment> resultList = new ArrayList<>();
         List<Comment> commentList = commentRepository.findByReview(reviewRepository.findById(reviewId).get());
         for (Comment comment : commentList) {
             resultList.add(createTransferComment(comment , userId));
         }
+//        Long totalSize = 0L;
+//        for(TransferComment transferComment : resultList){
+//            totalSize++;
+//            totalSize += transferComment.getNestedCount();
+//        }
+//        CountWithList result = new CountWithList(totalSize , new ArrayList<>(resultList));
         return resultList;
     }
 
@@ -118,6 +128,7 @@ public class ReviewService {
         for(Comment nestedComment : commentList){
             nestedCommentList.add(createTransferCommentOfNested(nestedComment , userId));
         }
+        transferComment.setNestedCount(new Long(nestedCommentList.size())); // 자신에게 달린 댓글의 개수를 세는 것
         transferComment.setComments(nestedCommentList);
         transferComment.setWriter(comment.getWriter());
         transferComment.setThumbCount(comment.getThumbCount());
@@ -130,6 +141,7 @@ public class ReviewService {
     public TransferComment createTransferCommentOfNested(Comment comment , Long userId){
         TransferComment transferComment = new TransferComment();
         transferComment.setId(comment.getId());
+        transferComment.setNestedCount(null); // 얘는 대댓글이니까 대댓글은 자식의 개수가 없으니 null로 설정
         transferComment.setComments(null);
         transferComment.setWriter(comment.getWriter());
         transferComment.setThumbCount(comment.getThumbCount());
