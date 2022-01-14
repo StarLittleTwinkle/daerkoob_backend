@@ -21,12 +21,10 @@ public class ReviewController {
 
     private ReviewService reviewService;
     private BookService bookService;
-    private UserService userService;
 
-    public ReviewController(ReviewService reviewService , BookService bookService , UserService userService){
+    public ReviewController(ReviewService reviewService , BookService bookService){
         this.reviewService = reviewService;
         this.bookService = bookService;
-        this.userService = userService;
     }
 
     @GetMapping("count")
