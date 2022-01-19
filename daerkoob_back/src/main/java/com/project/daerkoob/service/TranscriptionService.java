@@ -65,7 +65,7 @@ public class TranscriptionService {
     }
 
     public List<Transcription> getTranscription(Long bookId){ //얘는 그냥 book에 review 달렸는지 안달렸는지 확인하는용
-        List<Transcription> transcriptions = transcriptionRepository.findByBookId(bookId);
+        List<Transcription> transcriptions = transcriptionRepository.findByBook(bookRepository.findById(bookId).get());
         return transcriptions;
     }
 
@@ -81,7 +81,7 @@ public class TranscriptionService {
     }
 
     public List<TransferTranscription> getBookTranscription(Long userId , Long bookId) {
-        List<Transcription> transcriptions = transcriptionRepository.findByBookId(bookId);
+        List<Transcription> transcriptions = transcriptionRepository.findByBook(bookRepository.findById(bookId).get());
         List<TransferTranscription> resultList = new ArrayList<>();
         for(Transcription transcription : transcriptions){
             resultList.add(createTransferTranscription(userId , transcription));

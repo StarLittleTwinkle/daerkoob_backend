@@ -2,6 +2,7 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.model.MessageWithList;
+import com.project.daerkoob.model.Pagination;
 import com.project.daerkoob.service.CommentService;
 import com.project.daerkoob.service.ReviewService;
 import org.springframework.web.bind.annotation.*;
@@ -28,12 +29,13 @@ public class CommentController {
             return new Message(false, "다시 입력해주세요.");
     }
 
-    @GetMapping("inquiry/{reviewId}/{userId}") //이거 하면 그냥 review에 달린 댓글들이 다 나옴
+    @GetMapping("inquiry/{reviewId}/{userId}/{pg}") //이거 하면 그냥 review에 달린 댓글들이 다 나옴
     public MessageWithList inquiryCommentOfReview(@PathVariable Long reviewId , @PathVariable Long userId){
         //MessageWithList는 그대로 유지하면서 그냥 commentService로 getCommentOfReview를 부르고 getCommentOfReview가 ReviewService의 getCommentOfReview의 List<TransferComment> 를 받아오는 형식으로 작성하였음
         /*
-        근데 근본적인 해결 방안을 찾아야한다...
-        delete api 에서는 개수를 반환하지 않는다 근데 이것은 문제가 있다는 것... 여기서도 분명히 해야함 , 근데 Message가 포함이 되어있는 것일 뿐, 여기서 CountWithList를 그냥 MessageWithList로 바꾸는 것은 어떨까?
+        inquiry 에서 pagination 방법을 구현해보자.
+        일단 getCommentOfReview 에서 가져와야 한다. 근데 여기서 pg , sz 정보를 받을 수가 있나? 전체 레코드 수를 모르는데?
+        일단 page 정보대로 한번 해보자 pg를 1로 일단 받아서
          */
         return commentService.getCommentOfReview(reviewId , userId);
     }

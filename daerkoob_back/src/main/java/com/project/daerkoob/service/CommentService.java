@@ -3,6 +3,7 @@ package com.project.daerkoob.service;
 import com.project.daerkoob.domain.Comment;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.model.MessageWithList;
+import com.project.daerkoob.model.Pagination;
 import com.project.daerkoob.model.TransferComment;
 import com.project.daerkoob.repository.CommentRepository;
 import com.project.daerkoob.repository.ReviewRepository;
