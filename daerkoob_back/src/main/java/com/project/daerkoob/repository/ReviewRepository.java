@@ -20,7 +20,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Page<Review> findByBook(Book book , Pageable pageable);
     default List<Review> findByBook(Pagination pagination){
         Page<Review> page = this.findByBook((Book)pagination.getId() , PageRequest.of(pagination.getPageNumber() - 1 , pagination.getPageSize() , Sort.Direction.ASC , "registerDate"));
-        //pagination의 속성들을 Integer로 선언하는 것도 중요하다 PageRequest.of method 에 받는 형식이 int이기 때문이다. 
+        //pagination의 속성들을 Integer로 선언하는 것도 중요하다 PageRequest.of method 에 받는 형식이 int이기 때문이다.
         pagination.setTotalRecordCount((int)page.getTotalElements());
         return page.getContent();
     }

@@ -48,14 +48,6 @@ public class TranscriptionController {
         return transcriptionService.getBookTranscriptionOfCountWithList(userId , isbn);
     }
 
-//    @GetMapping("register/{userId}/{isbn}/{transcriptionContent}") //guide line , 이제 그냥 isbn 넘겨주시면 가능합니다.
-//    public boolean getRegister(@PathVariable Long userId, @PathVariable String isbn, @PathVariable String transcriptionContent) throws Exception{
-//        bookService.save(bookService.createBook(isbn) , 2L);
-//        Optional<Book> book = bookService.findBook(isbn);
-//        transcriptionService.save(transcriptionService.createDto(userId, book.get().getId() ,  transcriptionContent));
-//        return true;
-//    }
-
     @PostMapping("register")
     public Message register(Long userId, String isbn , String transcriptionContent) throws Exception{
         if(!transcriptionContent.isBlank()) {
@@ -66,11 +58,6 @@ public class TranscriptionController {
         }else{
             return new Message(false ,"다시 입력해주세요.");
         }
-    }
-
-    @GetMapping("delete/{userId}/{transcriptionId}")
-    public MessageWithList getDelete(@PathVariable Long userId , @PathVariable Long transcriptionId){
-        return transcriptionService.transcriptionDelete(userId, transcriptionId);
     }
 
     @DeleteMapping("delete")
