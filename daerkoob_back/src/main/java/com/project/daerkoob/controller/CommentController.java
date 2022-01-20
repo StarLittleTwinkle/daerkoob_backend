@@ -29,7 +29,7 @@ public class CommentController {
             return new Message(false, "다시 입력해주세요.");
     }
 
-    @GetMapping("inquiry/{reviewId}/{userId}/{pg}") //이거 하면 그냥 review에 달린 댓글들이 다 나옴
+    @GetMapping("inquiry/{reviewId}/{userId}") //이거 하면 그냥 review에 달린 댓글들이 다 나옴
     public MessageWithList inquiryCommentOfReview(@PathVariable Long reviewId , @PathVariable Long userId){
         //MessageWithList는 그대로 유지하면서 그냥 commentService로 getCommentOfReview를 부르고 getCommentOfReview가 ReviewService의 getCommentOfReview의 List<TransferComment> 를 받아오는 형식으로 작성하였음
         /*

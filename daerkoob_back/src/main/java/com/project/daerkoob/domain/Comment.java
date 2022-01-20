@@ -19,8 +19,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private Long id;
-//    @Column(name = "nested_comment")
-//    private Long nestedComment;
     @ManyToOne
     @JoinColumn(name = "nested_comment")
     private Comment comment; //comment가 자신을 참조한다
