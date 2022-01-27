@@ -2,7 +2,6 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.service.FriendService;
-import com.project.daerkoob.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
@@ -11,11 +10,9 @@ import org.springframework.web.bind.annotation.*;
 public class FriendController {
 
     private FriendService friendService;
-    private UserService userService;
 
-    public FriendController(FriendService friendService , UserService userService){
+    public FriendController(FriendService friendService){
         this.friendService = friendService;
-        this.userService = userService;
     }
 
     @PostMapping("register") //친구리스트랑 boolean 같이넘어오게 ,
