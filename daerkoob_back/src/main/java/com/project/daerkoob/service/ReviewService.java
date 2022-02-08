@@ -1,9 +1,7 @@
 package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.*;
-import com.project.daerkoob.model.MessageWithList;
-import com.project.daerkoob.model.TransferComment;
-import com.project.daerkoob.model.TransferReview;
+import com.project.daerkoob.model.*;
 import com.project.daerkoob.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -45,8 +43,8 @@ public class ReviewService {
         //추후에는 여기서 판단하는 것이 아닌 이전에 review 조회할 때에도 자신이 쓴 review인지 조회할 수 있도록 , thumb처럼 수정해야할 듯
         Review review = reviewRepository.findById(reviewId).get();
         if (review.getUser().getId() != userId) { //같지 않은 경우 삭제 불가
-            List<TransferReview> transferReviews = getBookReview(userId , review.getBook().getId());
-            return new MessageWithList(new Long(transferReviews.size()), new Message(false , "삭제에 실패했습니다."), new ArrayList<>(transferReviews));
+            CountAndList transferReviews = getBookReview(userId , review.getBook().getId());
+            return new MessageWithList(new Long(transferReviews.getTotalCount()), new Message(false , "삭제에 실패했습니다."), new ArrayList<>(transferReviews.getList()));
         } else {
             reviewRepository.deleteById(reviewId);
             User user = userRepository.findById(userId).get();
@@ -57,8 +55,8 @@ public class ReviewService {
             book.setReviewCount(book.getReviewCount() - 1); //reveiw count까지 차감
             bookRepository.save(book); //별점 업데이트 후 저장 까지 완료
             userRepository.save(user);
-            List<TransferReview> transferReviews = getBookReview(userId , review.getBook().getId());
-            return new MessageWithList(new Long(transferReviews.size()), new Message(true, "삭제에 성공했습니다."), new ArrayList<>(transferReviews));
+            CountAndList transferReviews = getBookReview(userId , review.getBook().getId());
+            return new MessageWithList(new Long(transferReviews.getTotalCount()), new Message(true, "삭제에 성공했습니다."), new ArrayList<>(transferReviews.getList()));
         }
     }
 
@@ -67,17 +65,28 @@ public class ReviewService {
     }
 
     public MessageWithList getMessageWithListOfBookReview(Long userId , Long bookId){ // getBookReview가 List<TransferReview> 로 넘겨주면 MessageWithList로 변환해서 넘겨준다.
-        List<TransferReview> transferReviews = getBookReview(userId , bookId);
-        return new MessageWithList(new Long(transferReviews.size()) , new Message(true , "리뷰를 성공적으로 가져왔습니다.") , new ArrayList<>(transferReviews));
+        CountAndList transferReviews = getBookReview(userId , bookId);
+        return new MessageWithList(new Long(transferReviews.getTotalCount()) , new Message(true , "리뷰를 성공적으로 가져왔습니다.") , new ArrayList<>(transferReviews.getList()));
     }
 
-    public List<TransferReview> getBookReview(Long userId, Long bookId) {
-        List<Review> reviews = reviewRepository.findByBook(bookRepository.findById(bookId).get());
+    public CountAndList getBookReview(Long userId, Long bookId) {
+        /*
+        요기서 아얘 pagination으로 해당 정보만 딱 받아서 준다면? 여기서 이제 뭐 사용자가 보고 싶은 pageCount는 나중에 생각하고
+        여기서 totalRecordCount는 그대로 놥두고 정보만 따로 그냥 짤라서 넘겨주면 어떨까
+        그러면 pagination을 여기서 먼저 선언해서 bookId로 넣는다.
+        그 다음에 reviewRepository 에서 default method를 이용해서 List<Review> 를 반환하는 pagination method를 만든다.
+        그 다음에 받아오자 일단 일단 pagenation 하게 호출부터 해보자.
+        살짝 틀어져서 그냥 book 정보를 넘겨야 할 것 같다 transcription , comment 전부 다 해당 객체로 하는 지 살펴보고 맞다면 pagination에다가 객체를 넣을 수 있도록 추가한다 , id가 아니라
+        여기서 이제 CountAndList로 넘기고 totalCount 정보랑 같이 넘기면 총 전체 리뷰수는 유지하면서 pagination된 정보만 줄 수 있다.
+         */
+        Pagination pagination = new Pagination();
+        pagination.setId(bookRepository.findById(bookId).get());
+        List<Review> reviews = reviewRepository.findByBook(pagination);
         List<TransferReview> resultList = new ArrayList<>();
         for (Review review : reviews) {
             resultList.add(createTransferReview(userId, review));
         }
-        return resultList;
+        return new CountAndList(new Long(pagination.getTotalRecordCount()) , new ArrayList<>(resultList));
     }
 
     public TransferReview createTransferReview(Long userId, Review review) {
@@ -98,26 +107,19 @@ public class ReviewService {
 //        return reviews;
 //    }
 
-    public List<TransferComment> getCommentOfReview(Long reviewId , Long userId) { //review에 대한 댓글을 다 불러오는 메소드
+    public CountAndList getCommentOfReview(Long reviewId , Long userId) { //review에 대한 댓글을 다 불러오는 메소드
         /*
-        -- 추가구현
-        1. 여기서 review에 달려있는 댓글의 개수 , 대댓글까지 포함해서 같이 반환하기
-        2. 안에 포함되어 있는 댓글들도 대댓글을 가지고 있으니까 카테고리를 리뷰에 달린 댓글 총 개수(대댓글까지) , 댓글들은 자신들의 대댓글 개수를 가지고 있는 것
-        3. 문제 발생함 , 이전에 deleteComment로 했었던 것이 문제가 일어남 나머지도 아마 다 똑같이 할텐데 , 그럴려면 나머지도 다 수정해야함..
-        4. 이러면 그냥 여기서는 이전처럼 List<TransferComment> 를 보내고 그거를 받아서 따로 공정해서 반환하는 과정을 거쳐야 할 것 같음
+        일단 CountAndList로 반환을 할 것임 TotalCount와 list로
+        일단 그럴려면 pagination을 넘겨야함 , reviewId를 넣어서 넘기자
          */
         List<TransferComment> resultList = new ArrayList<>();
-        List<Comment> commentList = commentRepository.findByReview(reviewRepository.findById(reviewId).get());
+        Pagination pagination = new Pagination();
+        pagination.setId(reviewRepository.findById(reviewId).get());
+        List<Comment> commentList = commentRepository.findByReview(pagination);
         for (Comment comment : commentList) {
             resultList.add(createTransferComment(comment , userId));
         }
-//        Long totalSize = 0L;
-//        for(TransferComment transferComment : resultList){
-//            totalSize++;
-//            totalSize += transferComment.getNestedCount();
-//        }
-//        CountWithList result = new CountWithList(totalSize , new ArrayList<>(resultList));
-        return resultList;
+        return new CountAndList(new Long(pagination.getTotalRecordCount()) , new ArrayList<>(resultList));
     }
 
     public List<Review> getRecentReview(){

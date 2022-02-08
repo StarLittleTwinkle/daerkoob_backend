@@ -2,7 +2,9 @@ package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.Comment;
 import com.project.daerkoob.domain.Message;
+import com.project.daerkoob.model.CountAndList;
 import com.project.daerkoob.model.MessageWithList;
+import com.project.daerkoob.model.Pagination;
 import com.project.daerkoob.model.TransferComment;
 import com.project.daerkoob.repository.CommentRepository;
 import com.project.daerkoob.repository.ReviewRepository;
@@ -40,13 +42,13 @@ public class CommentService {
             commentRepository.deleteById(commentId);
             message = new Message(true , "삭제에 성공했습니다.");
         }
-        List<TransferComment> transferComments = reviewService.getCommentOfReview(reviewId , userId);
-        Long totalSize = 0L;
-        for(TransferComment transferComment : transferComments){
-            totalSize++;
-            totalSize += transferComment.getNestedCount();
-        }
-        return new MessageWithList(totalSize , message , new ArrayList<>(transferComments));
+        CountAndList transferComments = reviewService.getCommentOfReview(reviewId , userId);
+//        Long totalSize = 0L;
+//        for(TransferComment transferComment : transferComments){
+//            totalSize++;
+//            totalSize += transferComment.getNestedCount();
+//        }
+        return new MessageWithList(transferComments.getTotalCount() , message , new ArrayList<>(transferComments.getList()));
     }
 
     public void save(Comment comment){
@@ -54,13 +56,8 @@ public class CommentService {
     }
 
     public MessageWithList getCommentOfReview(Long reviewId , Long userId){
-        List<TransferComment> resultList = reviewService.getCommentOfReview(reviewId , userId);
-        Long totalSize = 0L;
-        for(TransferComment transferComment : resultList){
-            totalSize++;
-            totalSize += transferComment.getNestedCount();
-        }
-        MessageWithList result = new MessageWithList(totalSize ,new Message(true , "댓글을 성공적으로 불러왔습니다.") ,  new ArrayList<>(resultList));
+        CountAndList resultList = reviewService.getCommentOfReview(reviewId , userId);
+        MessageWithList result = new MessageWithList(resultList.getTotalCount() ,new Message(true , "댓글을 성공적으로 불러왔습니다.") ,  new ArrayList<>(resultList.getList()));
         return result;
     }
 
