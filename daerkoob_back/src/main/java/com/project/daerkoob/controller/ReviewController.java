@@ -43,10 +43,10 @@ public class ReviewController {
         return true;
     }
 
-    @GetMapping("inquiry/{userId}/{isbn}") //해당 책에 대한 리뷰내역 조회
-    public MessageWithList inquiry(@PathVariable Long userId , @PathVariable String isbn) throws Exception{
+    @GetMapping("inquiry/{userId}/{isbn}/{pageNumber}") //해당 책에 대한 리뷰내역 조회
+    public MessageWithList inquiry(@PathVariable Long userId , @PathVariable String isbn , @PathVariable Long pageNumber) throws Exception{
         Optional<Book> book = bookService.findBook(isbn);
-        return reviewService.getMessageWithListOfBookReview(userId, book.get().getId());
+        return reviewService.getMessageWithListOfBookReview(userId, book.get().getId() , pageNumber);
     }
 
 

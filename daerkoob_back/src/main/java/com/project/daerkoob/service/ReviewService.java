@@ -43,7 +43,7 @@ public class ReviewService {
         //추후에는 여기서 판단하는 것이 아닌 이전에 review 조회할 때에도 자신이 쓴 review인지 조회할 수 있도록 , thumb처럼 수정해야할 듯
         Review review = reviewRepository.findById(reviewId).get();
         if (review.getUser().getId() != userId) { //같지 않은 경우 삭제 불가
-            CountAndList transferReviews = getBookReview(userId , review.getBook().getId());
+            CountAndList transferReviews = getBookReview(userId , review.getBook().getId() , 1L);
             return new MessageWithList(new Long(transferReviews.getTotalCount()), new Message(false , "삭제에 실패했습니다."), new ArrayList<>(transferReviews.getList()));
         } else {
             reviewRepository.deleteById(reviewId);
@@ -55,7 +55,7 @@ public class ReviewService {
             book.setReviewCount(book.getReviewCount() - 1); //reveiw count까지 차감
             bookRepository.save(book); //별점 업데이트 후 저장 까지 완료
             userRepository.save(user);
-            CountAndList transferReviews = getBookReview(userId , review.getBook().getId());
+            CountAndList transferReviews = getBookReview(userId , review.getBook().getId() , 1L);
             return new MessageWithList(new Long(transferReviews.getTotalCount()), new Message(true, "삭제에 성공했습니다."), new ArrayList<>(transferReviews.getList()));
         }
     }
@@ -64,12 +64,12 @@ public class ReviewService {
         return new ArrayList<Review>();
     }
 
-    public MessageWithList getMessageWithListOfBookReview(Long userId , Long bookId){ // getBookReview가 List<TransferReview> 로 넘겨주면 MessageWithList로 변환해서 넘겨준다.
-        CountAndList transferReviews = getBookReview(userId , bookId);
+    public MessageWithList getMessageWithListOfBookReview(Long userId , Long bookId , Long pageNumber){ // getBookReview가 List<TransferReview> 로 넘겨주면 MessageWithList로 변환해서 넘겨준다.
+        CountAndList transferReviews = getBookReview(userId , bookId , pageNumber);
         return new MessageWithList(new Long(transferReviews.getTotalCount()) , new Message(true , "리뷰를 성공적으로 가져왔습니다.") , new ArrayList<>(transferReviews.getList()));
     }
 
-    public CountAndList getBookReview(Long userId, Long bookId) {
+    public CountAndList getBookReview(Long userId, Long bookId , Long pageNumber) {
         /*
         요기서 아얘 pagination으로 해당 정보만 딱 받아서 준다면? 여기서 이제 뭐 사용자가 보고 싶은 pageCount는 나중에 생각하고
         여기서 totalRecordCount는 그대로 놥두고 정보만 따로 그냥 짤라서 넘겨주면 어떨까
@@ -81,6 +81,7 @@ public class ReviewService {
          */
         Pagination pagination = new Pagination();
         pagination.setId(bookRepository.findById(bookId).get());
+        pagination.setPageNumber(Math.toIntExact(pageNumber));
         List<Review> reviews = reviewRepository.findByBook(pagination);
         List<TransferReview> resultList = new ArrayList<>();
         for (Review review : reviews) {

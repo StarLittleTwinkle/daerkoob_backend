@@ -13,7 +13,7 @@ import java.util.List;
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
     Page<Notice> findAllByOrderByRegisterDateDesc(Pageable pageable);
     default List<Notice> findAllByOrderByRegisterDateDesc(Pagination pagination){
-        Page<Notice> page = findAllByOrderByRegisterDateDesc(PageRequest.of(pagination.getPageNumber() - 1 , pagination.getPageSize() , Sort.Direction.ASC , "id"));
+        Page<Notice> page = findAllByOrderByRegisterDateDesc(PageRequest.of(pagination.getPageNumber() - 1 , pagination.getPageSize() , Sort.Direction.DESC , "registerDate"));
         pagination.setTotalRecordCount((int)page.getTotalElements());
         return page.getContent();
 
