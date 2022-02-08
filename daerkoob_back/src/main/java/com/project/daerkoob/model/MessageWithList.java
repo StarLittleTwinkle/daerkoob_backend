@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class MessageWithList {
+public class MessageWithList{
     //이런식으로 그냥 Message와 , CountWithList를 통합시킨다.
     private Long totalSize;
     private Message message;
