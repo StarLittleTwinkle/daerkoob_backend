@@ -47,7 +47,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (1,'김이나의 작사법 (우리의 감정을 사로잡는 일상의 언어들)','김이나','문학동네','20150318','8954635601 9788954635608','https://bookthumb-phinf.pstatic.net/cover/088/824/08882431.jpg?type=m1&udate=20210119','아이유 윤상 허지웅의 감정을 두드린 이 책!이선희 〈그중에 그대를 만나〉, 조용필 〈걷고 싶다〉, 아이유 〈좋은 날〉, 브라운아이드걸스 〈아브라카다브라〉, 성시경 〈10월에 눈이 내리면〉, 엑소 〈LUCKY〉,가인 〈APPLE〉 〈PARADISE LOST〉 등 300여 곡\n\n대한민국 작사가 저작권료 수입 1위!\n대중을... ',4,4,4.5,'2'),(2,'동물농장','조지 오웰','열린책들','20091130','8932909709 9788932909707','https://bookthumb-phinf.pstatic.net/cover/061/870/06187070.jpg?type=m1&udate=20200418','인간은 평등하다, 그러나 어떤 인간은 특별히 더 평등하다!&#x0D;&#x0D;당시 영국의 동맹이던 스탈린을 가차 없이 공격하는 내용 때문에 출판사로부터 출간을 거부당하여 1943년에 써놓고도 출간하지 못할 뻔 하였던 조지 오웰의 소설이다. 동물들이 존스 씨를 몰아내고 스스로 농장을 경영해 나간다는... ',2,9,4.33,'3'),(3,'호꼼 골아봅서 (제주 애월읍 수산리 제주 어르신 그림책)','제주 애월읍 수산리 어르신들 (양순자|강신자|박송자|김영순|송옥자|양인옥)','책여우','20211109','1187860530 9791187860532','https://bookthumb-phinf.pstatic.net/cover/212/981/21298162.jpg?type=m1&udate=20211121','우리들의 젊은 날처럼 어르신들도 젊은 날이 있었다는 사실을 잊고 산다. 긴 시간이지만 찰나처럼 느껴지는 어르신들의 지난날. 그저 허허허, 웃으시는 목소리와 모습에서 저절로 고개가 숙여진다. &lt;호꼼 골아봅서(조금 이야기해 보세요)&gt;는 제주시 애월 수산리 6명 어르신들의 이야기를 모아 한 권에... ',1,4,3.5,'2'),(4,'가면산장 살인사건','히가시노 게이고','재인','20140926','899098257X 9788990982575','https://bookthumb-phinf.pstatic.net/cover/082/730/08273055.jpg?type=m1&udate=20210611','강도와 인질 간의 숨 막히는 줄다리기!히가시노 게이고의 소설 『가면산장 살인사건』. 저자와 독자가 아슬아슬한 두뇌 싸움을 벌이게 되는 이 작품은 외딴 산장에 모인 여덟 명의 남녀와 한밤중에 침입한 은행 강도범의 인질극을 그리고 있다. 잘 짜인 무대에서 벌어지는 연극과도 같은 이 소설은 그 누구도... ',0,0,0,'0'),(5,'베스트! 원조 괴짜가족 4 (코테츠의 여름방학편)','KENJI HAMAOKA','서울미디어코믹스(서울문화사)','20190925','1165015757 9791165015756','https://bookthumb-phinf.pstatic.net/cover/156/584/15658438.jpg?type=m1&udate=20191101','일본 제일의 활기찬 초등학생 오오사와기 코테츠가 더욱 빛을 발하는\n여름방학 에피소드 15편!!\n괴짜가족 시리즈에서 특별히 선별한 폭소 특선 제4탄~!\n\n첫 번째 방학★수영 타임·\n두 번째 방학★끝나가는 여름방학\n세 번째 방학★코테츠의 여름방학 전야제\n네 번째 방학★혼자 노는 아이\n다섯 번째 방학... ',0,1,5,'1'),(6,'Chrome','Blade|Cg','Lulu.com','20180525','1387590332 9781387590339','https://bookthumb-phinf.pstatic.net/cover/137/072/13707243.jpg?type=m1&udate=20210119','In this sixth chilling novel in the Pseudoverse, Detective Lori Lynn Gutierrez, and former journalist Amanda Sese, both poisoned in Onyx and &quot;recruited&quot; by the NIB, have their work cut out for them as they are pulled into the biggest gun battle the nation has ever witnessed.... ',1,2,3,'1'),(7,'고등 지구과학2(2021)(CHRONOX Astra)','김재연','시대인재북스','20200225','1190260573 9791190260572','https://bookthumb-phinf.pstatic.net/cover/162/745/16274578.jpg?type=m1&udate=20210831','실질적으로 필요한 것만을, 지구과학Ⅱ 선택자에게..\n\n이 책은 지구과학2의 \'우리은하와 우주의 구조\'를 제외한 \'천문학 파트만을 다루고 있습니다. 목차와 내용을 확인하고 구매하세요.\'\n\n좌표계와 행성의 시운동은 예전부터 많은 학생들을 괴롭혀왔습니다.\n겉으로 보기엔 단원 하나지만 실제로 수험생이... ',2,0,0,'0'),(8,'동물농장 (최신 버전으로 새롭게 편집한 명작의 백미, 책 읽어드립니다)','조지 오웰','스타북스','20200408','1157955207 9791157955206','https://bookthumb-phinf.pstatic.net/cover/163/240/16324003.jpg?type=m1&udate=20201106','타임지와 뉴스위크, BBC가 주목한 가장 중요한 작가!\n모든 동물은 평등하다? 그러나, 어떤 동물은 더더욱 평등하다!!\n인간이라면 꼭 한 번은 읽어야 할 자유를 위한 예리한 풍자소설\n《동물농장》은 오웰의 작품 중 유일하게 유머가 가득한 작품으로 봐도 좋은데, 간결한 문체와 예리한 풍자가 돋보이는 소설로 사회... ',1,0,0,'0'),(9,'Hello! 처음 만나는 전기기기','최은혁|박숭규','한빛아카데미','20161101','1156642396 9791156642398','https://bookthumb-phinf.pstatic.net/cover/112/395/11239598.jpg?type=m1&udate=20190724','이 책은 전기기기를 처음 배우는 공학계열 학생들을 위한 입문서로, 전기기기의 기본 이론부터 실무 관련 이론까지 꼭 필요한 내용을 엄선하여 담았다. 전기기기에서 배우는 직류기, 변압기, 동기기, 유도기의 기본 이론(구조, 특성, 파라미터, 시험평가)을 통해 각 기기의 원리와 특징을 이해할 수 있게 했다. 또한... ',1,0,0,'0'),(10,'Spiderman (Down These Mean Streets)','DECANDIDO|Keith R. A.','PocketBooks','20050830','1416509682 9781416509684','https://bookthumb-phinf.pstatic.net/cover/017/813/01781399.jpg?type=m1&udate=20100218','A brand-new designer drug arrives in New York City with the force of a hurricane: Triple X, a potentially lethal combination of ecstasy and gamma radiation that is literally turning users from the shadowy, dank alleys to the glittering, raucous party circuit into living... ',1,0,0,'0'),(11,'Die Umsetzung Von Kinderschutz Im Allgemeinen Sozialen Dienst (Asd). Zwischen Hilfe Und Kontrolle','Arlt|Claudia','GrinPublishing','20151130','366809327X 9783668093270','https://bookthumb-phinf.pstatic.net/cover/166/466/16646661.jpg?type=m1&udate=20210118','Studienarbeit aus dem Jahr 2015 im Fachbereich SozialpA¤dagogik / Sozialarbeit, Note: 2,0, Katholische Hochschule fA¼r Sozialwesen Berlin, Sprache: Deutsch, Abstract: Es ist Aufgabe des Jugendamtes sein WA¤chteramt wahrzunehmen, wenn das Kindeswohl gefA¤hrdet ist und die... ',1,0,0,'0');
+INSERT INTO `book` VALUES (1,'김이나의 작사법 (우리의 감정을 사로잡는 일상의 언어들)','김이나','문학동네','20150318','8954635601 9788954635608','https://bookthumb-phinf.pstatic.net/cover/088/824/08882431.jpg?type=m1&udate=20210119','아이유 윤상 허지웅의 감정을 두드린 이 책!이선희 〈그중에 그대를 만나〉, 조용필 〈걷고 싶다〉, 아이유 〈좋은 날〉, 브라운아이드걸스 〈아브라카다브라〉, 성시경 〈10월에 눈이 내리면〉, 엑소 〈LUCKY〉,가인 〈APPLE〉 〈PARADISE LOST〉 등 300여 곡\n\n대한민국 작사가 저작권료 수입 1위!\n대중을... ',9,6,4.67,'3'),(2,'동물농장','조지 오웰','열린책들','20091130','8932909709 9788932909707','https://bookthumb-phinf.pstatic.net/cover/061/870/06187070.jpg?type=m1&udate=20200418','인간은 평등하다, 그러나 어떤 인간은 특별히 더 평등하다!&#x0D;&#x0D;당시 영국의 동맹이던 스탈린을 가차 없이 공격하는 내용 때문에 출판사로부터 출간을 거부당하여 1943년에 써놓고도 출간하지 못할 뻔 하였던 조지 오웰의 소설이다. 동물들이 존스 씨를 몰아내고 스스로 농장을 경영해 나간다는... ',2,9,4.33,'3'),(3,'호꼼 골아봅서 (제주 애월읍 수산리 제주 어르신 그림책)','제주 애월읍 수산리 어르신들 (양순자|강신자|박송자|김영순|송옥자|양인옥)','책여우','20211109','1187860530 9791187860532','https://bookthumb-phinf.pstatic.net/cover/212/981/21298162.jpg?type=m1&udate=20211121','우리들의 젊은 날처럼 어르신들도 젊은 날이 있었다는 사실을 잊고 산다. 긴 시간이지만 찰나처럼 느껴지는 어르신들의 지난날. 그저 허허허, 웃으시는 목소리와 모습에서 저절로 고개가 숙여진다. &lt;호꼼 골아봅서(조금 이야기해 보세요)&gt;는 제주시 애월 수산리 6명 어르신들의 이야기를 모아 한 권에... ',2,6,4,'3'),(4,'가면산장 살인사건','히가시노 게이고','재인','20140926','899098257X 9788990982575','https://bookthumb-phinf.pstatic.net/cover/082/730/08273055.jpg?type=m1&udate=20210611','강도와 인질 간의 숨 막히는 줄다리기!히가시노 게이고의 소설 『가면산장 살인사건』. 저자와 독자가 아슬아슬한 두뇌 싸움을 벌이게 되는 이 작품은 외딴 산장에 모인 여덟 명의 남녀와 한밤중에 침입한 은행 강도범의 인질극을 그리고 있다. 잘 짜인 무대에서 벌어지는 연극과도 같은 이 소설은 그 누구도... ',0,2,4,'1'),(5,'베스트! 원조 괴짜가족 4 (코테츠의 여름방학편)','KENJI HAMAOKA','서울미디어코믹스(서울문화사)','20190925','1165015757 9791165015756','https://bookthumb-phinf.pstatic.net/cover/156/584/15658438.jpg?type=m1&udate=20191101','일본 제일의 활기찬 초등학생 오오사와기 코테츠가 더욱 빛을 발하는\n여름방학 에피소드 15편!!\n괴짜가족 시리즈에서 특별히 선별한 폭소 특선 제4탄~!\n\n첫 번째 방학★수영 타임·\n두 번째 방학★끝나가는 여름방학\n세 번째 방학★코테츠의 여름방학 전야제\n네 번째 방학★혼자 노는 아이\n다섯 번째 방학... ',0,1,5,'1'),(6,'Chrome','Blade|Cg','Lulu.com','20180525','1387590332 9781387590339','https://bookthumb-phinf.pstatic.net/cover/137/072/13707243.jpg?type=m1&udate=20210119','In this sixth chilling novel in the Pseudoverse, Detective Lori Lynn Gutierrez, and former journalist Amanda Sese, both poisoned in Onyx and &quot;recruited&quot; by the NIB, have their work cut out for them as they are pulled into the biggest gun battle the nation has ever witnessed.... ',1,2,3,'1'),(7,'고등 지구과학2(2021)(CHRONOX Astra)','김재연','시대인재북스','20200225','1190260573 9791190260572','https://bookthumb-phinf.pstatic.net/cover/162/745/16274578.jpg?type=m1&udate=20210831','실질적으로 필요한 것만을, 지구과학Ⅱ 선택자에게..\n\n이 책은 지구과학2의 \'우리은하와 우주의 구조\'를 제외한 \'천문학 파트만을 다루고 있습니다. 목차와 내용을 확인하고 구매하세요.\'\n\n좌표계와 행성의 시운동은 예전부터 많은 학생들을 괴롭혀왔습니다.\n겉으로 보기엔 단원 하나지만 실제로 수험생이... ',3,0,0,'0'),(8,'동물농장 (최신 버전으로 새롭게 편집한 명작의 백미, 책 읽어드립니다)','조지 오웰','스타북스','20200408','1157955207 9791157955206','https://bookthumb-phinf.pstatic.net/cover/163/240/16324003.jpg?type=m1&udate=20201106','타임지와 뉴스위크, BBC가 주목한 가장 중요한 작가!\n모든 동물은 평등하다? 그러나, 어떤 동물은 더더욱 평등하다!!\n인간이라면 꼭 한 번은 읽어야 할 자유를 위한 예리한 풍자소설\n《동물농장》은 오웰의 작품 중 유일하게 유머가 가득한 작품으로 봐도 좋은데, 간결한 문체와 예리한 풍자가 돋보이는 소설로 사회... ',2,0,0,'0'),(9,'Hello! 처음 만나는 전기기기','최은혁|박숭규','한빛아카데미','20161101','1156642396 9791156642398','https://bookthumb-phinf.pstatic.net/cover/112/395/11239598.jpg?type=m1&udate=20190724','이 책은 전기기기를 처음 배우는 공학계열 학생들을 위한 입문서로, 전기기기의 기본 이론부터 실무 관련 이론까지 꼭 필요한 내용을 엄선하여 담았다. 전기기기에서 배우는 직류기, 변압기, 동기기, 유도기의 기본 이론(구조, 특성, 파라미터, 시험평가)을 통해 각 기기의 원리와 특징을 이해할 수 있게 했다. 또한... ',1,0,0,'0'),(10,'Spiderman (Down These Mean Streets)','DECANDIDO|Keith R. A.','PocketBooks','20050830','1416509682 9781416509684','https://bookthumb-phinf.pstatic.net/cover/017/813/01781399.jpg?type=m1&udate=20100218','A brand-new designer drug arrives in New York City with the force of a hurricane: Triple X, a potentially lethal combination of ecstasy and gamma radiation that is literally turning users from the shadowy, dank alleys to the glittering, raucous party circuit into living... ',1,0,0,'0'),(11,'Die Umsetzung Von Kinderschutz Im Allgemeinen Sozialen Dienst (Asd). Zwischen Hilfe Und Kontrolle','Arlt|Claudia','GrinPublishing','20151130','366809327X 9783668093270','https://bookthumb-phinf.pstatic.net/cover/166/466/16646661.jpg?type=m1&udate=20210118','Studienarbeit aus dem Jahr 2015 im Fachbereich SozialpA¤dagogik / Sozialarbeit, Note: 2,0, Katholische Hochschule fA¼r Sozialwesen Berlin, Sprache: Deutsch, Abstract: Es ist Aufgabe des Jugendamtes sein WA¤chteramt wahrzunehmen, wenn das Kindeswohl gefA¤hrdet ist und die... ',1,0,0,'0');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,7 @@ CREATE TABLE `comment` (
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`) ON DELETE CASCADE,
   CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE,
   CONSTRAINT `comment_ibfk_3` FOREIGN KEY (`nested_comment`) REFERENCES `comment` (`comment_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +83,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,5,NULL,'헬로헬로',13,0,'2022-01-04 16:59:07'),(2,NULL,1,'헬로헬로',13,0,'2022-01-04 16:59:30');
+INSERT INTO `comment` VALUES (1,5,NULL,'헬로헬로',13,1,'2022-01-04 16:59:07'),(2,NULL,1,'헬로헬로',13,0,'2022-01-04 16:59:30'),(3,1,NULL,'11번유저가 다는 댓글',11,0,'2022-01-10 13:16:47'),(4,NULL,3,'11번유저가 다는 대댓글',11,0,'2022-01-10 13:20:09'),(5,1,NULL,'11번유저가 다는 두번째 댓글',11,0,'2022-01-10 13:21:50'),(6,1,NULL,'11번유저가 다는 세번째 댓글',11,0,'2022-01-10 13:21:54'),(7,NULL,5,'11번유저가 다는 대댓글',11,0,'2022-01-10 13:22:19'),(8,NULL,5,'11번유저가 다는 두번째 대댓글',11,0,'2022-01-10 13:22:24'),(9,NULL,6,'11번유저가 다는 대댓글',11,0,'2022-01-10 13:22:31'),(10,NULL,6,'11번유저가 다는 두번째 대댓글',11,0,'2022-01-10 13:22:34'),(11,1,NULL,'그냥댓글',11,0,'2022-01-11 15:50:20'),(12,NULL,11,'대댓글',11,0,'2022-01-11 15:50:24'),(13,NULL,3,'',11,0,'2022-01-11 15:50:49'),(14,NULL,5,'',11,0,'2022-01-11 15:50:54'),(15,NULL,5,'',11,0,'2022-01-11 15:50:54'),(16,1,NULL,'11번유저가 다는 댓글',11,0,'2022-01-13 15:19:32'),(17,1,NULL,'n',11,0,'2022-01-13 15:20:33'),(18,1,NULL,'\' \'',11,0,'2022-01-13 15:21:03'),(19,1,NULL,'\" \"',11,0,'2022-01-13 15:21:07'),(20,1,NULL,'11번유저가 다는 댓글',11,0,'2022-01-13 15:21:59'),(21,7,NULL,'앙 기모띠',11,0,'2022-01-25 15:44:08'),(22,NULL,21,'맞네맞네',11,0,'2022-01-25 15:44:25'),(23,NULL,21,'앙앙앙 난니가 저암ㄹ 실헝',11,0,'2022-01-25 15:44:41'),(24,NULL,21,'유튜브',11,0,'2022-01-25 15:45:12'),(25,NULL,21,'기기기기',11,0,'2022-01-25 15:45:39'),(26,NULL,21,'아주 멋져요 1.25 화',11,0,'2022-01-25 15:46:23'),(27,NULL,21,'지영님 너무 멋져요',11,0,'2022-01-25 15:46:34'),(28,7,NULL,'우와아아아',11,0,'2022-01-25 15:46:42'),(29,7,NULL,'아주 멋지십니다',11,0,'2022-01-25 15:47:01'),(30,12,NULL,'아주 기분 좋습니다',11,0,'2022-01-25 15:47:36');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +104,7 @@ CREATE TABLE `friend` (
   KEY `user_index` (`user_index`),
   CONSTRAINT `friend_ibfk_1` FOREIGN KEY (`user_index`) REFERENCES `user` (`user_index`) ON DELETE CASCADE,
   CONSTRAINT `friend_ibfk_2` FOREIGN KEY (`user_index`) REFERENCES `user` (`user_index`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `notice` (
   `content` longtext NOT NULL,
   `register_date` datetime NOT NULL,
   PRIMARY KEY (`notice_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,6 +138,7 @@ CREATE TABLE `notice` (
 
 LOCK TABLES `notice` WRITE;
 /*!40000 ALTER TABLE `notice` DISABLE KEYS */;
+INSERT INTO `notice` VALUES (1,'헬로헬로','2022-02-08 00:00:00');
 /*!40000 ALTER TABLE `notice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +163,7 @@ CREATE TABLE `review` (
   KEY `book_id` (`book_id`),
   CONSTRAINT `review_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE,
   CONSTRAINT `review_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +172,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (13,1,'이것은!',1,1,5,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베',0,2,5,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베 연타',0,3,4,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베 연타',0,4,4,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베 연타',0,5,4,'2021-12-02 00:00:00'),(13,5,'저기 좀 비켜',0,6,5,'2021-12-02 00:00:00'),(13,1,'헬로헬로',0,7,4,'2021-12-03 00:00:00'),(11,3,'리ㅂ리뷰',0,8,4,'2021-12-10 00:00:00'),(17,3,'호꼼 골아봅서',0,9,3,'2021-12-10 22:56:13'),(17,6,'약간 무서워 보이네요',0,10,3,'2021-12-10 22:56:25');
+INSERT INTO `review` VALUES (13,1,'이것은!',2,1,5,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베',0,2,5,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베 연타',0,3,4,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베 연타',0,4,4,'2021-12-02 00:00:00'),(13,2,'동물 동물 베베 연타',0,5,4,'2021-12-02 00:00:00'),(13,5,'저기 좀 비켜',0,6,5,'2021-12-02 00:00:00'),(13,1,'헬로헬로',1,7,4,'2021-12-03 00:00:00'),(11,3,'리ㅂ리뷰',1,8,4,'2021-12-10 00:00:00'),(17,3,'호꼼 골아봅서',0,9,3,'2021-12-10 22:56:13'),(17,6,'약간 무서워 보이네요',0,10,3,'2021-12-10 22:56:25'),(11,3,'킹녕하세요',1,11,5,'2022-01-11 15:49:53'),(11,1,'앙앙앙 난 니가 정말 싫어',1,12,5,'2022-01-14 00:04:34'),(11,4,'he llo hello',1,13,4,'2022-01-25 15:37:21');
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +199,7 @@ CREATE TABLE `thumb` (
   CONSTRAINT `thumb_ibfk_2` FOREIGN KEY (`transcription_id`) REFERENCES `transcription` (`transcription_id`) ON DELETE CASCADE,
   CONSTRAINT `thumb_ibfk_3` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`) ON DELETE CASCADE,
   CONSTRAINT `thumb_ibfk_4` FOREIGN KEY (`given_user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +208,7 @@ CREATE TABLE `thumb` (
 
 LOCK TABLES `thumb` WRITE;
 /*!40000 ALTER TABLE `thumb` DISABLE KEYS */;
-INSERT INTO `thumb` VALUES (4,1,NULL,13,NULL);
+INSERT INTO `thumb` VALUES (4,1,NULL,13,NULL),(11,NULL,1,11,NULL),(12,NULL,2,11,NULL),(13,NULL,7,11,NULL),(14,NULL,12,11,NULL),(15,NULL,17,11,NULL),(16,NULL,20,11,NULL),(19,NULL,NULL,11,1),(20,11,NULL,11,NULL),(21,NULL,5,11,NULL),(22,8,NULL,11,NULL),(23,NULL,8,11,NULL),(24,NULL,25,11,NULL),(26,12,NULL,11,NULL),(27,7,NULL,11,NULL),(28,1,NULL,11,NULL),(29,NULL,9,11,NULL),(30,13,NULL,11,NULL),(31,NULL,16,11,NULL);
 /*!40000 ALTER TABLE `thumb` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,7 +232,7 @@ CREATE TABLE `transcription` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `transcription_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE,
   CONSTRAINT `transcription_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_index`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,7 +241,7 @@ CREATE TABLE `transcription` (
 
 LOCK TABLES `transcription` WRITE;
 /*!40000 ALTER TABLE `transcription` DISABLE KEYS */;
-INSERT INTO `transcription` VALUES (1,13,1,'김이나의 작사법을 들어왔는데 살짝 오류가 있네요',0,'2021-12-02 00:00:00'),(1,13,2,'hello',0,'2021-12-02 00:00:00'),(2,13,3,'동물 동물 베베',0,'2021-12-02 00:00:00'),(3,13,4,'그냥 정상적으로 한번만 눌렀을 때',0,'2021-12-02 00:00:00'),(3,13,5,'이거는 한번 더 작성',0,'2021-12-02 00:00:00'),(4,13,6,'가면산장의 살인사건',6,'2021-12-02 00:00:00'),(1,11,7,'김이나',0,'2021-12-10 00:00:00'),(2,11,8,'ang ang ang ...',0,'2021-12-10 00:00:00'),(6,11,9,'앙앙앙 기모찌\n',0,'2021-12-10 00:00:00'),(7,17,10,'고등 지구 과학?',0,'2021-12-10 00:00:00'),(7,17,11,'어쩔어쩔',0,'2021-12-10 22:53:11'),(1,17,12,'김이나이나 지영님이 좋아하시는 이나이나\n',0,'2021-12-10 22:55:33'),(8,17,13,'꿀꿀',0,'2021-12-10 22:55:58'),(9,17,14,'처음 만나는 전자기기',0,'2021-12-10 23:04:42'),(10,17,15,'oh man i love it',0,'2021-12-10 23:05:52'),(11,11,16,'merry christmas\n',0,'2021-12-27 15:33:27'),(1,11,17,'김재연',0,'2022-01-04 16:02:52');
+INSERT INTO `transcription` VALUES (1,13,1,'김이나의 작사법을 들어왔는데 살짝 오류가 있네요',1,'2021-12-02 00:00:00'),(1,13,2,'hello',1,'2021-12-02 00:00:00'),(2,13,3,'동물 동물 베베',0,'2021-12-02 00:00:00'),(3,13,4,'그냥 정상적으로 한번만 눌렀을 때',0,'2021-12-02 00:00:00'),(3,13,5,'이거는 한번 더 작성',1,'2021-12-02 00:00:00'),(4,13,6,'가면산장의 살인사건',6,'2021-12-02 00:00:00'),(1,11,7,'김이나',1,'2021-12-10 00:00:00'),(2,11,8,'ang ang ang ...',1,'2021-12-10 00:00:00'),(6,11,9,'앙앙앙 기모찌\n',1,'2021-12-10 00:00:00'),(7,17,10,'고등 지구 과학?',0,'2021-12-10 00:00:00'),(7,17,11,'어쩔어쩔',0,'2021-12-10 22:53:11'),(1,17,12,'김이나이나 지영님이 좋아하시는 이나이나\n',1,'2021-12-10 22:55:33'),(8,17,13,'꿀꿀',0,'2021-12-10 22:55:58'),(9,17,14,'처음 만나는 전자기기',0,'2021-12-10 23:04:42'),(10,17,15,'oh man i love it',0,'2021-12-10 23:05:52'),(11,11,16,'merry christmas\n',1,'2021-12-27 15:33:27'),(1,11,17,'김재연',1,'2022-01-04 16:02:52'),(8,11,18,'필사필사맨\n',0,'2022-01-06 11:29:31'),(3,11,19,'호꼼 꼴아봅서봅서\n',0,'2022-01-06 11:29:48'),(1,11,20,'헬로우헬롱\n',1,'2022-01-10 00:07:53'),(1,11,21,'앙 앙 난 니가 정말 실헝\n',0,'2022-01-10 00:41:40'),(1,13,22,'아앙앙 난니가 정말 실헝\n',0,'2022-01-10 00:44:49'),(1,13,23,'도라에몽이\n',0,'2022-01-10 00:45:00'),(1,11,24,'앙 기모띠',0,'2022-01-13 15:49:41'),(7,11,25,'김재연',1,'2022-01-23 00:31:59');
 /*!40000 ALTER TABLE `transcription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +274,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (11,'kpeel5839','김재연','수희사랑','sksk5839!','2021-11-15 15:00:00',1,1,5),(12,'suheelove','황수희','재연사랑','sksk5839!','2021-11-15 15:00:00',0,0,0),(13,'hello','김김김','숲세권주민','1234','2021-11-16 15:00:00',0,6,6),(14,'suhee831','황수희','봉봉알러뷰','wodustkfkd486','1998-08-28 15:00:00',0,0,0),(15,'12345','김재연','ㅇㅇㅇ','sksk5839','2021-11-20 15:00:00',0,0,0),(16,'jiyeong','박지영','졍','wldud','2021-12-09 15:00:00',0,0,0),(17,'1234','김재연','수히히히','1234','1998-06-05 00:00:00',0,2,6);
+INSERT INTO `user` VALUES (11,'kpeel5839','김재연','수희사랑','sksk5839!','2021-11-15 15:00:00',1,4,11),(12,'suheelove','황수희','재연사랑','sksk5839!','2021-11-15 15:00:00',0,0,0),(13,'hello','김김김','숲세권주민','1234','2021-11-16 15:00:00',0,6,8),(14,'suhee831','황수희','봉봉알러뷰','wodustkfkd486','1998-08-28 15:00:00',0,0,0),(15,'12345','김재연','ㅇㅇㅇ','sksk5839','2021-11-20 15:00:00',0,0,0),(16,'jiyeong','박지영','졍','wldud','2021-12-09 15:00:00',0,0,0),(17,'1234','김재연','수히히히','1234','1998-06-05 00:00:00',0,2,6);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -286,4 +287,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-05 18:08:30
+-- Dump completed on 2022-02-08 16:40:34
