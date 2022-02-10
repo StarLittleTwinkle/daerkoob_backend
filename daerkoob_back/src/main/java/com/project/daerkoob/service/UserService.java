@@ -6,6 +6,7 @@ import com.project.daerkoob.model.MessageWithGrass;
 import com.project.daerkoob.model.TransferUser;
 import com.project.daerkoob.repository.TranscriptionRepository;
 import com.project.daerkoob.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,15 +16,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    private UserRepository userRepository;
-    private TranscriptionRepository transcriptionRepository;
-
-    public UserService(UserRepository userRepository , TranscriptionRepository transcriptionRepository){
-        this.userRepository = userRepository; //UserService가 userRepository 를 사용 가능하도록 dependency injection 을 추가
-        this.transcriptionRepository = transcriptionRepository;
-    }
+    private final UserRepository userRepository;
+    private final TranscriptionRepository transcriptionRepository;
 
     public Optional<User> findByUserId(String userId){
         return userRepository.findByUserId(userId);

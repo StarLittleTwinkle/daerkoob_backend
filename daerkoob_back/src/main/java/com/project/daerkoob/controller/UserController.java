@@ -6,23 +6,19 @@ import com.project.daerkoob.model.*;
 import com.project.daerkoob.service.ReviewService;
 import com.project.daerkoob.service.TranscriptionService;
 import com.project.daerkoob.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("user")
 public class UserController {
 
-    private UserService userService;
-    private TranscriptionService transcriptionService;
-    private ReviewService reviewService;
-
-    public UserController(UserService userService , TranscriptionService transcriptionService , ReviewService reviewService) {
-        this.userService = userService;
-        this.reviewService = reviewService;
-        this.transcriptionService = transcriptionService;
-    }
+    private final UserService userService;
+    private final TranscriptionService transcriptionService;
+    private final ReviewService reviewService;
 
     @PostMapping("signup")
     public Message signUp(User user, String confirmPassword){

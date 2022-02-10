@@ -2,6 +2,7 @@ package com.project.daerkoob.service;
 
 import com.project.daerkoob.domain.Book;
 import com.project.daerkoob.repository.BookRepository;
+import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class BookService {
     private final BookRepository bookRepository;
-
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
 
     public void save(Book book , Long judgeNumber) throws Exception{
         if(!bookRepository.existsByIsbn(book.getIsbn())){

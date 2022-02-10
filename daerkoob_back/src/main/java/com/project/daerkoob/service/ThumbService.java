@@ -5,24 +5,19 @@ import com.project.daerkoob.repository.CommentRepository;
 import com.project.daerkoob.repository.ReviewRepository;
 import com.project.daerkoob.repository.ThumbRepository;
 import com.project.daerkoob.repository.TranscriptionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ThumbService {
 
-    ThumbRepository thumbRepository;
-    ReviewRepository reviewRepository;
-    TranscriptionRepository transcriptionRepository;
-    CommentRepository commentRepository;
-
-    public ThumbService(ThumbRepository thumbRepository , ReviewRepository reviewRepository , TranscriptionRepository transcriptionRepository, CommentRepository commentRepository){
-        this.thumbRepository = thumbRepository;
-        this.reviewRepository = reviewRepository;
-        this.transcriptionRepository = transcriptionRepository;
-        this.commentRepository = commentRepository;
-    }
+    private final ThumbRepository thumbRepository;
+    private final ReviewRepository reviewRepository;
+    private final TranscriptionRepository transcriptionRepository;
+    private final CommentRepository commentRepository;
 
     public Message judgeReview(Long userIndex , Long reviewId){
         Optional<Thumb> tempThumb = thumbRepository.findByReviewIdAndGivenUserId(reviewId , userIndex);

@@ -2,18 +2,16 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.service.FriendService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("friend")
+@RequiredArgsConstructor
 public class FriendController {
 
-    private FriendService friendService;
-
-    public FriendController(FriendService friendService){
-        this.friendService = friendService;
-    }
+    private final FriendService friendService;
 
     @PostMapping("register") //친구리스트랑 boolean 같이넘어오게 ,
     public MessageWithList add(Long userId , Long friendId){ //없는 친구면 그냥 추가하면 됨 , 근데 만약 이미 있으면?

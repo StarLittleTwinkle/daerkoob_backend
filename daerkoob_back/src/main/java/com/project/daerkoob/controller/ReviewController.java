@@ -6,6 +6,7 @@ import com.project.daerkoob.domain.Review;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.ReviewService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,16 +14,12 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("review")
 public class ReviewController {
 
-    private ReviewService reviewService;
-    private BookService bookService;
-
-    public ReviewController(ReviewService reviewService , BookService bookService){
-        this.reviewService = reviewService;
-        this.bookService = bookService;
-    }
+    private final ReviewService reviewService;
+    private final BookService bookService;
 
     @GetMapping("count")
     public Long countReview(){

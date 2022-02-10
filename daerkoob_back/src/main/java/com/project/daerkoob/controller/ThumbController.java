@@ -4,17 +4,16 @@ import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.Review;
 import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.service.ThumbService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("thumb")
 public class ThumbController {
 
-    ThumbService thumbService;
-    public ThumbController(ThumbService thumbService){
-        this.thumbService = thumbService;
-    }
+    private final ThumbService thumbService;
 
     @GetMapping("review/{userIndex}/{reviewId}") //좋아요 리뷰에다가 , guide line ,userIndex == 리뷰에 좋아요 누르는 사람
     public Message getSetReview(@PathVariable Long userIndex, @PathVariable Long reviewId){

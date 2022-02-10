@@ -6,21 +6,18 @@ import com.project.daerkoob.domain.User;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.repository.FriendRepository;
 import com.project.daerkoob.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class FriendService {
 
-    FriendRepository friendRepository;
-    UserRepository userRepository;
-
-    public FriendService(FriendRepository friendRepository , UserRepository userRepository){
-        this.friendRepository = friendRepository;
-        this.userRepository = userRepository;
-    }
+    private final FriendRepository friendRepository;
+    private final UserRepository userRepository;
 
     public List<Friend> ask(Long userId){
         return friendRepository.findByUser(userRepository.findById(userId).get());

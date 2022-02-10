@@ -16,6 +16,8 @@ public class Notice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notice_id")
     private Long id;
+    @Column(name = "title")
+    private String title;
     @Column(name = "register_date")
     private LocalDateTime registerDate;
     @Column(name = "content")

@@ -2,19 +2,17 @@ package com.project.daerkoob.controller;
 
 import com.project.daerkoob.domain.Book;
 import com.project.daerkoob.service.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("book")
 public class BookController {
 
     private final BookService bookService;
-
-    public BookController(BookService bookService){
-        this.bookService = bookService;
-    }
 
     @GetMapping("find/{isbn}") //글쓰기 및 책 내용보기를 클릭하면 넘어오는 정보
     public Book getClick(@PathVariable String isbn) throws Exception{

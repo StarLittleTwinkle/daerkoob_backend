@@ -11,6 +11,7 @@ import com.project.daerkoob.repository.BookRepository;
 import com.project.daerkoob.repository.ThumbRepository;
 import com.project.daerkoob.repository.TranscriptionRepository;
 import com.project.daerkoob.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.project.daerkoob.domain.Book;
 import java.time.LocalDateTime;
@@ -19,25 +20,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TranscriptionService {
 
-    private TranscriptionRepository transcriptionRepository;
-    private UserRepository userRepository;
-    private BookRepository bookRepository;
-    private ThumbRepository thumbRepository;
-
-    public TranscriptionService(TranscriptionRepository transcriptionRepository , UserRepository userRepository , BookRepository bookRepository, ThumbRepository thumbRepository){
-        this.transcriptionRepository = transcriptionRepository;
-        this.userRepository = userRepository;
-        this.bookRepository = bookRepository;
-        this.thumbRepository = thumbRepository;
-    }
+    private final TranscriptionRepository transcriptionRepository;
+    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
+    private final ThumbRepository thumbRepository;
 
     public MessageWithList transcriptionDelete(Long userId, Long transcriptionId){ //userId와 비교하면서 transcription이 지우기가 가능한지 판단하고
         //그리고 user의 transcriptionCount를 떨어트려야함
         Transcription transcription = transcriptionRepository.findById(transcriptionId).get();
         if(transcription.getUser().getId() != userId){
-            CountAndList transferTranscriptions = getBookTranscription(userId , transcription.getBook().getId());
+            CountAndList transferTranscriptions = getBookTranscription(userId , transcription.getBook().getId() , 1L);
             return new MessageWithList(transferTranscriptions.getTotalCount() ,new Message(false, "필사 삭제에 실패했습니다.") , new ArrayList<>(transferTranscriptions.getList()));
         }
         else{
@@ -49,7 +44,7 @@ public class TranscriptionService {
             book.setTranscriptionCount(book.getTranscriptionCount() - 1);
             userRepository.save(user);
             bookRepository.save(book);
-            CountAndList transferTranscriptions = getBookTranscription(userId , transcription.getBook().getId());
+            CountAndList transferTranscriptions = getBookTranscription(userId , transcription.getBook().getId() , 1L);
             return new MessageWithList(transferTranscriptions.getTotalCount() , new Message(true, "필사 삭제에 성공했습니다.") , new ArrayList<>(transferTranscriptions.getList()));
         }
     }
@@ -78,14 +73,15 @@ public class TranscriptionService {
 
     }
 
-    public MessageWithList getBookTranscriptionOfCountWithList(Long userId , String isbn){
+    public MessageWithList getBookTranscriptionOfCountWithList(Long userId , String isbn , Long pageNumber){
         Book book = bookRepository.findByIsbn(isbn).get();
-        CountAndList result = getBookTranscription(userId, book.getId());
+        CountAndList result = getBookTranscription(userId, book.getId() , pageNumber);
         return new MessageWithList(result.getTotalCount() , new Message(true , "필사를 성공적으로 가져왔습니다."), new ArrayList<>(result.getList()));
     }
 
-    public CountAndList getBookTranscription(Long userId , Long bookId) {
+    public CountAndList getBookTranscription(Long userId , Long bookId , Long pageNumber) {
         Pagination pagination = new Pagination();
+        pagination.setPageNumber(pageNumber.intValue());
         pagination.setId(bookRepository.findById(bookId).get());
         List<Transcription> transcriptions = transcriptionRepository.findByBook(pagination);
         List<TransferTranscription> resultList = new ArrayList<>();

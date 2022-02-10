@@ -3,6 +3,7 @@ package com.project.daerkoob.service;
 import com.project.daerkoob.domain.*;
 import com.project.daerkoob.model.*;
 import com.project.daerkoob.repository.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,20 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ReviewService {
-    private ReviewRepository reviewRepository;
-    private UserRepository userRepository;
-    private BookRepository bookRepository;
-    private CommentRepository commentRepository;
-    private ThumbRepository thumbRepository;
-
-    public ReviewService(ReviewRepository reviewRepository, UserRepository userRepository, BookRepository bookRepository, CommentRepository commentRepository, ThumbRepository thumbRepository) {
-        this.reviewRepository = reviewRepository;
-        this.userRepository = userRepository;
-        this.bookRepository = bookRepository;
-        this.commentRepository = commentRepository;
-        this.thumbRepository = thumbRepository;
-    }
+    private final ReviewRepository reviewRepository;
+    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
+    private final CommentRepository commentRepository;
+    private final ThumbRepository thumbRepository;
 
     public Long countAll() {
         return reviewRepository.count();
@@ -81,7 +75,7 @@ public class ReviewService {
          */
         Pagination pagination = new Pagination();
         pagination.setId(bookRepository.findById(bookId).get());
-        pagination.setPageNumber(Math.toIntExact(pageNumber));
+        pagination.setPageNumber(pageNumber.intValue());
         List<Review> reviews = reviewRepository.findByBook(pagination);
         List<TransferReview> resultList = new ArrayList<>();
         for (Review review : reviews) {
@@ -108,13 +102,14 @@ public class ReviewService {
 //        return reviews;
 //    }
 
-    public CountAndList getCommentOfReview(Long reviewId , Long userId) { //review에 대한 댓글을 다 불러오는 메소드
+    public CountAndList getCommentOfReview(Long reviewId , Long userId , Long pageNumber) { //review에 대한 댓글을 다 불러오는 메소드
         /*
         일단 CountAndList로 반환을 할 것임 TotalCount와 list로
         일단 그럴려면 pagination을 넘겨야함 , reviewId를 넣어서 넘기자
          */
         List<TransferComment> resultList = new ArrayList<>();
         Pagination pagination = new Pagination();
+        pagination.setPageNumber(pageNumber.intValue());
         pagination.setId(reviewRepository.findById(reviewId).get());
         List<Comment> commentList = commentRepository.findByReview(pagination);
         for (Comment comment : commentList) {

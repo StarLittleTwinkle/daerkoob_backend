@@ -5,6 +5,7 @@ import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.TranscriptionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,16 +14,12 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("transcription")
 public class TranscriptionController {
 
-    private TranscriptionService transcriptionService;
-    private BookService bookService;
-
-    public TranscriptionController(TranscriptionService transcriptionService , BookService bookService){
-        this.transcriptionService = transcriptionService;
-        this.bookService = bookService;
-    }
+    private final TranscriptionService transcriptionService;
+    private final BookService bookService;
 
     @GetMapping("count")
     public Long countTranscription(){
@@ -43,9 +40,12 @@ public class TranscriptionController {
         return true;
     }
 
-    @GetMapping("inquiry/{userId}/{isbn}") //해당 책에 대한 필사내용 조회
-    public MessageWithList inquiry(@PathVariable Long userId , @PathVariable String isbn){
-        return transcriptionService.getBookTranscriptionOfCountWithList(userId , isbn);
+    @GetMapping("inquiry/{userId}/{isbn}/{pageNumber}") //해당 책에 대한 필사내용 조회
+    public MessageWithList inquiry(@PathVariable Long userId , @PathVariable String isbn , @PathVariable Long pageNumber){
+        /*
+        transcription 은 인피니티 하게 스크롤 되야함 , 그러면 그냥 계속 정보를 받으면서 pagination 된 정보만 넘기면 된다.
+         */
+        return transcriptionService.getBookTranscriptionOfCountWithList(userId , isbn, pageNumber);
     }
 
     @PostMapping("register")
