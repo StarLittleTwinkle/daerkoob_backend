@@ -128,8 +128,9 @@ CREATE TABLE `notice` (
   `notice_id` int unsigned NOT NULL AUTO_INCREMENT,
   `content` longtext NOT NULL,
   `register_date` datetime NOT NULL,
+  `title` longtext NOT NULL,
   PRIMARY KEY (`notice_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +139,7 @@ CREATE TABLE `notice` (
 
 LOCK TABLES `notice` WRITE;
 /*!40000 ALTER TABLE `notice` DISABLE KEYS */;
-INSERT INTO `notice` VALUES (1,'헬로헬로','2022-02-08 00:00:00');
+INSERT INTO `notice` VALUES (1,'헬로헬로','2022-02-08 00:00:00',''),(2,'앙앙앙 난 니가 정말 싫어','2022-02-10 22:04:12','앙기모찌'),(3,'ㅁㅁㅁ','2022-02-10 22:05:35','앙기모찌'),(4,'공지사항을 적는 멋진 모습','2022-02-10 22:05:56','김재연이 작성합니다.');
 /*!40000 ALTER TABLE `notice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,4 +288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-08 16:40:34
+-- Dump completed on 2022-02-10 22:20:16
