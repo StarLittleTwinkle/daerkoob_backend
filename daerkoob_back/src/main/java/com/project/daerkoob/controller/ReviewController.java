@@ -28,16 +28,12 @@ public class ReviewController {
 
     @GetMapping("judge/{isbn}")
     public Boolean getJudge(@PathVariable String isbn) throws Exception{ //false 는 필사 존재 x , true 는 필사 존재 o (필사 보기 가능)
-        Optional<Book> book = bookService.findBook(isbn);
+        Optional<Book> book = bookService.findBook(isbn); // book 을 찾아 봄
         Book resultBook = book.orElse(null);
-        if(resultBook == null){
+        if(resultBook == null){ // 해당 book 이 있는지 검사
             return false;
         }
-        List<Review> reviewList = reviewService.getReview(resultBook.getId());
-        if(reviewList.size() == 0){
-            return false;
-        }
-        return true;
+        return reviewService.getReview(resultBook.getId()); // 있으면 true , 없으면 false;
     }
 
     @GetMapping("inquiry/{userId}/{isbn}/{pageNumber}") //해당 책에 대한 리뷰내역 조회

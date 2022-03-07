@@ -49,6 +49,7 @@ public class BookService {
     }
 
     public Optional<Book> findBook(String isbn){
+        System.out.println(isbn);
         Optional<Book> book = bookRepository.findByIsbn(isbn);
         return book;
     }

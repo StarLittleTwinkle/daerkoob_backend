@@ -54,8 +54,8 @@ public class ReviewService {
         }
     }
 
-    public List<Review> getReview(Long bookId) {
-        return new ArrayList<Review>();
+    public boolean getReview(Long bookId) {
+        return reviewRepository.existsByBookId(bookId);
     }
 
     public MessageWithList getMessageWithListOfBookReview(Long userId , Long bookId , Long pageNumber){ // getBookReview가 List<TransferReview> 로 넘겨주면 MessageWithList로 변환해서 넘겨준다.

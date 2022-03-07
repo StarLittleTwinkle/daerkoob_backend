@@ -25,4 +25,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
         return page.getContent();
     }
     long count();
+    boolean existsByBookId(Long bookId);
 }
