@@ -14,15 +14,14 @@
 <div class = "container">
     <form th:action = "@{/admin/notices}" method = "post">
         <div>
-
             <label for = "id"> id</label>
             <input type = "text" id = "id" name = "id"/><br><br>
 
             <label for = "title"> title</label>
-            <input type = "textarea" id = "title" name = "title" th:value = "${notice.title}" style = "width : 400px;"/><br><br>
+            <input type = "text" id = "title" name = "title" th:value = "${notice.title}"/><br><br>
 
             <label for = "content"> content</label>
-            <input type = "textarea" id = "content" name = "content" th:value = "${notice.content}" style = "width : 400px; height : 200px;"/><br><br>
+            <textarea id = "content" name = "content" th:value = "${notice.content}" rows = 10 cols = 30></textarea><br><br>
 
         </div>
         <button type ="submit" th:name = "cmd" th:value = "register">등록</button>
