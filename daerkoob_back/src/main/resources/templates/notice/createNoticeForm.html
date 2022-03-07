@@ -21,8 +21,8 @@
             <input type = "text" id = "title" name = "title" th:value = "${notice.title}"/><br><br>
 
             <label for = "content"> content</label>
-            <textarea id = "content" name = "content" th:value = "${notice.content}" rows = 10 cols = 30></textarea><br><br>
-
+            <textarea id = "content" name = "content" th:text = "${notice.content}" rows = 10 cols = 30></textarea><br><br>
+<!--            <input type = "text" th:value = "${notice.content}"/>-->
         </div>
         <button type ="submit" th:name = "cmd" th:value = "register">등록</button>
         <button type ="submit" th:name = "cmd" th:value = "update">수정</button>
