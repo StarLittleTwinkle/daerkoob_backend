@@ -4,12 +4,15 @@ import com.project.daerkoob.domain.*;
 import com.project.daerkoob.model.*;
 import com.project.daerkoob.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -64,24 +67,13 @@ public class ReviewService {
     }
 
     public CountAndList getBookReview(Long userId, Long bookId , Long pageNumber) {
-        /*
-        요기서 아얘 pagination으로 해당 정보만 딱 받아서 준다면? 여기서 이제 뭐 사용자가 보고 싶은 pageCount는 나중에 생각하고
-        여기서 totalRecordCount는 그대로 놥두고 정보만 따로 그냥 짤라서 넘겨주면 어떨까
-        그러면 pagination을 여기서 먼저 선언해서 bookId로 넣는다.
-        그 다음에 reviewRepository 에서 default method를 이용해서 List<Review> 를 반환하는 pagination method를 만든다.
-        그 다음에 받아오자 일단 일단 pagenation 하게 호출부터 해보자.
-        살짝 틀어져서 그냥 book 정보를 넘겨야 할 것 같다 transcription , comment 전부 다 해당 객체로 하는 지 살펴보고 맞다면 pagination에다가 객체를 넣을 수 있도록 추가한다 , id가 아니라
-        여기서 이제 CountAndList로 넘기고 totalCount 정보랑 같이 넘기면 총 전체 리뷰수는 유지하면서 pagination된 정보만 줄 수 있다.
-         */
-        Pagination pagination = new Pagination();
-        pagination.setId(bookRepository.findById(bookId).get());
-        pagination.setPageNumber(pageNumber.intValue());
-        List<Review> reviews = reviewRepository.findByBook(pagination);
-        List<TransferReview> resultList = new ArrayList<>();
-        for (Review review : reviews) {
-            resultList.add(createTransferReview(userId, review));
-        }
-        return new CountAndList(new Long(pagination.getTotalRecordCount()) , new ArrayList<>(resultList));
+        Page<Review> reviews = reviewRepository.findByBookIdOrderByRegisterDateDesc(bookId , PageRequest.of(pageNumber.intValue() , 5));
+
+        List<TransferReview> resultList = reviews.getContent().stream()
+                .map(review -> createTransferReview(userId , review))
+                .collect(Collectors.toList());
+
+        return new CountAndList(reviews.getTotalElements() , new ArrayList<>(resultList));
     }
 
     public TransferReview createTransferReview(Long userId, Review review) {

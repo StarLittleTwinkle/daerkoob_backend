@@ -12,12 +12,15 @@ import com.project.daerkoob.repository.ThumbRepository;
 import com.project.daerkoob.repository.TranscriptionRepository;
 import com.project.daerkoob.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.project.daerkoob.domain.Book;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -82,13 +85,14 @@ public class TranscriptionService {
     public CountAndList getBookTranscription(Long userId , Long bookId , Long pageNumber) {
         Pagination pagination = new Pagination();
         pagination.setPageNumber(pageNumber.intValue());
-        pagination.setId(bookRepository.findById(bookId).get());
-        List<Transcription> transcriptions = transcriptionRepository.findByBook(pagination);
-        List<TransferTranscription> resultList = new ArrayList<>();
-        for(Transcription transcription : transcriptions){
-            resultList.add(createTransferTranscription(userId , transcription));
-        }
-        return new CountAndList(new Long(pagination.getTotalRecordCount()), new ArrayList<>(resultList));
+
+        Page<Transcription> transcriptions = transcriptionRepository.findByBookIdOrderByRegisterDateDesc(bookId , PageRequest.of(pageNumber.intValue() , 5));
+
+        List<TransferTranscription> result = transcriptions.getContent().stream()
+                .map(transcription -> createTransferTranscription(userId , transcription))
+                .collect(Collectors.toList());
+
+        return new CountAndList(transcriptions.getTotalElements() , new ArrayList<>(result));
     } //내가 이 사람 필사에 좋아요를 눌렀는지 확인하는 방법..
 
     public TransferTranscription createTransferTranscription(Long userId , Transcription transcription){

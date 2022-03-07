@@ -19,4 +19,6 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
         pagination.setTotalRecordCount((int)page.getTotalElements());
         return page.getContent();
     }
+
+    List<Notice> findAllByOrderByRegisterDateDesc();
 }

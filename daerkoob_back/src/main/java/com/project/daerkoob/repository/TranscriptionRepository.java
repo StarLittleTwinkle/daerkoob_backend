@@ -17,13 +17,19 @@ import java.util.List;
 @Repository
 public interface TranscriptionRepository extends JpaRepository<Transcription , Long> {
     long count();
+
     Page<Transcription> findByBook(Book book , Pageable pageable);
+
     default List<Transcription> findByBook(Pagination pagination){
         Page<Transcription> page = this.findByBook((Book)pagination.getId() , PageRequest.of(pagination.getPageNumber() - 1, pagination.getPageSize() , Sort.Direction.ASC , "registerDate"));
         pagination.setTotalRecordCount((int)page.getTotalElements());
         return page.getContent();
     }
     List<Transcription> findByUser(User user);
+
     List<Transcription> findTop8ByOrderByRegisterDateDesc();
+
     List<Transcription> findByUserAndRegisterDateBetweenOrderByRegisterDateAsc(User user , LocalDateTime registerDate1 , LocalDateTime registerDate2);
+
+    Page<Transcription> findByBookIdOrderByRegisterDateDesc(Long bookId , Pageable pageable);
 }

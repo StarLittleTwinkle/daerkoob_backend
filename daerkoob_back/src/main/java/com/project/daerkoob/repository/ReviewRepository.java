@@ -26,4 +26,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     }
     long count();
     boolean existsByBookId(Long bookId);
+
+    Page<Review> findByBookIdOrderByRegisterDateDesc(Long bookId , Pageable pageable);
 }
