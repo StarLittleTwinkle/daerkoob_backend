@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,22 +99,43 @@ public class ReviewService {
         /*
         일단 CountAndList로 반환을 할 것임 TotalCount와 list로
         일단 그럴려면 pagination을 넘겨야함 , reviewId를 넣어서 넘기자
+
+        일단 그냥 댓글의 개수들을 알 수 있어야한다.
+        그리고 대댓글의 개수들도 알아내야 한다.
+        총 댓글의 개수 = 댓글의 개수 + 대댓글의 개수
+        즉 , 댓글의 개수 , 대댓글의 개수를 따로 알아낼 수 있다면?
+        두개의 개수를 알아낼 수 있다.
          */
         List<TransferComment> resultList = new ArrayList<>();
-        Pagination pagination = new Pagination();
-        pagination.setPageNumber(pageNumber.intValue());
-        pagination.setId(reviewRepository.findById(reviewId).get());
-        List<Comment> commentList = commentRepository.findByReview(pagination);
-        for (Comment comment : commentList) {
-            resultList.add(createTransferComment(comment , userId));
+        Review review = reviewRepository.findById(reviewId).orElseThrow(()
+                -> {throw new EntityNotFoundException();});
+
+        // 대댓글의 개수
+        Long nestedCommentCount = 0L;
+        // 댓글의 개수
+        Long commentCount = 0L;
+
+        for (Comment comment : commentRepository.findByReview(review)) { // 그냥 pagination 을 수동적으로 진행하였음
+
+            if(pageNumber * 5 <= commentCount && commentCount <= pageNumber * 5 + 4){
+                resultList.add(createTransferComment(comment , userId));
+            }
+
+            nestedCommentCount += getNestedCommentCount(comment);
+            commentCount++; // 댓글이 점점 쌓여감
         }
-        return new CountAndList(new Long(pagination.getTotalRecordCount()) , new ArrayList<>(resultList));
+
+        // nestedCommentCount == 대 댓글 개수 , commentCount == 그냥 댓글 개수
+        return new CountAndList(nestedCommentCount + commentCount , commentCount ,  new ArrayList<>(resultList));
     }
 
     public List<Review> getRecentReview(){
         return reviewRepository.findTop8ByOrderByRegisterDateDesc();
     }
 
+    public Long getNestedCommentCount(Comment comment){
+         return new Long(comment.getComments().size());
+    }
     public TransferComment createTransferComment(Comment comment , Long userId) { //대댓글에 쓰이는 transferComment
         // 대댓글도 좋아요를 분간 할 수 있도록 다시 구현해놓았음
         TransferComment transferComment = new TransferComment();

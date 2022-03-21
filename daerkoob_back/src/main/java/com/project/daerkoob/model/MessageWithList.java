@@ -10,6 +10,13 @@ import java.util.List;
 public class MessageWithList{
     //이런식으로 그냥 Message와 , CountWithList를 통합시킨다.
     private Long totalSize;
+    private Long realSize;
     private Message message;
-    private List<Object> List;
+    private List<Object> list;
+
+    public MessageWithList(Long totalSize , Message message , List<Object> list){
+        this.totalSize = totalSize;
+        this.message = message;
+        this.list = list;
+    }
 }

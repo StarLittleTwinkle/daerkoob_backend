@@ -52,8 +52,7 @@ public class CommentService {
 
     public MessageWithList getCommentOfReview(Long reviewId , Long userId , Long pageNumber){
         CountAndList resultList = reviewService.getCommentOfReview(reviewId , userId , pageNumber);
-        MessageWithList result = new MessageWithList(resultList.getTotalCount() ,new Message(true , "댓글을 성공적으로 불러왔습니다.") ,  new ArrayList<>(resultList.getList()));
-        return result;
+        return new MessageWithList(resultList.getTotalCount() , resultList.getRealCount() , new Message(true , "댓글을 성공적으로 불러왔습니다.") ,  new ArrayList<>(resultList.getList()));
     }
 
 //    public List<Comment> getCommentOfComment(Long commentId){ // 이건 현재는 사용을 안함 , 이것도 곧 수정해서 사용하면 될 듯
