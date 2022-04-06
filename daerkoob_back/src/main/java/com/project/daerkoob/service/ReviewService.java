@@ -28,6 +28,10 @@ public class ReviewService {
         return reviewRepository.count();
     }
 
+    public Long getReviewCount(Book book){
+        return reviewRepository.countByBook(book);
+    }
+
     public List<TransferReview> getUserReview(Long userId){
         List<Review> reviews = reviewRepository.findByUser(userRepository.findById(userId).get());
         List<TransferReview> transferReviews = new ArrayList<>();

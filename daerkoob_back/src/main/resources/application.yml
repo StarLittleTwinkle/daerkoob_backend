@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/daerkoob?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: user1
+    password: skhuA+4.5
+  mvc:
+    hiddentmethod:
+      filter:
+        enable: true
+    static-path-pattern: "/static/**"
+  devtools:
+    livereload:
+      enable: true
+    restart:
+      enable: false
+      additional-paths: "/Users/jaeyeonkim/Desktop/daerkoob_backend/daerkoob_back"
+    remote:
+      restart:
+        enable: true
+
+  jpa:
+    #    hibernate:
+    #      ddl-auto: create
+    properties:
+      hibernate:
+        show-sql: true
+
+
+server:
+  port: 8088

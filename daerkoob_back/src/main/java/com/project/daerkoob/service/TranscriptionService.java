@@ -31,6 +31,9 @@ public class TranscriptionService {
     private final BookRepository bookRepository;
     private final ThumbRepository thumbRepository;
 
+    public Long getTranscriptionCount(Book book){
+        return transcriptionRepository.countByBook(book);
+    }
     public MessageWithList transcriptionDelete(Long userId, Long transcriptionId){ //userId와 비교하면서 transcription이 지우기가 가능한지 판단하고
         //그리고 user의 transcriptionCount를 떨어트려야함
         Transcription transcription = transcriptionRepository.findById(transcriptionId).get();

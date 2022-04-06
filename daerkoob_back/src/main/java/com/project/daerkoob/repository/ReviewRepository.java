@@ -25,6 +25,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
         return page.getContent();
     }
     long count();
+    long countByBook(Book book);
     boolean existsByBookId(Long bookId);
 
     Page<Review> findByBookIdOrderByRegisterDateDesc(Long bookId , Pageable pageable);

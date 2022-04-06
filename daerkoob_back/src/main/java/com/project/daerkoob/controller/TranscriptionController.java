@@ -26,18 +26,20 @@ public class TranscriptionController {
         return transcriptionService.countAll();
     }
 
+    // 필사 수도 같이 넘기기
     @GetMapping("judge/{isbn}")
-    public Boolean getJudge(@PathVariable String isbn){ //false 는 필사 존재 x , true 는 필사 존재 o (필사 보기 가능)
+    public MessageWithList getJudge(@PathVariable String isbn){ //false 는 필사 존재 x , true 는 필사 존재 o (필사 보기 가능)
         Optional<Book> book = bookService.findBook(isbn);
         Book resultBook = book.orElse(null);
-        if(resultBook == null){
-            return false;
+        if(resultBook == null){ // 아얘 필사가 쓰였던 적이 없는 경우
+            return new MessageWithList(0L , new Message(false , "필사가 없습니다."));
         }
         List<Transcription> transcriptionList = transcriptionService.getTranscription(resultBook.getId());
-        if(transcriptionList.size() == 0){
-            return false;
+        if(transcriptionList.size() == 0){ // 필사가 쓰였다가 지워진 경우
+            return new MessageWithList(0L , new Message(false , "필사가 없습니다."));
         }
-        return true;
+
+        return new MessageWithList(transcriptionService.getTranscriptionCount(resultBook) , new Message(true , "필사가 있습니다."));
     }
 
     @GetMapping("inquiry/{userId}/{isbn}/{pageNumber}") //해당 책에 대한 필사내용 조회

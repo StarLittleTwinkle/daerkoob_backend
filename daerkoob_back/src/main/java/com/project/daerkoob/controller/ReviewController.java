@@ -3,6 +3,7 @@ package com.project.daerkoob.controller;
 import com.project.daerkoob.domain.Book;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.Review;
+import com.project.daerkoob.domain.Transcription;
 import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.service.BookService;
 import com.project.daerkoob.service.ReviewService;
@@ -26,14 +27,21 @@ public class ReviewController {
         return reviewService.countAll();
     }
 
+    // 해당 기능의 리뷰 개수도 같이 넘기기
     @GetMapping("judge/{isbn}")
-    public Boolean getJudge(@PathVariable String isbn) throws Exception{ //false 는 필사 존재 x , true 는 필사 존재 o (필사 보기 가능)
+    public MessageWithList getJudge(@PathVariable String isbn) throws Exception{ //false 는 필사 존재 x , true 는 필사 존재 o (필사 보기 가능)
         Optional<Book> book = bookService.findBook(isbn); // book 을 찾아 봄
         Book resultBook = book.orElse(null);
+
         if(resultBook == null){ // 해당 book 이 있는지 검사
-            return false;
+            return new MessageWithList(0L , new Message(false , "리뷰가 없습니다."));
         }
-        return reviewService.getReview(resultBook.getId()); // 있으면 true , 없으면 false;
+
+        if(!reviewService.getReview(resultBook.getId())){ // 필사가 쓰였다가 지워진 경우
+            return new MessageWithList(0L , new Message(false , "리뷰가 없습니다."));
+        }
+
+        return new MessageWithList(reviewService.getReviewCount(resultBook) , new Message(true , "리뷰가 있습니다.")); // 있으면 true , 없으면 false;
     }
 
     @GetMapping("inquiry/{userId}/{isbn}/{pageNumber}") //해당 책에 대한 리뷰내역 조회

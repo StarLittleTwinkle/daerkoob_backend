@@ -18,6 +18,8 @@ import java.util.List;
 public interface TranscriptionRepository extends JpaRepository<Transcription , Long> {
     long count();
 
+    long countByBook(Book book);
+
     Page<Transcription> findByBook(Book book , Pageable pageable);
 
     default List<Transcription> findByBook(Pagination pagination){

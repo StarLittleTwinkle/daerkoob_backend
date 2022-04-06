@@ -14,6 +14,10 @@ public class MessageWithList{
     private Message message;
     private List<Object> list;
 
+    public MessageWithList(Long totalSize , Message message){
+        this.totalSize = totalSize;
+        this.message = message;
+    }
     public MessageWithList(Long totalSize , Message message , List<Object> list){
         this.totalSize = totalSize;
         this.message = message;
