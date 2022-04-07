@@ -52,11 +52,11 @@ public class ReviewController {
 
 
     @PostMapping("register")
-    public Message register(Long userId, String isbn , String reviewContent , Double score) throws Exception{
-        if(reviewContent.isBlank()) return new Message(false , "다시 입력해주세요.");
+    public Message register(Long userId, String isbn , String content , Double score) throws Exception{
+        if(content == null || content.isBlank()) return new Message(false , "다시 입력해주세요.");
         bookService.save(bookService.createBook(isbn) , 1L);
         Optional<Book> book = bookService.findBook(isbn);
-        reviewService.save(reviewService.createDto(userId, book.get().getId() ,  score , reviewContent));
+        reviewService.save(reviewService.createDto(userId, book.get().getId() ,  score == null ? 0 : score , content));
         return new Message(true , "리뷰 등록에 성공하셨습니다.");
     }
 

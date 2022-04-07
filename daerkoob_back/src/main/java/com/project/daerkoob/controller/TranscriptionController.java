@@ -51,11 +51,11 @@ public class TranscriptionController {
     }
 
     @PostMapping("register")
-    public Message register(Long userId, String isbn , String transcriptionContent) throws Exception{
-        if(!transcriptionContent.isBlank()) {
+    public Message register(Long userId, String isbn , String content) throws Exception{
+        if(!content.isBlank()) {
             bookService.save(bookService.createBook(isbn), 2L);
             Optional<Book> book = bookService.findBook(isbn);
-            transcriptionService.save(transcriptionService.createDto(userId, book.get().getId(), transcriptionContent));
+            transcriptionService.save(transcriptionService.createDto(userId, book.get().getId(), content));
             return new Message(true , "입력에 성공하셨습니다.");
         }else{
             return new Message(false ,"다시 입력해주세요.");

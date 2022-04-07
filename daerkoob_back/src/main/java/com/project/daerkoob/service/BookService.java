@@ -49,7 +49,6 @@ public class BookService {
     }
 
     public Optional<Book> findBook(String isbn){
-        System.out.println(isbn);
         Optional<Book> book = bookRepository.findByIsbn(isbn);
         return book;
     }
@@ -64,22 +63,25 @@ public class BookService {
     }
 
     public Book createBook(String isbn) throws Exception{
-        List<Book> bookList = getBook(isbn , "1");
-        Book book = new Book();
-        for(Book tempBook : bookList) {
-            book.setTitle(tempBook.getTitle());
-            book.setAuthor(tempBook.getAuthor());
-            book.setPublisher(tempBook.getPublisher());
-            book.setPubdate(tempBook.getPubdate());
-            book.setIsbn(isbn);
-            book.setImage(tempBook.getImage());
-            book.setDescription(tempBook.getDescription());
-            book.setTranscriptionCount(0L); //그냥 0으로 초기화해주고 , 그 다음에 필사 , 리뷰 달때마다 추가해주는 방향으로 가야함
-            book.setReviewCount(0L);
-            book.setStar(0D);
-            book.setStarCount(0L);
+        if(existsBook(isbn)) {
+            return bookRepository.findByIsbn(isbn).get();
         }
-        return book;
+
+        Book book = getBook(isbn , "1").get(0);
+
+        return Book.builder()
+                .title(book.getTitle())
+                .author(book.getAuthor())
+                .publisher(book.getPublisher())
+                .pubdate(book.getPubdate())
+                .isbn(book.getIsbn())
+                .image(book.getImage())
+                .description(book.getDescription())
+                .transcriptionCount(book.getTranscriptionCount())
+                .reviewCount(book.getReviewCount())
+                .star(book.getStar())
+                .starCount(book.getStarCount())
+                .build();
     }
 
     public List<Book> getBook(String title , String display) throws Exception {
@@ -87,8 +89,6 @@ public class BookService {
         List<Book> bookList = new ArrayList<Book>();
         String id = "FZrwDPKOBRfo1BlN5tFY";
         String secret = "pBFNa86Va1";
-//        String id = "lmnnx8RRbuqvKHD3QC_X";
-//        String secret = "SFUhgfJCLl";
         String url = URLEncoder.encode(title, "UTF-8") + ("&display=" + display + "&start=1");
         String response = naverApiService.search(id, secret, url);
 
