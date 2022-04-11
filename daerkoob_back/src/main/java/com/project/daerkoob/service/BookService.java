@@ -63,25 +63,27 @@ public class BookService {
     }
 
     public Book createBook(String isbn) throws Exception{
+        // 이미 책이 존재하는 경우 , 그냥 바로 있던 책의 정보를 반환
         if(existsBook(isbn)) {
             return bookRepository.findByIsbn(isbn).get();
         }
 
+        // 책이 존재하지 않는 경우 , 저장과 동시에 반환한다.
         Book book = getBook(isbn , "1").get(0);
 
-        return Book.builder()
+        return bookRepository.save(Book.builder()
                 .title(book.getTitle())
                 .author(book.getAuthor())
                 .publisher(book.getPublisher())
                 .pubdate(book.getPubdate())
-                .isbn(book.getIsbn())
+                .isbn(isbn)
                 .image(book.getImage())
                 .description(book.getDescription())
-                .transcriptionCount(book.getTranscriptionCount())
-                .reviewCount(book.getReviewCount())
-                .star(book.getStar())
-                .starCount(book.getStarCount())
-                .build();
+                .transcriptionCount(0L)
+                .reviewCount(0L)
+                .star(0d)
+                .starCount(0L)
+                .build());
     }
 
     public List<Book> getBook(String title , String display) throws Exception {

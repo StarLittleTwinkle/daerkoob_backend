@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,22 @@ public class FriendService {
     private final FriendRepository friendRepository;
     private final UserRepository userRepository;
 
+    /*
+    userId 로 넘어온다.
+    그러면 findAll 을 통해서 일단 모든 user list 들이 다 반환이 될 것이다.
+    거기서 해당 userId를 가진 친구의 친구들은 제외시켜야 한다.
+    그러면 어떻게 할 수 있을까?
+     */
+    public List<User> findAll(Long userId){
+        User findByUser = userRepository.findById(userId).get();
+        return userRepository.findAll().stream().filter(
+                user -> !friendRepository.existsByUserAndFriendIndex(findByUser , user.getId()) && user.getId() != userId)
+                .collect(Collectors.toList());
+    }
+
+    public List<Friend> findByNickName(String nickName){
+        return friendRepository.findByFriendNickName(nickName);
+    }
     public List<Friend> ask(Long userId){
         return friendRepository.findByUser(userRepository.findById(userId).get());
     }

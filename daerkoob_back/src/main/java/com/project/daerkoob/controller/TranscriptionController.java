@@ -44,10 +44,11 @@ public class TranscriptionController {
 
     @GetMapping("inquiry/{userId}/{isbn}/{pageNumber}") //해당 책에 대한 필사내용 조회
     public MessageWithList inquiry(@PathVariable Long userId , @PathVariable String isbn , @PathVariable Long pageNumber){
-        /*
-        transcription 은 인피니티 하게 스크롤 되야함 , 그러면 그냥 계속 정보를 받으면서 pagination 된 정보만 넘기면 된다.
-         */
-        return transcriptionService.getBookTranscriptionOfCountWithList(userId , isbn, pageNumber);
+        Book book = bookService.findBook(isbn).orElse(null);
+
+        // 아직 책이 등록되는 중이라 발생하는 예외 방지
+        if(!(book == null))return transcriptionService.getBookTranscriptionOfCountWithList(userId , book.getId() , pageNumber);
+        else return new MessageWithList(0L , new Message(false , "필사가 없습니다.") , null);
     }
 
     @PostMapping("register")

@@ -46,10 +46,12 @@ public class ReviewController {
 
     @GetMapping("inquiry/{userId}/{isbn}/{pageNumber}") //해당 책에 대한 리뷰내역 조회
     public MessageWithList inquiry(@PathVariable Long userId , @PathVariable String isbn , @PathVariable Long pageNumber) throws Exception{
-        Optional<Book> book = bookService.findBook(isbn);
-        return reviewService.getMessageWithListOfBookReview(userId, book.get().getId() , pageNumber);
-    }
+        Book book = bookService.findBook(isbn).orElse(null);
 
+        // 아직 책이 등록되는 중이라 발생하는 예외 방지
+        if(!(book == null)) return reviewService.getMessageWithListOfBookReview(userId, book.getId() , pageNumber);
+        else return new MessageWithList(0L , new Message(false , "리뷰가 없습니다.") , null);
+    }
 
     @PostMapping("register")
     public Message register(Long userId, String isbn , String content , Double score) throws Exception{

@@ -79,9 +79,8 @@ public class TranscriptionService {
 
     }
 
-    public MessageWithList getBookTranscriptionOfCountWithList(Long userId , String isbn , Long pageNumber){
-        Book book = bookRepository.findByIsbn(isbn).get();
-        CountAndList result = getBookTranscription(userId, book.getId() , pageNumber);
+    public MessageWithList getBookTranscriptionOfCountWithList(Long userId , Long bookId , Long pageNumber){
+        CountAndList result = getBookTranscription(userId, bookId , pageNumber);
         return new MessageWithList(result.getTotalCount() , new Message(true , "필사를 성공적으로 가져왔습니다."), new ArrayList<>(result.getList()));
     }
 

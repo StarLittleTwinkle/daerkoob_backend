@@ -1,5 +1,6 @@
 package com.project.daerkoob.controller;
 
+import com.project.daerkoob.domain.Friend;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.model.*;
@@ -10,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequiredArgsConstructor
@@ -48,5 +51,12 @@ public class UserController {
     @GetMapping("record/{userId}/{year}")
     public MessageWithGrass getUserRecord(@PathVariable Long userId , @PathVariable Long year){
         return userService.getUserRecordCount(userId , year);
+    }
+
+    // nickName 으로 찾는 method
+    @PostMapping("find")
+    public User findByNickName(String nickName) {
+        Optional<User> result = userService.findByNickName(nickName);
+        return result.get();
     }
 }
