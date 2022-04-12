@@ -16,60 +16,60 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("admin/notices")
 public class AdminNoticeController {
 
-    private final NoticeService noticeService;
-    private final NoticeRepository noticeRepository;
-
-    public void noticeListMvcAddObject(ModelAndView mvc) {
-        mvc.addObject("noticeList", noticeRepository.findAllByOrderByRegisterDateDesc());
-    }
-
-    public void noticeMvcAddObject(ModelAndView mvc){
-        mvc.addObject("notice" , new Notice());
-    }
-    @GetMapping() // 처음 화면
-    public ModelAndView setNotice() {
-        ModelAndView mvc = new ModelAndView("notice/createNoticeForm");
-        noticeMvcAddObject(mvc);
-        noticeListMvcAddObject(mvc);
-        return mvc;
-    }
-
-    @PostMapping(params = "cmd=register") // 등록
-    public ModelAndView registerNotice(Notice notice) {
-        ModelAndView mvc = new ModelAndView("redirect:notices");
-        noticeService.save(notice);
-        noticeMvcAddObject(mvc);
-        noticeListMvcAddObject(mvc);
-        return mvc; //등록화면으로 다시 넘어감
-    }
-
-    @PostMapping(params = "cmd=inquiry") // 조회
-    public ModelAndView inquiryNotice(@RequestParam("id") Long noticeId) {
-        System.out.println(noticeRepository.findById(noticeId).get());
-        ModelAndView mvc = new ModelAndView("notice/createNoticeForm");
-        if (!noticeRepository.existsById(noticeId)) noticeMvcAddObject(mvc); // 없으면 빈 객체로
-        else mvc.addObject("notice", noticeRepository.findById(noticeId).get()); // 있으면 채운채로
-        noticeListMvcAddObject(mvc);
-        return mvc;
-    }
-
-    @PostMapping(params = "cmd=update") // 업데이트
-    public ModelAndView updateHof(@RequestParam("id") Long noticeId, Notice notice) {
-        ModelAndView mvc = new ModelAndView("redirect:notices");
-        noticeService.update(noticeId , notice); // update
-        noticeMvcAddObject(mvc);
-        noticeListMvcAddObject(mvc);
-        return mvc; // 다시 편집 가능하도록
-    }
-
-
-    @PostMapping(params = "cmd=delete") // 삭제
-    public ModelAndView deleteHof(@RequestParam("id") Long noticeId) {
-        System.out.println("delete");
-        ModelAndView mvc = new ModelAndView("redirect:notices");
-        noticeService.delete(noticeId);
-        noticeMvcAddObject(mvc);
-        noticeListMvcAddObject(mvc);
-        return mvc;
-    }
+//    private final NoticeService noticeService;
+//    private final NoticeRepository noticeRepository;
+//
+//    public void noticeListMvcAddObject(ModelAndView mvc) {
+//        mvc.addObject("noticeList", noticeRepository.findAllByOrderByRegisterDateDesc());
+//    }
+//
+//    public void noticeMvcAddObject(ModelAndView mvc){
+//        mvc.addObject("notice" , new Notice());
+//    }
+//    @GetMapping() // 처음 화면
+//    public ModelAndView setNotice() {
+//        ModelAndView mvc = new ModelAndView("notice/createNoticeForm");
+//        noticeMvcAddObject(mvc);
+//        noticeListMvcAddObject(mvc);
+//        return mvc;
+//    }
+//
+//    @PostMapping(params = "cmd=register") // 등록
+//    public ModelAndView registerNotice(Notice notice) {
+//        ModelAndView mvc = new ModelAndView("redirect:notices");
+//        noticeService.save(notice);
+//        noticeMvcAddObject(mvc);
+//        noticeListMvcAddObject(mvc);
+//        return mvc; //등록화면으로 다시 넘어감
+//    }
+//
+//    @PostMapping(params = "cmd=inquiry") // 조회
+//    public ModelAndView inquiryNotice(@RequestParam("id") Long noticeId) {
+//        System.out.println(noticeRepository.findById(noticeId).get());
+//        ModelAndView mvc = new ModelAndView("notice/createNoticeForm");
+//        if (!noticeRepository.existsById(noticeId)) noticeMvcAddObject(mvc); // 없으면 빈 객체로
+//        else mvc.addObject("notice", noticeRepository.findById(noticeId).get()); // 있으면 채운채로
+//        noticeListMvcAddObject(mvc);
+//        return mvc;
+//    }
+//
+//    @PostMapping(params = "cmd=update") // 업데이트
+//    public ModelAndView updateHof(@RequestParam("id") Long noticeId, Notice notice) {
+//        ModelAndView mvc = new ModelAndView("redirect:notices");
+//        noticeService.update(noticeId , notice); // update
+//        noticeMvcAddObject(mvc);
+//        noticeListMvcAddObject(mvc);
+//        return mvc; // 다시 편집 가능하도록
+//    }
+//
+//
+//    @PostMapping(params = "cmd=delete") // 삭제
+//    public ModelAndView deleteHof(@RequestParam("id") Long noticeId) {
+//        System.out.println("delete");
+//        ModelAndView mvc = new ModelAndView("redirect:notices");
+//        noticeService.delete(noticeId);
+//        noticeMvcAddObject(mvc);
+//        noticeListMvcAddObject(mvc);
+//        return mvc;
+//    }
 }

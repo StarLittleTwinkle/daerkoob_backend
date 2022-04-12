@@ -3,14 +3,12 @@ package com.project.daerkoob.service;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.Notice;
 import com.project.daerkoob.model.MessageWithList;
-import com.project.daerkoob.model.Pagination;
 import com.project.daerkoob.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -20,30 +18,22 @@ public class NoticeService {
     private final NoticeRepository noticeRepository;
 
     public Notice save(Notice notice){
-        notice = createDto(notice.getTitle() , notice.getContent());
-        return noticeRepository.save(notice);
+        return noticeRepository.save(createDto(notice.getTitle() , notice.getContent()));
+    }
+
+    public Notice findById(Long id){
+        return noticeRepository.findById(id).get();
     }
 
     public MessageWithList getNotice(Long pageNumber){
-        /*
-        notice 그냥 register date 역순으로 가져오기
-        여기에서도 pagination 적용?
-         */
         Page<Notice> notices = noticeRepository.findAllByOrderByRegisterDateDesc(PageRequest.of(pageNumber.intValue() , 10));
         return new MessageWithList(new Long(notices.getTotalElements()) , new Message(true , "성공적으로 가져왔습니다.") , new ArrayList<>(notices.getContent()));
     }
 
-//    public Message setNotice(Long userIndex , String title , String content){
-//
-//        /*
-//        11 = kpeel5839 , 16 = jiyeong star
-//        이거 아니면 바로 차단 , 맞으면 등록
-//        교수님 말대로 isBlank() 가 null은 처리를 못하나보다. Optional 로 감싸야하나 ? 근데 짜피 content 가 null로 들어올 일은 없으니까 그대로 가자
-//         */
-//        if((userIndex != 11 && userIndex != 16) || content.isBlank() || title.isBlank()) return new Message(false , "다시 작성하세요");
-//        noticeRepository.save(createDto(title , content));
-//        return new Message(true , "성공적으로 저장했습니다.");
-//    }
+    public MessageWithList setNotice(String title , String content){
+        noticeRepository.save(createDto(title , content));
+        return getNotice(0L);
+    }
 
     public Notice createDto(String title , String content){
         Notice notice =  new Notice();
@@ -53,13 +43,20 @@ public class NoticeService {
         return notice;
     }
 
-    public Notice update(Long id , Notice notice){
-        notice = createDto(notice.getTitle(), notice.getContent());
-        notice.setId(id);
-        return noticeRepository.save(notice);
+    public MessageWithList update(Long id , String title , String content){
+        Notice notice = noticeRepository.findById(id).get();
+
+        // title , content 중에 수정하지 않은 것들도 있을 수도 있고 , 입력하지 않고 넘길 수도 있는 예외 사항들을 처리함
+        Notice modifyNotice = createDto(title == null ? notice.getTitle() : title ,
+                content == null ? notice.getContent() : content);
+
+        modifyNotice.setId(id);
+        noticeRepository.save(modifyNotice);
+        return getNotice(0L);
     }
 
-    public void delete(Long noticeId){
-        noticeRepository.delete(noticeRepository.findById(noticeId).orElseThrow(EntityNotFoundException::new));
+    public MessageWithList delete(Long noticeId){
+        noticeRepository.deleteById(noticeId);
+        return getNotice(0L);
     }
 }
