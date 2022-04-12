@@ -125,7 +125,7 @@ public class ReviewService {
         Long commentCount = 0L;
 
         Long mul = 10L;
-        for (Comment comment : commentRepository.findByReview(review)) { // 그냥 pagination 을 수동적으로 진행하였음
+        for (Comment comment : commentRepository.findByReviewOrderByRegisterDateDesc(review)) { // 그냥 pagination 을 수동적으로 진행하였음
 
             if(pageNumber * mul <= commentCount && commentCount < pageNumber * mul + mul){
                 resultList.add(createTransferComment(comment , userId));

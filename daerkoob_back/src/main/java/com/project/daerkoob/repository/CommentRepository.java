@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment , Long> {
-    List<Comment> findByReview(Review review);
+    List<Comment> findByReviewOrderByRegisterDateDesc(Review review);
     Long countByComment(Comment comment);
     Page<Comment> findByReview(Review review , Pageable pageable);
 }
