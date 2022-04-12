@@ -29,13 +29,6 @@ public class CommentController {
     @GetMapping("inquiry/{reviewId}/{userId}/{pageNumber}") //이거 하면 그냥 review에 달린 댓글들이 다 나옴
     public MessageWithList inquiryCommentOfReview(@PathVariable Long reviewId , @PathVariable Long userId , @PathVariable Long pageNumber){
         //MessageWithList는 그대로 유지하면서 그냥 commentService로 getCommentOfReview를 부르고 getCommentOfReview가 ReviewService의 getCommentOfReview의 List<TransferComment> 를 받아오는 형식으로 작성하였음
-        /*
-        inquiry 에서 pagination 방법을 구현해보자.
-        일단 getCommentOfReview 에서 가져와야 한다. 근데 여기서 pg , sz 정보를 받을 수가 있나? 전체 레코드 수를 모르는데?
-        일단 page 정보대로 한번 해보자 pg를 1로 일단 받아서
-
-        그냥 infinite scroll 을 하니까 , 무지성으로다가 , 다음꺼 계속 주면 된다.
-         */
         return commentService.getCommentOfReview(reviewId , userId , pageNumber);
     }
 

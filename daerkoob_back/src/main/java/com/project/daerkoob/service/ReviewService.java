@@ -76,7 +76,7 @@ public class ReviewService {
     }
 
     public CountAndList getBookReview(Long userId, Long bookId , Long pageNumber) {
-        Page<Review> reviews = reviewRepository.findByBookIdOrderByRegisterDateDesc(bookId , PageRequest.of(pageNumber.intValue() , 5));
+        Page<Review> reviews = reviewRepository.findByBookIdOrderByRegisterDateDesc(bookId , PageRequest.of(pageNumber.intValue() , 10));
 
         List<TransferReview> resultList = reviews.getContent().stream()
                 .map(review -> createTransferReview(userId , review))
@@ -124,9 +124,10 @@ public class ReviewService {
         // 댓글의 개수
         Long commentCount = 0L;
 
+        Long mul = 10L;
         for (Comment comment : commentRepository.findByReview(review)) { // 그냥 pagination 을 수동적으로 진행하였음
 
-            if(pageNumber * 5 <= commentCount && commentCount <= pageNumber * 5 + 4){
+            if(pageNumber * mul <= commentCount && commentCount < pageNumber * mul + mul){
                 resultList.add(createTransferComment(comment , userId));
             }
 

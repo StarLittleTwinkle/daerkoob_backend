@@ -17,8 +17,8 @@ pagination 에서 가장 중요한 , Pageable 객체로 넘길 때 PageRequest.o
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pagination {
-    private Integer pageNumber = 1; // 일단 확실하게 볼 수 있도록 pageSize 와 pageNumber는 조건 이렇게 하도록 하자
-    private Integer pageSize = 5;
+    private Integer pageNumber = 0; // 일단 확실하게 볼 수 있도록 pageSize 와 pageNumber는 조건 이렇게 하도록 하자
+    private Integer pageSize = 10;
     private Object id; // 일단 해당 객체로 다 탐색하는 형식으로 가고 있다 그래서 Object로 받아서 pagination 객체에 저장하는 형태로 가야할 듯
     private Integer totalRecordCount; // 총 받게 되는 record 개수
 }

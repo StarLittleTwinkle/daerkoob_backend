@@ -94,7 +94,7 @@ public class TranscriptionService {
         Pagination pagination = new Pagination();
         pagination.setPageNumber(pageNumber.intValue());
 
-        Page<Transcription> transcriptions = transcriptionRepository.findByBookIdOrderByRegisterDateDesc(bookId , PageRequest.of(pageNumber.intValue() , 5));
+        Page<Transcription> transcriptions = transcriptionRepository.findByBookIdOrderByRegisterDateDesc(bookId , PageRequest.of(pageNumber.intValue() , 10));
 
         List<TransferTranscription> result = transcriptions.getContent().stream()
                 .map(transcription -> createTransferTranscription(userId , transcription))

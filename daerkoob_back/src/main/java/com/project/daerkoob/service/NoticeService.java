@@ -6,12 +6,14 @@ import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.Pagination;
 import com.project.daerkoob.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class NoticeService {
@@ -27,11 +29,8 @@ public class NoticeService {
         notice 그냥 register date 역순으로 가져오기
         여기에서도 pagination 적용?
          */
-        System.out.println(pageNumber);
-        Pagination pagination = new Pagination();
-        pagination.setPageNumber(pageNumber.intValue());
-        List<Notice> notices = noticeRepository.findAllByOrderByRegisterDateDesc(pagination);
-        return new MessageWithList(new Long(pagination.getTotalRecordCount()) , new Message(true , "성공적으로 가져왔습니다.") , new ArrayList<>(notices));
+        Page<Notice> notices = noticeRepository.findAllByOrderByRegisterDateDesc(PageRequest.of(pageNumber.intValue() , 10));
+        return new MessageWithList(new Long(notices.getTotalElements()) , new Message(true , "성공적으로 가져왔습니다.") , new ArrayList<>(notices.getContent()));
     }
 
 //    public Message setNotice(Long userIndex , String title , String content){
