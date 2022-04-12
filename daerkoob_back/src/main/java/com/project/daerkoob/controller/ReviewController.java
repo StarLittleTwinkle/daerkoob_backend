@@ -53,6 +53,13 @@ public class ReviewController {
         else return new MessageWithList(0L , new Message(false , "리뷰가 없습니다.") , null);
     }
 
+    // review/inquiry/currentId/reviewId , thumbJudge 까지 적용해서
+    @GetMapping("inquiry/{userid}/{reviewid}")
+    public MessageWithList inquiryOfId(@PathVariable(name = "userid") Long userId , @PathVariable(name = "reviewid") Long reviewId){
+        // transcriptionId 로 해당 필사를 조회하는 것
+        return new MessageWithList(1L , new Message(true , "리뷰를 성공적으로 가져왔습니다.") , List.of(reviewService.findById(userId , reviewId)));
+    }
+
     @PostMapping("register")
     public Message register(Long userId, String isbn , String content , Double score) throws Exception{
         if(content == null || content.isBlank()) return new Message(false , "다시 입력해주세요.");
@@ -72,4 +79,5 @@ public class ReviewController {
     public List<Review> getRecentTranscription(){
         return reviewService.getRecentReview();
     }
+
 }

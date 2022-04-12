@@ -34,6 +34,12 @@ public class TranscriptionService {
     public Long getTranscriptionCount(Book book){
         return transcriptionRepository.countByBook(book);
     }
+
+    // transcriptionId 를 통해서 record 를 가져오는 method
+    public TransferTranscription findById(Long userId , Long transcriptionId){
+        return createTransferTranscription(userId , transcriptionRepository.findById(transcriptionId).get());
+    }
+
     public MessageWithList transcriptionDelete(Long userId, Long transcriptionId){ //userId와 비교하면서 transcription이 지우기가 가능한지 판단하고
         //그리고 user의 transcriptionCount를 떨어트려야함
         Transcription transcription = transcriptionRepository.findById(transcriptionId).get();
@@ -97,6 +103,7 @@ public class TranscriptionService {
         return new CountAndList(transcriptions.getTotalElements() , new ArrayList<>(result));
     } //내가 이 사람 필사에 좋아요를 눌렀는지 확인하는 방법..
 
+    // 가장 핵심적인 내용은 thumbJudge 를 같이 가져오는 것
     public TransferTranscription createTransferTranscription(Long userId , Transcription transcription){
         TransferTranscription transferTranscription = new TransferTranscription();
         transferTranscription.setBook(transcription.getBook());

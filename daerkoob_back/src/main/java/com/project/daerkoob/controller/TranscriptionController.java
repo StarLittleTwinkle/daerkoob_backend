@@ -8,6 +8,7 @@ import com.project.daerkoob.service.TranscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.project.daerkoob.domain.Book;
 import java.util.Optional;
@@ -43,12 +44,18 @@ public class TranscriptionController {
     }
 
     @GetMapping("inquiry/{userId}/{isbn}/{pageNumber}") //해당 책에 대한 필사내용 조회
-    public MessageWithList inquiry(@PathVariable Long userId , @PathVariable String isbn , @PathVariable Long pageNumber){
+    public MessageWithList inquiryOfIsbn(@PathVariable Long userId , @PathVariable String isbn , @PathVariable Long pageNumber){
         Book book = bookService.findBook(isbn).orElse(null);
 
         // 아직 책이 등록되는 중이라 발생하는 예외 방지
         if(!(book == null))return transcriptionService.getBookTranscriptionOfCountWithList(userId , book.getId() , pageNumber);
         else return new MessageWithList(0L , new Message(false , "필사가 없습니다.") , null);
+    }
+
+    @GetMapping("inquiry/{userid}/{transcriptionid}")
+    public MessageWithList inquiryOfId(@PathVariable(name = "userid") Long userId , @PathVariable(name = "transcriptionid") Long transcriptionId){
+        // transcriptionId 로 해당 필사를 조회하는 것
+        return new MessageWithList(1L , new Message(true , "필사를 성공적으로 가져왔습니다.") , List.of(transcriptionService.findById(userId , transcriptionId)));
     }
 
     @PostMapping("register")
@@ -72,4 +79,5 @@ public class TranscriptionController {
     public List<Transcription> getRecentTranscription(){
         return transcriptionService.getRecentTranscription();
     }
+
 }

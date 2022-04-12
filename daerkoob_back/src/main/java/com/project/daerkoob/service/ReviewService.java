@@ -41,6 +41,10 @@ public class ReviewService {
         return transferReviews;
     }
 
+    public TransferReview findById(Long userId , Long reviewId){
+        return createTransferReview(userId , reviewRepository.findById(reviewId).get());
+    }
+
     public MessageWithList reviewDelete(Long reviewId, Long userId) { //이제 해야할게 userId로 해당 user가 쓴게 맞는지 확인해야함
         //추후에는 여기서 판단하는 것이 아닌 이전에 review 조회할 때에도 자신이 쓴 review인지 조회할 수 있도록 , thumb처럼 수정해야할 듯
         Review review = reviewRepository.findById(reviewId).get();
@@ -81,6 +85,7 @@ public class ReviewService {
         return new CountAndList(reviews.getTotalElements() , new ArrayList<>(resultList));
     }
 
+    // 가장 핵심적인 내용은 thumbJudge 를 같이 가져오는 것
     public TransferReview createTransferReview(Long userId, Review review) {
         TransferReview transferReview = new TransferReview();
         transferReview.setBook(review.getBook());
