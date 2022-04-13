@@ -53,7 +53,7 @@ public class UserService {
             message = new Message(true , "유저를 성공적으로 검색하였습니다.");
         }
 
-        return new MessageWithList(user == null ? 0L : 1L , message , user == null ? null : new ArrayList<>(List.of(user)));
+        return new MessageWithList(user == null ? 0L : 1L , message , user == null ? null : List.of(createTransferUser(user)));
     }
 
     public void save(User user){
