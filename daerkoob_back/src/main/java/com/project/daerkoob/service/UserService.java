@@ -3,6 +3,7 @@ package com.project.daerkoob.service;
 import com.project.daerkoob.domain.*;
 import com.project.daerkoob.model.Grass;
 import com.project.daerkoob.model.MessageWithGrass;
+import com.project.daerkoob.model.MessageWithList;
 import com.project.daerkoob.model.TransferUser;
 import com.project.daerkoob.repository.TranscriptionRepository;
 import com.project.daerkoob.repository.UserRepository;
@@ -26,8 +27,33 @@ public class UserService {
         return userRepository.findByUserId(userId);
     }
 
-    public Optional<User> findByNickName(String nickName){
-        return userRepository.findByNickName(nickName);
+    // userId 를 받으면 , TransferUser 를 반환
+    public TransferUser findById(Long id){
+        return createTransferUser(userRepository.findById(id).get());
+    }
+
+    // 해당 유저를 찾아주는 method
+    public MessageWithList findByNickName(Long userId, String nickName){
+        User user = userRepository.findByNickName(nickName).orElse(null);
+        Message message;
+
+        // 없는 사람이면 message
+        if(user == null){
+            message = new Message(false , "해당 유저는 존재하지 않습니다.");
+        }
+
+        // 해당 유저가 본인이면 , message
+        else if(userId == user.getId()){
+            message = new Message(false , "본인을 검색할 수 없습니다.");
+            user = null;
+        }
+
+        // 있는 경우면 그냥 넣어서 보내준다.
+        else {
+            message = new Message(true , "유저를 성공적으로 검색하였습니다.");
+        }
+
+        return new MessageWithList(user == null ? 0L : 1L , message , user == null ? null : new ArrayList<>(List.of(user)));
     }
 
     public void save(User user){

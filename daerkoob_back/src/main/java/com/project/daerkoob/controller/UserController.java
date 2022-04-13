@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -53,10 +52,11 @@ public class UserController {
         return userService.getUserRecordCount(userId , year);
     }
 
-    // nickName 으로 찾는 method
+    // nickName 으로 찾는 method , 여기다가 추가적으로 존재하지 않는 닉네임과 , 본인을 검색하였을 때 , error message 가 나오도록
     @PostMapping("find")
-    public User findByNickName(String nickName) {
-        Optional<User> result = userService.findByNickName(nickName);
-        return result.get();
+    public MessageWithList findByNickName(Long userId , String nickName) {
+
+        // 본인인지 확인하기 위해서 userId (currentId) 도 같이 넘김
+        return userService.findByNickName(userId , nickName);
     }
 }

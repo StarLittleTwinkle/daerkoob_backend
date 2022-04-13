@@ -70,7 +70,7 @@ public class TranscriptionController {
         }
     }
 
-    @DeleteMapping("delete")
+    @PostMapping("delete")
     public MessageWithList delete(Long userId, Long transcriptionId){
         return transcriptionService.transcriptionDelete(userId, transcriptionId);
     }

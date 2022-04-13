@@ -14,5 +14,7 @@ public interface FriendRepository extends JpaRepository<Friend , Long> {
     List<Friend> findByFriendNickName(String friendNickName);
     List<Friend> findByUser(User user);
     @Transactional
+    void deleteByUserAndFriendIndex(User user , Long friendIndex);
+    @Transactional
     void deleteByFriendIndex(Long friendIndex);
 }

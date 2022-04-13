@@ -4,12 +4,12 @@ import com.project.daerkoob.domain.Friend;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.model.MessageWithList;
+import com.project.daerkoob.model.TransferUser;
 import com.project.daerkoob.repository.FriendRepository;
 import com.project.daerkoob.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +19,7 @@ public class FriendService {
 
     private final FriendRepository friendRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     /*
     userId 로 넘어온다.
@@ -43,30 +44,39 @@ public class FriendService {
     public MessageWithList friendDelete(Long userId, Long friendId){
         User user = userRepository.findById(userId).get();
         user.setFriendCount(user.getFriendCount() - 1);
-        userRepository.save(user); //user friendCount 차감 시켜주고 해당 친구 삭제
-        friendRepository.deleteByFriendIndex(friendId);
-        List<Friend> friends = ask(userId);
-        return new MessageWithList(new Long(friends.size()) , new Message(true , "친구 삭제에 성공했습니다.") , new ArrayList<>(friends));
+
+        //userFriendCount 감소 시켜주고 , save 하면서 , user 다시 받아낸다.
+        user = userRepository.save(user);
+
+        // 그리고 friend 에서 관계 없애주기
+        friendRepository.deleteByUserAndFriendIndex(user , friendId);
+        return new MessageWithList(user.getFriendCount() , new Message(true , "친구 삭제에 성공했습니다.") , List.of(userService.createTransferUser(user)));
    }
-    public MessageWithList add(Long userId, Long friendId){ // 친구 추가
+    public MessageWithList add(Long userId, Long friendId){ // 친구 추가 , 그냥 친구 추가하고 , user 정보 새로 반환하자.
         Message message = null;
+
         if (friendRepository.existsByUserAndFriendIndex(userRepository.findById(userId).get(),friendId)){
             message = new Message(false ,  "이미 친구입니다.");
         }
+
         else if(userId == friendId){
             message = new Message(false , "자신은 친구로 추가할 수 없습니다.");
         }
+
         if(message != null){ //이미 친구로 추가할 수 없다는 것이 정해졌을 때
-            List<Friend> friends = ask(userId);
-            return new MessageWithList(new Long(friends.size()) , message , new ArrayList<>(friends));
+            User user = userRepository.findById(userId).get();
+            return new MessageWithList(user.getFriendCount() , message , List.of(userService.createTransferUser(user)));
         }
-        Optional<User> findById = userRepository.findById(userId);
-        User resultUser = findById.get();
-        resultUser.setFriendCount(resultUser.getFriendCount() + 1);
-        userRepository.save(resultUser); //친구 수 바꾸고 저장 (업데이트)
+
+        User user = userRepository.findById(userId).get();
+
+        user.setFriendCount(user.getFriendCount() + 1);
+
+        user = userRepository.save(user); //친구 수 바꾸고 저장 (업데이트)
+
         friendRepository.save(createFriend(userId, friendId)); // 친구로 저장
-        List<Friend> friends = ask(userId);
-        return new MessageWithList(new Long(friends.size()), new Message(true , "친구 등록에 성공했습니다."), new ArrayList<>(ask(userId)));
+
+        return new MessageWithList(user.getFriendCount(), new Message(true , "친구 등록에 성공했습니다."), new ArrayList<>(List.of(userService.createTransferUser(user))));
     }
 
     public Friend createFriend(Long userId , Long friendId){ //friend 객체를 만드는 함수

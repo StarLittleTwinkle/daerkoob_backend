@@ -41,7 +41,7 @@ public class CommentController {
             return new Message(false, "다시 입력해주세요.");
     }
 
-    @DeleteMapping("delete")
+    @PostMapping("delete")
     public MessageWithList delete(Long reviewId , Long commentId , Long userId){ //어떤 리뷰를 조회했을 때 나오는 댓글인지 , 그 정보를 알려주기 위해서 reviewId를 받아야함
         return commentService.deleteComment(reviewId , commentId , userId);
     }

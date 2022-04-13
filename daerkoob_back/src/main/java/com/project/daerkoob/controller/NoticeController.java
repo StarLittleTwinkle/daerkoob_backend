@@ -39,7 +39,7 @@ public class NoticeController {
         return noticeService.update(id , title , content);
     }
 
-    @DeleteMapping("")
+    @PostMapping("delete")
     public MessageWithList delete(Long id){
         return noticeService.delete(id);
     }

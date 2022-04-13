@@ -68,7 +68,7 @@ public class ReviewController {
         return new Message(true , "리뷰 등록에 성공하셨습니다.");
     }
 
-    @DeleteMapping("delete")
+    @PostMapping("delete")
     public MessageWithList delete(Long reviewId , Long userId){ //review id만 주면은 삭제가 가능하도록 , 근데 이게 이 유저의 댓글인지를 알아야하니까 userId를 받는다
         //그러면서 delete하면서 다시 해당 book에 대한 정보 받아올 수 있도록 bookId까지 받아서옴
         return reviewService.reviewDelete(reviewId , userId);
