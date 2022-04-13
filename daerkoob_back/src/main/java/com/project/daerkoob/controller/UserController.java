@@ -1,6 +1,5 @@
 package com.project.daerkoob.controller;
 
-import com.project.daerkoob.domain.Friend;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.model.*;
@@ -22,6 +21,11 @@ public class UserController {
     private final TranscriptionService transcriptionService;
     private final ReviewService reviewService;
 
+    @GetMapping("{userid}")
+    public TransferUser findById(@PathVariable("userid") Long userId){
+        return userService.findById(userId);
+    }
+
     @PostMapping("signup")
     public Message signUp(User user, String confirmPassword){
         return userService.signUp(user, confirmPassword);
@@ -36,6 +40,7 @@ public class UserController {
     public List<TransferTranscription> getUserTranscription(@PathVariable Long userId){
         return transcriptionService.getUserTranscription(userId);
     }
+
 
     @GetMapping("review/{userId}")
     public List<TransferReview> getUserReview(@PathVariable Long userId){

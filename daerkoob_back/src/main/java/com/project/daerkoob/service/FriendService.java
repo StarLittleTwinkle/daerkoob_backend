@@ -4,7 +4,6 @@ import com.project.daerkoob.domain.Friend;
 import com.project.daerkoob.domain.Message;
 import com.project.daerkoob.domain.User;
 import com.project.daerkoob.model.MessageWithList;
-import com.project.daerkoob.model.TransferUser;
 import com.project.daerkoob.repository.FriendRepository;
 import com.project.daerkoob.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,11 +44,12 @@ public class FriendService {
         User user = userRepository.findById(userId).get();
         user.setFriendCount(user.getFriendCount() - 1);
 
+        // 그리고 friend 에서 관계 없애주기
+        friendRepository.deleteByUserIdAndFriendIndex(userId , friendId);
+
         //userFriendCount 감소 시켜주고 , save 하면서 , user 다시 받아낸다.
         user = userRepository.save(user);
 
-        // 그리고 friend 에서 관계 없애주기
-        friendRepository.deleteByUserAndFriendIndex(user , friendId);
         return new MessageWithList(user.getFriendCount() , new Message(true , "친구 삭제에 성공했습니다.") , List.of(userService.createTransferUser(user)));
    }
     public MessageWithList add(Long userId, Long friendId){ // 친구 추가 , 그냥 친구 추가하고 , user 정보 새로 반환하자.
