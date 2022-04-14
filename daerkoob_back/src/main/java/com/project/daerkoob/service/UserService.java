@@ -68,7 +68,6 @@ public class UserService {
     }
 
     public TransferUser createTransferUser(User user){
-        System.out.println(user.getFriends());
         TransferUser transferUser = new TransferUser();
         transferUser.setId(user.getId());
         transferUser.setName(user.getName());

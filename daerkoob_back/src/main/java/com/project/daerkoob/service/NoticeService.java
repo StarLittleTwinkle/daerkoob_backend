@@ -57,6 +57,8 @@ public class NoticeService {
 
     public MessageWithList delete(Long noticeId){
         noticeRepository.deleteById(noticeId);
-        return getNotice(0L);
+        MessageWithList messageWithList = getNotice(0L);
+        messageWithList.getMessage().setMessage("공지를 삭제했습니다.");
+        return messageWithList;
     }
 }
