@@ -23,7 +23,7 @@ public interface TranscriptionRepository extends JpaRepository<Transcription , L
     Page<Transcription> findByBook(Book book , Pageable pageable);
 
     default List<Transcription> findByBook(Pagination pagination){
-        Page<Transcription> page = this.findByBook((Book)pagination.getId() , PageRequest.of(pagination.getPageNumber() - 1, pagination.getPageSize() , Sort.Direction.ASC , "registerDate"));
+        Page<Transcription> page = this.findByBook((Book)pagination.getId() , PageRequest.of(pagination.getPageNumber(), pagination.getPageSize() , Sort.Direction.ASC , "registerDate"));
         pagination.setTotalRecordCount((int)page.getTotalElements());
         return page.getContent();
     }

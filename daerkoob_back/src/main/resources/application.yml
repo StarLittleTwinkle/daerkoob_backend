@@ -20,8 +20,6 @@ spring:
         enable: true
 
   jpa:
-    #    hibernate:
-    #      ddl-auto: create
     properties:
       hibernate:
         show-sql: true
