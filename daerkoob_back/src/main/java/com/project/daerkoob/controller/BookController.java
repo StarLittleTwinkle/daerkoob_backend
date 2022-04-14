@@ -14,7 +14,8 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping("find/{isbn}") //글쓰기 및 책 내용보기를 클릭하면 넘어오는 정보
+    //글쓰기 및 책 내용보기를 클릭하면 넘어오는 정보
+    @GetMapping("find/{isbn}")
     public Book getClick(@PathVariable String isbn) throws Exception{
         return bookService.createBook(isbn);
     }
